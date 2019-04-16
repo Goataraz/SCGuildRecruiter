@@ -1,7 +1,8 @@
 ## Interface: 80100
 ## Title: Shadow Collective Recruiter
 ## Version: 1.00
-## SavedVariables: SC_DATA, SC_BACKUP
+## SavedVariables: SC_DATA
+## SavedVariablesPerCharacter: SC_BACKUP
 ## Notes: Searches for unguilded players and allows you to send them a recruitment message.
 ## Author: Nimueh-Eldre'thalas
 
