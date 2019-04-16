@@ -1,0 +1,27 @@
+## Interface: 80100
+## Title: Shadow Collective Recruiter
+## Version: 1.00
+## SavedVariables: SC_DATA, SC_BACKUP
+## Notes: Searches for unguilded players and allows you to send them a recruitment message.
+## Author: Nimueh-Eldre'thalas
+
+libs\LibStub\LibStub.lua
+libs\MSA-DropDownMenu-1.0\MSA-DropDownMenu-1.0.xml
+libs\Alerts\Alerts.lua
+libs\ChatIntercept\ChatIntercept.lua
+libs\GuildShield\GuildShield.lua
+libs\LibWho-2.0\libs\LibStub\LibStub.lua
+libs\LibWho-2.0\libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+libs\LibWho-2.0\LibWho-2.0\LibWho-2.0.lua
+
+core\SC_Constants.lua
+core\SC_Core.lua
+
+core\SC_Blacklist.lua
+core\SC_AddOn_Message.lua
+core\SC_Filter.lua
+core\SuperScan.lua
+core\SC_System_Message.lua
+core\SC_Events.lua
+
+core\SC_GUI.lua
