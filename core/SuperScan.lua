@@ -110,6 +110,15 @@ local raceClassCombos = {
 			"Warrior",
 			"Monk",
 		},
+		["Dark Iron Dwarf"] = {
+			"Hunter",
+			"Mage",
+			"Priest",
+			"Rogue",
+			"Shaman",
+			"Warrior",
+			"Monk",
+		},
 	},
 	["Horde"] = {
 		["Blood Elf"] = {
