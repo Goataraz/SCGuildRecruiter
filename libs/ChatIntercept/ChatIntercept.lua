@@ -89,35 +89,38 @@ ChatIntercept = {}
 function ChatIntercept:StateSystem(on)
 	if (on) then
 		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", HideSystemMessage);
-		print("|cffffff00ChatIntercept [|r|cff16ABB5System Messages|r|cffffff00] is now |r|cff00ff00ACTIVE|r");
+--		print("|cffffff00ChatIntercept [|r|cff16ABB5System Messages|r|cffffff00] is now |r|cff00ff00ACTIVE|r");
 	else
 		ChatFrame_RemoveMessageEventFilter("CHAT_MSG_SYSTEM", HideSystemMessage);
-		print("|cffffff00ChatIntercept [|r|cff16ABB5System Messages|r|cffffff00] is now |r|cffff0000INACTIVE|r");
+--		print("|cffffff00ChatIntercept [|r|cff16ABB5System Messages|r|cffffff00] is now |r|cffff0000INACTIVE|r");
 	end
 end
 
 function ChatIntercept:StateRealm(state)
 	if (state) then
 		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", HideRealmConflictMessage);
-		SGI:debug("Blocking realm conflict messages");
+--		SGI:debug("Blocking realm conflict messages");
 	else
 		ChatFrame_RemoveMessageEventFilter("CHAT_MSG_SYSTEM",HideRealmConflictMessage);
-		SGI:debug("Not blocking realm conflict messages");
+--		SGI:debug("Not blocking realm conflict messages");
 	end
 end
 
 function ChatIntercept:StateWhisper(on)
-	WhisperFilterActive = on;
+
 	if (on) then
-		--ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER_INFORM", HideOutWhispers);
-		print("|cffffff00ChatIntercept [|r|cff16ABB5Whispers|r|cffffff00] is now |r|cff00ff00ACTIVE|r");
+		ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER_INFORM", HideOutWhispers);
+			WhisperFilterActive = on;
+--		print("|cffffff00ChatIntercept [|r|cff16ABB5Whispers|r|cffffff00] is now |r|cff00ff00ACTIVE|r");
 	else
-		--ChatFrame_RemoveMessageEventFilter("CHAT_MSG_WHISPER_INFORM", HideOutWhispers);
-		print("|cffffff00ChatIntercept [|r|cff16ABB5Whispers|r|cffffff00] is now |r|cffff0000INACTIVE|r");
+		ChatFrame_RemoveMessageEventFilter("CHAT_MSG_WHISPER_INFORM", HideOutWhispers);
+			WhisperFilterActive = nill;
+--		print("|cffffff00ChatIntercept [|r|cff16ABB5Whispers|r|cffffff00] is now |r|cffff0000INACTIVE|r");
 	end
 end
 
 function ChatIntercept:InterceptNextWhisper()
+	
 	if (WhisperFilterActive) then
 		ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER_INFORM", HideOutWhispers);
 	end

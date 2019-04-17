@@ -1,28 +1,20 @@
 ## Interface: 80100
+## Author: Nimueh - Eldre'Thalas US
 ## Title: Shadow Collective Recruiter
-## Version: 1.00
-## SavedVariables: SC_DATA
-## SavedVariablesPerCharacter: SC_BACKUP
-## Notes: Searches for unguilded players and allows you to send them a recruitment message.
-## Author: Nimueh-Eldre'thalas
+## Notes: Recruitment Tool for The Shadow Collective
+## Version: 1.0.1
+## SavedVariables: SGI_DATA
+## SavedVariablesPerCharacter: SGI_BACKUP
+embeds.xml
 
-libs\LibStub\LibStub.lua
-libs\MSA-DropDownMenu-1.0\MSA-DropDownMenu-1.0.xml
-libs\Alerts\Alerts.lua
-libs\ChatIntercept\ChatIntercept.lua
-libs\GuildShield\GuildShield.lua
-libs\LibWho-2.0\libs\LibStub\LibStub.lua
-libs\LibWho-2.0\libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
-libs\LibWho-2.0\LibWho-2.0\LibWho-2.0.lua
+core\SGI_Constants.lua
+core\SGI_Core.lua
 
-core\SC_Constants.lua
-core\SC_Core.lua
-
-core\SC_Blacklist.lua
-core\SC_AddOn_Message.lua
-core\SC_Filter.lua
+core\SGI_Blacklist.lua
+core\SGI_AddOn_Message.lua
+core\SGI_Filter.lua
 core\SuperScan.lua
-core\SC_System_Message.lua
-core\SC_Events.lua
+core\SGI_System_Message.lua
+core\SGI_Events.lua
 
-core\SC_GUI.lua
+core\SGI_GUI.xml

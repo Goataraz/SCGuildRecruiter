@@ -23,8 +23,8 @@
 
 
 
-RegisterAddonMessagePrefix("GUILD_SHIELD")
-RegisterAddonMessagePrefix("I_HAVE_SHIELD")
+C_ChatInfo.RegisterAddonMessagePrefix("GUILD_SHIELD")
+C_ChatInfo.RegisterAddonMessagePrefix("I_HAVE_SHIELD")
 
 local function IsShielded(self,player)
 	SendAddonMessage("GUILD_SHIELD","","WHISPER",player)
