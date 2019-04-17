@@ -1,8 +1,9 @@
 ## Interface: 80100
-## Author: Nimueh - Eldre'Thalas US
+## Author: Janniie - Stormreaver EU
+## Updated by: Nimueh - Eldre'Thalas US
 ## Title: Shadow Collective Recruiter
-## Notes: Recruitment Tool for The Shadow Collective
-## Version: 1.0.1
+## Notes: Guild Recruitment Tool based on SuperGuildInvite (abandoned)
+## Version: 1.0.2
 ## SavedVariables: SGI_DATA
 ## SavedVariablesPerCharacter: SGI_BACKUP
 embeds.xml
