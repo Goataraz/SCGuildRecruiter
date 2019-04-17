@@ -1186,7 +1186,7 @@ local function ChangeLog()
 
 	SGI_ChangeLog.title = SGI_ChangeLog:CreateFontString()
 	SGI_ChangeLog.title:SetFont("Fonts\\FRIZQT__.TTF",22,"OUTLINE")
-	SGI_ChangeLog.title:SetText("|cffffff00<|r|cff16ABB5Shadow Collective Recruiter|r|cff00ff00 Recent Changes|r|cffffff00>|r|cffffff00")
+	SGI_ChangeLog.title:SetText("|cffffff00<|r|cff16ABB5SC Recruiter|r|cff00ff00 Recent Changes|r|cffffff00>|r|cffffff00")
 	SGI_ChangeLog.title:SetPoint("TOP",SGI_ChangeLog,"TOP",0,-12)
 
 	SGI_ChangeLog.version = SGI_ChangeLog:CreateFontString()
@@ -1317,10 +1317,10 @@ local function CreateOptions()
 	close:SetPoint("TOPRIGHT",SGI_Options,"TOPRIGHT",-4,-4)
 
 	SGI_Options.title = SGI_Options:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
-	SGI_Options.title:SetText("SC Recruiter ver. 1.0.0 Options")
+	SGI_Options.title:SetText("SC Recruiter ver. 1.0.2 Options")
 	SGI_Options.title:SetPoint("TOP",SGI_Options,"TOP",0,-15)
 	SGI_Options.bottom = SGI_Options:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
-	SGI_Options.bottom:SetText("Updated by Nimueh - Eldre'Thalas")
+	--SGI_Options.bottom:SetText("Updated by Nimueh - Eldre'Thalas")
 	SGI_Options.bottom:SetPoint("BOTTOM",SGI_Options,"BOTTOM",0,5)
 
 	SGI_Options.optionHelpText = SGI_Options:CreateFontString(nil, "OVERLAY","GameFontNormal");
@@ -1680,7 +1680,7 @@ local function CreateOptions()
 			--BUTTON_KEYBIND.label:SetText(SGI.L["Set Keybind ("..(SGI_DATA[SGI_DATA_INDEX].keyBind and SGI_DATA[SGI_DATA_INDEX].keyBind or "NONE")..")"]);
 
 			if (SGI_DATA[SGI_DATA_INDEX].debug) then
-				SGI_Options.title:SetText("|cffff3300(DEBUG MODE) |rShadow Collective Recruiter "..SGI.VERSION_MAJOR..SGI.VERSION_MINOR.." Options")
+				SGI_Options.title:SetText("|cffff3300(DEBUG MODE) |rSC Recruiter "..SGI.VERSION_MAJOR..SGI.VERSION_MINOR.." Options")
 			else
 				SGI_Options.title:SetText("SC Recruiter "..SGI.VERSION_MAJOR..SGI.VERSION_MINOR.." Options")
 			end

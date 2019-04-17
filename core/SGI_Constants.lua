@@ -13,7 +13,7 @@ SGI_MIN_LEVEL_SUPER_SCAN = 1;
 
 -- Version realted
 SGI.VERSION_MAJOR = "1.0";
-SGI.VERSION_MINOR = ".1";
+SGI.VERSION_MINOR = ".2";
 SGI.versionChanges = {
 	version = "Version |cff55EE55"..SGI.VERSION_MAJOR..SGI.VERSION_MINOR.."|r",
 	items = {
@@ -56,12 +56,12 @@ local old = print
 function SGI:print(...)
 	if (SGI_DATA_INDEX == "?" or type(SGI_DATA) ~= "table") then return end
 	if (not SGI_DATA[SGI_DATA_INDEX].settings.checkBox["CHECKBOX_SGI_MUTE"]) then
-		old("|cffffff00<|r|cff16ABB5SGI|r|cffffff00>|r|cffffff00",...,"|r")
+		old("|cffffff00<|r|cff16ABB5SC|r|cffffff00>|r|cffffff00",...,"|r")
 	end
 end
 function SGI:debug(...)
 	if (debugMode) then
-		old("|cffffff00<|r|cff16ABB5SGI|r|cffffff00>|r|cffff3300",...,"|r")
+		old("|cffffff00<|r|cff16ABB5SC|r|cffffff00>|r|cffff3300",...,"|r")
 	end
 end
 
