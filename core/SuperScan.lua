@@ -658,14 +658,13 @@ function SGI:SendGuildInvite(button)
 
 		if (SGI_DATA[SGI_DATA_INDEX].settings.dropDown["DROPDOWN_INVITE_MODE"] == 1) then
 
-			GuildInvite(name);
+			SGI:SendWhisper(SGI:FormatWhisper(SGI:PickRandomWhisper(), name), name, 4);
 			SGI:LockPlayer(name);
 			--SGI:print("Only Invite: "..name);
 
 		elseif (SGI_DATA[SGI_DATA_INDEX].settings.dropDown["DROPDOWN_INVITE_MODE"] == 2) then
 
-			GuildInvite(name);
-			SGI:RegisterForWhisper(name);
+			SGI:SendWhisper(SGI:FormatWhisper(SGI:PickRandomWhisper(), name), name, 4);
 			SGI:LockPlayer(name);
 			--SGI:print("Invite, then whisper: "..name);
 
