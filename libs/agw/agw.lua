@@ -1,4 +1,4 @@
-﻿function AGW_OnLoad(self)
+function AGW_OnLoad(self)
     self:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
     self:RegisterEvent("CHAT_MSG_ACHIEVEMENT")
     self:RegisterEvent("CHAT_MSG_PARTY")
@@ -37,7 +37,7 @@
 		AGW_GuildWelcomeMessage = "Welcome to the guild!";		
 	end
 	AGW_SetupOptionsUI();
-	AGW_Print("AGW Enabled");
+	AGW_Print("Please visit http://shadowco.io/ for feedback and support.");
 end
 
 function AGW_SetupOptionsUI()
@@ -361,7 +361,7 @@ function AGW_CheckOverride()
 end
 
 function AGW_Print(msg)
-	print("\124cffffFF00[AGW]\124r",msg);
+	print("\124cffffFF00[GOAT]\124r",msg);
 end
 
 function split(str, pat)

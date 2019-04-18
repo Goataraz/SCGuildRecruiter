@@ -4,8 +4,7 @@
 ## Title: Auto Grats and Welcome
 ## Version: 1.0.0
 ## DefaultState: Enabled
-## SavedVariablesPerCharacter: AGW_GratsMessage,AGW_GratsTimeMin,AGW_GratsTimeMax,AGW_GratsTimeWait,AGW_GuildJoinMessageToggle,AGW_Guild,AG_Say,AGW_Party,AGW_Delay,AGW_GuildDisabledOverride,AGW_GroupingTime,AGW_GuildJoinMessageToggle,AGW_GuildWelcomeMessage
-
+## SavedVariablesPerCharacter: AG_GratsMessage,AGW_GratsTimeMin,AGW_GratsTimeMax,AGW_GratsTimeWait,AGW_GuildJoinMessageToggle,AGW_Guild,AGW_Say,AGW_Party,AGW_Delay,AGW_GuildDisabledOverride,AGW_GroupingTime,AGW_GuildJoinMessageToggle,AGW_GuildWelcomeMessage
 
 agw.lua
 agw.xml

@@ -4,7 +4,7 @@
 ## Title: Guild Recruiter
 ## Notes: Guild Recruitment Addon developed by The Shadow Collective
 ## Version: 1.1.0
-## SavedVariables: GR_DATA
+## SavedVariables: GR_DATA,AG_GratsMessage,AGW_GratsTimeMin,AGW_GratsTimeMax,AGW_GratsTimeWait,AGW_GuildJoinMessageToggle,AGW_Guild,AGW_Say,AGW_Party,AGW_Delay,AGW_GuildDisabledOverride,AGW_GroupingTime,AGW_GuildJoinMessageToggle,AGW_GuildWelcomeMessage
 ## SavedVariablesPerCharacter: GR_BACKUP
 
 libs\agw\agw.xml
