@@ -1,9 +1,9 @@
 ## Interface: 80100
 ## Author: Janniie - Stormreaver EU
 ## Updated by: Nimueh - Eldre'Thalas US
-## Title: Shadow Collective Recruiter
+## Title: SC Guild Recruiter
 ## Notes: Guild Recruitment Tool based on SuperGuildInvite (abandoned)
-## Version: 1.0.2
+## Version: 1.0.3
 ## SavedVariables: SGI_DATA
 ## SavedVariablesPerCharacter: SGI_BACKUP
 embeds.xml
