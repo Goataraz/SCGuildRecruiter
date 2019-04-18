@@ -1,6 +1,0 @@
-## Interface: 80100
-## Title: SCGuildInvite
-## Author: Nimueh-Eldre'Thalas US
-## Notes: Adds an "Invite to Guild" option ot many dialogs.
-
-SCGInv.lua
