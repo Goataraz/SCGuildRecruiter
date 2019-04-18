@@ -3,7 +3,7 @@
 ## Updated by: Nimueh - Eldre'thalas US
 ## Title: Guild Recruiter
 ## Notes: Guild Recruitment Addon developed by The Shadow Collective
-## Version: 1.0.0
+## Version: 1.1.0
 ## SavedVariables: GR_DATA
 ## SavedVariablesPerCharacter: GR_BACKUP
 
