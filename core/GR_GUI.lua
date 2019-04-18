@@ -1720,8 +1720,8 @@ local function CreateMinimapButton()
 	f:SetMovable(true)
 	SetFramePosition(f)
 
-	f:SetNormalTexture("Interface\\AddOns\\GuildRecruiter\\media\\GR_MiniMapButton.tga")
-	f:SetPushedTexture("Interface\\AddOns\\GuildRecruiter\\media\\GR_MiniMapButtonPushed.tga")
+	f:SetNormalTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\GR_MiniMapButton.tga")
+	f:SetPushedTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\GR_MiniMapButtonPushed.tga")
 	f:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
 
 --	local tooltip = CreateFrame("Frame","GR_TooltTipMini",f,"GameTooltipTemplate")
