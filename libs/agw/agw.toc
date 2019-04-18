@@ -1,0 +1,11 @@
+## Author: Goat
+## Interface: 80100
+## Notes: Automatically Congratulate on Achievement and Welcoming of new guild members.
+## Title: Auto Grats and Welcome
+## Version: 1.0.0
+## DefaultState: Enabled
+## SavedVariablesPerCharacter: AG_GratsMessage,AG_GratsTimeMin,AG_GratsTimeMax,AG_GratsTimeWait,AG_GuildJoinMessageToggle,AG_Guild,AG_Say,AG_Party,AG_Delay,Ag_GuildDisabledOverride,AG_GroupingTime,AG_GuildJoinMessageToggle,AG_GuildWelcomeMessage
+
+
+agw.lua
+agw.xml

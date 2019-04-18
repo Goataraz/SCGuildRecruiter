@@ -1,4 +1,4 @@
-SGI_Locale = {}
+GR_Locale = {}
 
 local function defaultFunc(L,key)
 	return key
@@ -12,7 +12,7 @@ local English = setmetatable({}, {__index=defaultFunc})
 	English["Whisper only"] = nil
 	English["Invite and whisper"] = nil
 	English["Invite only"] = nil
-	English["Mute SGI"] = nil
+	English["Mute GR"] = nil
 	English["Filter 55-58 Death Knights"] = nil
 	English["Do a more thorough search"] = nil
 	English["Customize whisper"] = nil
@@ -27,7 +27,7 @@ local English = setmetatable({}, {__index=defaultFunc})
 	English["Classfilter Start:"] = nil
 	English["Amount of levels to search every ~7 seconds (higher numbers increase the risk of capping the search results)"] = nil
 	English["Interval:"] = nil
-	English["SuperGuildInvite Custom Whisper"] = nil
+	English["GuildRecruiter Custom Whisper"] = nil
 	English["WhisperInstructions"] = "Create a customized whisper to send people you invite! If you enter the words (must be caps) |cff00ff00NAME|r, |cff0000ffLEVEL|r or |cffff0000PLAYER|r these will be replaced by your Guildname, Guildlevel and the recieving players name"
 	English["Enter your whisper"] = nil
 	English["Save"] = nil
@@ -47,8 +47,8 @@ local English = setmetatable({}, {__index=defaultFunc})
 	English["PlayersScanned"] = "Players Scanned: |cff44FF44%d|r |cffffff00(Total: |r|cff44FF44%d|r)"
 	English["PlayersGuildLess"] = "Guildless Players: |cff44FF44%d|r (|cff44FF44%d%%|r)"
 	English["InvitesQueued"] = "Invites Queued: |cff44FF44%d|r"
-	English["ExceptionsInstructions"] = "You can add exception phrases that when found in a name will cause the player to be ignore by SuperGuildInvite. You can add several exceptions at once, seperated by a comma (,)."
-	English["SGI Exceptions"] = nil
+	English["ExceptionsInstructions"] = "You can add exception phrases that when found in a name will cause the player to be ignore by GuildRecruiter. You can add several exceptions at once, seperated by a comma (,)."
+	English["GR Exceptions"] = nil
 	English["Enter exceptions"] = nil
 	English["Go to Options and select your Invite Mode"] = nil
 	English["You need to specify the mode in which you wish to invite"] = nil
@@ -60,9 +60,9 @@ local English = setmetatable({}, {__index=defaultFunc})
 	English["to specify"] = "|cffff8800I am getting a message telling me to specify my invite mode when I try to invite!|r|cff00A2FF This happens when you have not used the dropdown menu in the options to pick how to invite people.|r|cff00ff00 Click to fix.|r"
 	English["I checked the box"] = "|cffff8800I am not sending any whispers when I invite and I checked the box!|r|cff00A2FF This is because you have selected only to invite with the dropdown menu in the options.|r|cff00ff00 Click to fix|r"
 	English["whisper to everyone"] = "|cffff8800I keep sending a whisper to everyone I invite, OR I just want to send whispers and not invite, but your AddOn does both!|r|cff00A2FF This is because you specified to both invite and whisper on the dropdown menu in options.|r|cff00ff00 Click to fix|r"
-	English["can't get SGI to invite"] = "|cffff8800I can't get SGI to invite people, all it does is sending whispers.|r|cff00A2FF This is because you picked that option in the dropdown menu.|r|cff00ff00 Click to fix|r"
-	English["can't see any messages"] = "|cffff8800I can't see any messages from SGI at all!|r|cff00A2FF This is because you have muted SGI in the options.|r|cff00ff00 Click to fix|r"
-	English["None of the above"] = "|cffff8800None of the above solved my problem!|r|cff00A2FF There might be an issue with the localization (language) you are using. You can try to load your locale manually: /sgi locale:deDE loads German (frFR for french). Please contact me at:|r|cff00ff00 SuperGuildInvite@gmail.com|r"
+	English["can't get GR to invite"] = "|cffff8800I can't get GR to invite people, all it does is sending whispers.|r|cff00A2FF This is because you picked that option in the dropdown menu.|r|cff00ff00 Click to fix|r"
+	English["can't see any messages"] = "|cffff8800I can't see any messages from GR at all!|r|cff00A2FF This is because you have muted GR in the options.|r|cff00ff00 Click to fix|r"
+	English["None of the above"] = "|cffff8800None of the above solved my problem!|r|cff00A2FF There might be an issue with the localization (language) you are using. You can try to load your locale manually: /GR locale:deDE loads German (frFR for french). Please contact me at:|r|cff00ff00 shadowco.io|r"
 	English["Enabled whispers"] = nil
 	English['Changed invite mode to "Invite and Whisper"'] = nil
 	English["Mute has been turned off"] = nil
@@ -115,7 +115,7 @@ German = setmetatable({}, {__index=defaultFunc})
 	German["Whisper only"] = "Nur anflüstern"
 	German["Invite and whisper"] = "Einladen und anflüstern"
 	German["Invite only"] = "Nur einladen"
-	German["Mute SGI"] = "SGI stummschalten"
+	German["Mute GR"] = "GR stummschalten"
 	German["Filter 55-58 Death Knights"] = "Level 55-58 Todesritter filtern"
 	German["Do a more thorough search"] = "Gründlichere Suche ausführen"
 	German["Customize whisper"] = "Flüsternachricht anpassen"
@@ -124,7 +124,7 @@ German = setmetatable({}, {__index=defaultFunc})
 	German["Choose Invites"] = "einladungen auswählen"
 	German["Exceptions"] = "Ausnahmen"
 	German["Help"] = "Hilfe"
-	German["SuperGuildInvite Custom Whisper"] = "SuperGuildInvite eigene Flüsternachricht"
+	German["GuildRecruiter Custom Whisper"] = "GuildRecruiter eigene Flüsternachricht"
 	German["WhisperInstructions"] = "Erstelle eine eigene Flüsternachricht, die an die Leute gesendet wird, die du einlädst! Wenn du die worte |cff00ff00NAME|r, |cff0000ffLEVEL|r oder |cffff0000PLAYER|r (in Großbuchstaben) benutzt werden diese durch Gildenname, Gildenlevel und den Namen des Empfängers ersetzt."
 	German["Enter your whisper"] = "Flüsternachricht eingeben"
 	German["Save"] = "Speichern"
@@ -144,8 +144,8 @@ German = setmetatable({}, {__index=defaultFunc})
 	German["PlayersScanned"] = "Spieler durchsucht: |cff44FF44%d|r (Insgesamt: |cff44FF44%d|r)"
 	German["PlayersGuildLess"] = "gildenlose Spieler: |cff44FF44%d|r"
 	German["InvitesQueued"] = "Einladungen in Warteschlange: |cff44FF44%d|r"
-	German["ExceptionsInstructions"] = "Hier kannst du Ausnahmen eingeben, die, wenn sie in einem Namen gefunden werden, dazu führen daß SGI diesen Spieler ignoriert. Du kannst mehrere Ausnahmen durch ein Komma (,) getrennt eingeben."
-	German["SGI Exceptions"] = "SGI Ausnahmen"
+	German["ExceptionsInstructions"] = "Hier kannst du Ausnahmen eingeben, die, wenn sie in einem Namen gefunden werden, dazu führen daß GR diesen Spieler ignoriert. Du kannst mehrere Ausnahmen durch ein Komma (,) getrennt eingeben."
+	German["GR Exceptions"] = "GR Ausnahmen"
 	German["Go to Options and select your Invite Mode"] = "Gehen Sie auf Optionen und wählen Sie Einladungsart"
 	German["You need to specify the mode in which you wish to invite"] = "Sie müssen den Modus, in dem Sie einladen möchten festlegen"
 	German["Amount of levels to search every ~7 seconds (higher numbers increase the risk of capping the search results)"] = "Anzahl der Level nach denen etwa alle 7 Sekunden gesucht wird (höhere Zahlen erhöhen das Risiko, daß nicht alle Suchergebnisse bearbeitet werden)."
@@ -156,9 +156,9 @@ German = setmetatable({}, {__index=defaultFunc})
 	German["to specify"] = "|cffff8800Ich bekomme eine Nachricht, daß ich die Einladungsart auswählen soll wenn ich jemanden einladen möchte.|r|cff00A2FF Das passiert wenn du nicht das Auswahlmenü in den Optionen benutzt hast um auszuwählen wie du Leute einlädst.|r|cff00ff00 Klicke auf diese Nachricht um das Problem zu beheben.|r"
 	German["I checked the box"] = "|cffff8800Ich verschicke keine Flüsternachrichten beim Einladen, obwohl ich das Kästchen angekreuzt habe.|r|cff00A2FF Das passiert wenn du nur einladen im Auswahlmenü ausgewählt hast.|r|cff00ff00 Klicke auf diese Nachricht um das Problem zu beheben.|r"
 	German["whisper to everyone"] = "|cffff8800Ich verschicke Flüsternachrichten an jeden den ich einlade ODER ich möchte nur Flüsternachrichten senden aber das AddOn macht beides!|r|cff00A2FF Das passiert weil du einladen und anflüstern im Auswahlmenü ausgewählt hast.|r|cff00ff00 Klicke auf diese Nachricht um das Problem zu beheben.|r"
-	German["can't get SGI to invite"] = "|cffff8800SGI lädt keine Leute ein und schickt ausschließlich Flüsternachrichten.|r|cff00A2FF DU hast nur diese Option im Auswahlmenü ausgewählt.|r|cff00ff00 Klicke auf diese Nachricht um das Problem zu beheben.|r"
-	German["can't see any messages"] = "|cffff8800Ich sehe keinerlei Ausgabe von SGI.|r|cff00A2FF Du hast SGI in den Optionen stummgeschaltet.|r|cff00ff00 Klicke auf diese Nachricht um das Problem zu beheben.|r"
-	German["None of the above"] = "|cffff8800Keine der obenstehenden Lösungen löst mein Problem!|r|cff00A2FF Es könnte ein Problem mit der Lokalisation (Sprache) geben, die du benutzt. Du kannst versuchen mit /sgi locale:deDE die deutschen Sprachoptionen zu laden (frFR für Französisch). Bitte schick mir eine Nachricht an:|r|cff00ff00 SuperGuildInvite@gmail.com|r"
+	German["can't get GR to invite"] = "|cffff8800GR lädt keine Leute ein und schickt ausschließlich Flüsternachrichten.|r|cff00A2FF DU hast nur diese Option im Auswahlmenü ausgewählt.|r|cff00ff00 Klicke auf diese Nachricht um das Problem zu beheben.|r"
+	German["can't see any messages"] = "|cffff8800Ich sehe keinerlei Ausgabe von GR.|r|cff00A2FF Du hast GR in den Optionen stummgeschaltet.|r|cff00ff00 Klicke auf diese Nachricht um das Problem zu beheben.|r"
+	German["None of the above"] = "|cffff8800Keine der obenstehenden Lösungen löst mein Problem!|r|cff00A2FF Es könnte ein Problem mit der Lokalisation (Sprache) geben, die du benutzt. Du kannst versuchen mit /GR locale:deDE die deutschen Sprachoptionen zu laden (frFR für Französisch). Bitte schick mir eine Nachricht an:|r|cff00ff00 shadowco.io|r"
 	German["Enabled whispers"] = "Flüsternachrichten eingeschaltet"
 	German['Changed invite mode to "Invite and Whisper"'] = "Einladungsart auf einladen und anflüstern geändert"
 	German["Mute has been turned off"] = "Stummschaltung wurde ausgeschaltet"
@@ -204,7 +204,7 @@ local French = setmetatable({}, {__index=defaultFunc})
     French["Whisper only"] = "Message seulement"
     French["Invite and whisper"] = "Invitation et message"
     French["Invite only"] = "Invitation seulement"
-    French["Mute SGI"] = "Mute SGI"
+    French["Mute GR"] = "Mute GR"
     French["Filter 55-58 Death Knights"] = "Filtrer les Chevaliers de la mort 55-58"
     French["Do a more thorough search"] = "Faire une recherche plus minutieuse"
     French["Customize whisper"] = "Personnaliser le message"
@@ -213,7 +213,7 @@ local French = setmetatable({}, {__index=defaultFunc})
     French["Choose Invites"] = "Choisir les invitations"
     French["Exceptions"] = "Exceptions"
     French["Help"] = "Aide"
-    French["SuperGuildInvite Custom Whisper"] = "SuperGuildInvite message personnalisé"
+    French["GuildRecruiter Custom Whisper"] = "GuildRecruiter message personnalisé"
     French["WhisperInstructions"] = "Créé un message personnalisé à envoyer aux personne que vous invitez ! Si vous entrez les mots (doivent être en majuscule) |cff00ff00NAME|r, |cff0000ffLEVEL|r ou |cffff0000PLAYER|r ils seront remplacés par le NomDeLaGuilde, NiveauDeLaGuilde et NomDuJoueurInvité."
     French["Enter your whisper"] = "Entrez votre message"
     French["Save"] = "Sauvegarder"
@@ -233,8 +233,8 @@ local French = setmetatable({}, {__index=defaultFunc})
     French["PlayersScanned"] = "Joueurs scannés: |cff44FF44%d|r |cffffff00(Total: |r|cff44FF44%d|r)"
     French["PlayersGuildLess"] = "Joueurs sans guilde: |cff44FF44%d|r (|cff44FF44%d%%|r)"
     French["InvitesQueued"] = "Invitations listées: |cff44FF44%d|r"
-    French["ExceptionsInstructions"] = "Vous pouvez ajouter des exceptions, si le nom d'un joueur correspond à l'une d'elles, SuperGuildInvite l'ignorera. Vous pouvez ajouter plusieurs exceptions à la fois, pour cela séparez les par une virgule (,)."
-    French["SGI Exceptions"] = "SGI Exceptions"
+    French["ExceptionsInstructions"] = "Vous pouvez ajouter des exceptions, si le nom d'un joueur correspond à l'une d'elles, GuildRecruiter l'ignorera. Vous pouvez ajouter plusieurs exceptions à la fois, pour cela séparez les par une virgule (,)."
+    French["GR Exceptions"] = "GR Exceptions"
     French["Author"] = "|cff00A2FF Translated by Anonymous, you know who you are and thank you :)|r"
     French["Go to Options and select your Invite Mode"] = "Allez dans Options et sélectionnez votre Mode d'invitation."
     French["You need to specify the mode in which you wish to invite"] = "Vous devez spécifier le mode dans lequel vous souhaitez inviter."
@@ -242,9 +242,9 @@ local French = setmetatable({}, {__index=defaultFunc})
     French["to specify"] = "|cffff8800J'ai un message m'indiquant que je dois spécifier le mode d'invitation quand j'essaye d'inviter !|r|cff00A2FF Ceci arrive quand vous n'avez pas utilisé le menu déroulant dans les options pour choisir votre mode d'invitation.|r|cff00ff00 Cliquez pour corriger.|r"
     French["I checked the box"] = "|cffff8800Je n'envoie aucun message lorsque j'invite alors que j'ai coché la case !|r|cff00A2FF C'est parce que vous avez choisi \"Invitation seulement\" comme mode d'invitation.|r|cff00ff00 Cliquez pour corriger.|r"
     French["whisper to everyone"] = "|cffff8800Je continue d'envoyer des invitations, or je veux seulement envoyer un message et ne pas inviter !|r|cff00A2FF C'est parce que vous avez choisi \"Invitation et message\" comme mode d'invitation.|r|cff00ff00 Cliquez pour corriger.|r"
-    French["can't get SGI to invite"] = "|cffff8800SGI n'invite personne, il envoie seulement des message.|r|cff00A2FF C'est parce que vous avez choisi \"Message seulement\" comme mode d'invitation.|r|cff00ff00 Cliquez pour corriger.|r"
-    French["can't see any messages"] = "|cffff8800Je ne vois plus aucun message de SGI !|r|cff00A2FF C'est parce que vous avez muté SGI dans les options.|r|cff00ff00 Cliquez pour corriger.|r"
-    French["None of the above"] = "|cffff8800Aucune des solutions n'a corrigé mon problème !|r|cff00A2FF Il peut y avoir une erreur avec le langage que vous utilisez. Vous pouvez essayer de charger votre langue manuellement : /sgi locale:frFR charge la langue française (deDE pour allemande). Merci de me contacter à :|r|cff00ff00 SuperGuildInvite@gmail.com|r"
+    French["can't get GR to invite"] = "|cffff8800GR n'invite personne, il envoie seulement des message.|r|cff00A2FF C'est parce que vous avez choisi \"Message seulement\" comme mode d'invitation.|r|cff00ff00 Cliquez pour corriger.|r"
+    French["can't see any messages"] = "|cffff8800Je ne vois plus aucun message de GR !|r|cff00A2FF C'est parce que vous avez muté GR dans les options.|r|cff00ff00 Cliquez pour corriger.|r"
+    French["None of the above"] = "|cffff8800Aucune des solutions n'a corrigé mon problème !|r|cff00A2FF Il peut y avoir une erreur avec le langage que vous utilisez. Vous pouvez essayer de charger votre langue manuellement : /GR locale:frFR charge la langue française (deDE pour allemande). Merci de me contacter à :|r|cff00ff00 shadowco.io|r"
     French["Enabled whispers"] = "Cuchotements activés."
     French['Changed invite mode to "Invite and Whisper"'] = 'Mode d\'invitation changé en "Invitation et message".'
     French["Mute has been turned off"] = 'Mute désactivé.'
@@ -286,7 +286,7 @@ local Spanish = setmetatable({}, {__index=defaultFunc})
 	Spanish["Whisper only"] = nil
 	Spanish["Invite and whisper"] = nil
 	Spanish["Invite only"] = nil
-	Spanish["Mute SGI"] = nil
+	Spanish["Mute GR"] = nil
 	Spanish["Filter 55-58 Death Knights"] = nil
 	Spanish["Do a more thorough search"] = nil
 	Spanish["Customize whisper"] = nil
@@ -295,7 +295,7 @@ local Spanish = setmetatable({}, {__index=defaultFunc})
 	Spanish["Choose Invites"] = nil
 	Spanish["Exceptions"] = nil
 	Spanish["Help"] = nil
-	Spanish["SuperGuildInvite Custom Whisper"] = nil
+	Spanish["GuildRecruiter Custom Whisper"] = nil
 	Spanish["WhisperInstructions"] = nil
 	Spanish["Enter your whisper"] = nil
 	Spanish["Save"] = nil
@@ -316,7 +316,7 @@ local Spanish = setmetatable({}, {__index=defaultFunc})
 	Spanish["PlayersGuildLess"] = nil
 	Spanish["InvitesQueued"] = nil
 	Spanish["ExceptionsInstructions"] = nil
-	Spanish["SGI Exceptions"] = nil
+	Spanish["GR Exceptions"] = nil
 	Spanish["Author"] = nil
 	Spanish["Go to Options and select your Invite Mode"] = nil
 	Spanish["You need to specify the mode in which you wish to invite"] = nil
@@ -324,9 +324,9 @@ local Spanish = setmetatable({}, {__index=defaultFunc})
 	Spanish["to specify"] = "|cffff8800I am getting a message telling me to specify my invite mode when I try to invite!|r|cff00A2FF This happens when you have not used the dropdown menu in the options to pick how to invite people.|r|cff00ff00 Click to fix.|r"
 	Spanish["I checked the box"] = "|cffff8800I am not sending any whispers when I invite and I checked the box!|r|cff00A2FF This is because you have selected only to invite with the dropdown menu in the options.|r|cff00ff00 Click to fix|r"
 	Spanish["whisper to everyone"] = "|cffff8800I keep sending a whisper to everyone I invite, OR I just want to send whispers and not invite, but your AddOn does both!|r|cff00A2FF This is because you specified to both invite and whisper on the dropdown menu in options.|r|cff00ff00 Click to fix|r"
-	Spanish["can't get SGI to invite"] = "|cffff8800I can't get SGI to invite people, all it does is sending whispers.|r|cff00A2FF This is because you picked that option in the dropdown menu.|r|cff00ff00 Click to fix|r"
-	Spanish["can't see any messages"] = "|cffff8800I can't see any messages from SGI at all!|r|cff00A2FF This is because you have muted SGI in the options.|r|cff00ff00 Click to fix|r"
-	Spanish["None of the above"] = "|cffff8800None of the above solved my problem!|r|cff00A2FF There might be an issue with the localization (language) you are using. You can try to load your locale manually: /sgi locale:deDE loads German (frFR for french). Please contact me at:|r|cff00ff00 SuperGuildInvite@gmail.com|r"
+	Spanish["can't get GR to invite"] = "|cffff8800I can't get GR to invite people, all it does is sending whispers.|r|cff00A2FF This is because you picked that option in the dropdown menu.|r|cff00ff00 Click to fix|r"
+	Spanish["can't see any messages"] = "|cffff8800I can't see any messages from GR at all!|r|cff00A2FF This is because you have muted GR in the options.|r|cff00ff00 Click to fix|r"
+	Spanish["None of the above"] = "|cffff8800None of the above solved my problem!|r|cff00A2FF There might be an issue with the localization (language) you are using. You can try to load your locale manually: /GR locale:deDE loads German (frFR for french). Please contact me at:|r|cff00ff00 shadowco.io|r"
 	Spanish["Enabled whispers"] = nil
 	Spanish['Changed invite mode to "Invite and Whisper"'] = nil
 	Spanish["Mute has been turned off"] = nil
@@ -367,7 +367,7 @@ local Russian = setmetatable({}, {__index=defaultFunc})
     Russian["Whisper only"] = "Только сообщение"
     Russian["Invite and whisper"] = "Приглашение и сообщение"
     Russian["Invite only"] = "Только приглашение"
-    Russian["Mute SGI"] = "Мут SGI"
+    Russian["Mute GR"] = "Мут GR"
     Russian["Filter 55-58 Death Knights"] = "Фильтровать Рыцарей Смерти 55-58 уровня"
     Russian["Do a more thorough search"] = "Глубокий поиск"
     Russian["Customize whisper"] = "Настроить Сообщение"
@@ -382,7 +382,7 @@ local Russian = setmetatable({}, {__index=defaultFunc})
     Russian["Classfilter Start:"] = "Классовый Фильтр"
     Russian["Amount of levels to search every ~7 seconds (higher numbers increase the risk of capping the search results)"] = "Интервал уровней для поиска каждые ~7 секунд (больший интервал приводит к риску достигнуть лимита поиска в 49 человек)"
     Russian["Interval:"] = "Интервал"
-    Russian["SuperGuildInvite Custom Whisper"] = "сообщение по умолчанию SGI"
+    Russian["GuildRecruiter Custom Whisper"] = "сообщение по умолчанию GR"
     Russian["WhisperInstructions"] = "Create a customized whisper to send people you invite! If you enter the words (must be caps) |cff00ff00NAME|r, |cff0000ffLEVEL|r or |cffff0000PLAYER|r these will be replaced by your Guildname, Guildlevel and the recieving players name"
     Russian["Enter your whisper"] = "Введите свое сообщение"
     Russian["Save"] = "Сохранить"
@@ -402,8 +402,8 @@ local Russian = setmetatable({}, {__index=defaultFunc})
     Russian["PlayersScanned"] = "Players Scanned: |cff44FF44%d|r |cffffff00(Total: |r|cff44FF44%d|r)"
     Russian["PlayersGuildLess"] = "Guildless Players: |cff44FF44%d|r (|cff44FF44%d%%|r)"
     Russian["InvitesQueued"] = "Invites Queued: |cff44FF44%d|r"
-    Russian["ExceptionsInstructions"] = "You can add exception phrases that when found in a name will cause the player to be ignore by SuperGuildInvite. You can add several exceptions at once, seperated by a comma (,)."
-    Russian["SGI Exceptions"] = "Исключения SGI"
+    Russian["ExceptionsInstructions"] = "You can add exception phrases that when found in a name will cause the player to be ignore by GuildRecruiter. You can add several exceptions at once, seperated by a comma (,)."
+    Russian["GR Exceptions"] = "Исключения GR"
     Russian["Enter exceptions"] = "Ввести исключения"
     Russian["Go to Options and select your Invite Mode"] = "Откройте настройки и выберите режим приглашения"
     Russian["You need to specify the mode in which you wish to invite"] = "Вы должны выбрать режим приглашения"
@@ -415,9 +415,9 @@ local Russian = setmetatable({}, {__index=defaultFunc})
     Russian["to specify"] = "|cffff8800I am getting a message telling me to specify my invite mode when I try to invite!|r|cff00A2FF This happens when you have not used the dropdown menu in the options to pick how to invite people.|r|cff00ff00 Click to fix.|r"
     Russian["I checked the box"] = "|cffff8800I am not sending any whispers when I invite and I checked the box!|r|cff00A2FF This is because you have selected only to invite with the dropdown menu in the options.|r|cff00ff00 Click to fix|r"
     Russian["whisper to everyone"] = "|cffff8800I keep sending a whisper to everyone I invite, OR I just want to send whispers and not invite, but your AddOn does both!|r|cff00A2FF This is because you specified to both invite and whisper on the dropdown menu in options.|r|cff00ff00 Click to fix|r"
-    Russian["can't get SGI to invite"] = "|cffff8800I can't get SGI to invite people, all it does is sending whispers.|r|cff00A2FF This is because you picked that option in the dropdown menu.|r|cff00ff00 Click to fix|r"
-    Russian["can't see any messages"] = "|cffff8800I can't see any messages from SGI at all!|r|cff00A2FF This is because you have muted SGI in the options.|r|cff00ff00 Click to fix|r"
-    Russian["None of the above"] = "|cffff8800None of the above solved my problem!|r|cff00A2FF There might be an issue with the localization (language) you are using. You can try to load your locale manually: /sgi locale:deDE loads German (frFR for french). Please contact me at:|r|cff00ff00 SuperGuildInvite@gmail.com|r"
+    Russian["can't get GR to invite"] = "|cffff8800I can't get GR to invite people, all it does is sending whispers.|r|cff00A2FF This is because you picked that option in the dropdown menu.|r|cff00ff00 Click to fix|r"
+    Russian["can't see any messages"] = "|cffff8800I can't see any messages from GR at all!|r|cff00A2FF This is because you have muted GR in the options.|r|cff00ff00 Click to fix|r"
+    Russian["None of the above"] = "|cffff8800None of the above solved my problem!|r|cff00A2FF There might be an issue with the localization (language) you are using. You can try to load your locale manually: /GR locale:deDE loads German (frFR for french). Please contact me at:|r|cff00ff00 shadowco.io|r"
     Russian["Enabled whispers"] = "Разрешить сообщения"
     Russian['Changed invite mode to "Invite and Whisper"'] = "Режим приглашения изменен на 'приглашение и сообщение'"
     Russian["Mute has been turned off"] = "Мут был выключен"
@@ -454,10 +454,10 @@ local Russian = setmetatable({}, {__index=defaultFunc})
     Russian["Author"] = "|cff00A2FF Переведено игроком Вовочкин - Гордунни.|r"
 	
 
-SGI_Locale["enGB"] = English
-SGI_Locale["enUS"] = English
-SGI_Locale["deDE"] = German
-SGI_Locale["frFR"] = French
---SGI_Locale["ruRU"] = Russian Can't be added because of client issues.
---SGI_Locale["esES"] = Spanish
---SGI_Locale["esMX"] = Spanish
+GR_Locale["enGB"] = English
+GR_Locale["enUS"] = English
+GR_Locale["deDE"] = German
+GR_Locale["frFR"] = French
+--GR_Locale["ruRU"] = Russian Can't be added because of client issues.
+--GR_Locale["esES"] = Spanish
+--GR_Locale["esMX"] = Spanish

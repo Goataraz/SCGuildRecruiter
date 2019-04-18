@@ -1,0 +1,33 @@
+## Interface: 80100
+## Author: Janniie - Stormreaver EU
+## Updated by: Nimueh - Eldre'thalas US
+## Title: Guild Recruiter
+## Notes: Guild Recruitment Addon developed by The Shadow Collective
+## Version: 1.0.0
+## SavedVariables: GR_DATA
+## SavedVariablesPerCharacter: GR_BACKUP
+
+libs\agw\agw.xml
+libs\agw\agw.lua
+
+libs\ChatIntercept\ChatIntercept.lua
+libs\Alerts\Alerts.lua
+
+libs\LibWho-2.0\libs\LibStub\LibStub.lua
+libs\LibWho-2.0\libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+libs\LibWho-2.0\LibWho-2.0\LibWho-2.0.lua
+
+locale\localization.lua
+
+core\GR_Constants.lua
+core\GR_Core.lua
+
+core\GR_Blacklist.lua
+core\GR_AddOn_Message.lua
+core\GR_Filter.lua
+core\GR_Scan.lua
+core\GR_System_Message.lua
+core\GR_Events.lua
+
+core\GR_GUI.lua
+
