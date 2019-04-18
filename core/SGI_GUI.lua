@@ -117,8 +117,8 @@ end
 local function CreateInviteListFrame()
 	CreateFrame("Frame","SGI_Invites")
 	local SGI_QUEUE = SGI:GetInviteQueue();
-	SGI_Invites:SetWidth(300)
-	SGI_Invites:SetHeight(15*SGI:CountTable(SGI_QUEUE) + 40)
+	SGI_Invites:SetWidth(370)
+	SGI_Invites:SetHeight(20*SGI:CountTable(SGI_QUEUE) + 40)
 	SGI_Invites:SetMovable(true)
 	SetFramePosition(SGI_Invites)
 	SGI_Invites:SetScript("OnMouseDown",function(self)
@@ -134,14 +134,14 @@ local function CreateInviteListFrame()
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true,
 		tileSize = 16,
-		edgeSize = 4,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
 	}
 	SGI_Invites:SetBackdrop(backdrop)
 
 	SGI_Invites.text = SGI_Invites:CreateFontString(nil,"OVERLAY","GameFontNormal")
 	SGI_Invites.text:SetPoint("TOP",SGI_Invites,"TOP",-15,-15)
-	SGI_Invites.text:SetText(SGI.L["Left Click to Invite, Right Click to Blacklist"])
+	SGI_Invites.text:SetText(SGI.L["Click on the players you wish to invite"])
 	SGI_Invites.tooltip = CreateFrame("Frame","InviteTime",SGI_Invites,"GameTooltipTemplate")
 
 		--SGI_Invites.tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
@@ -172,8 +172,8 @@ local function CreateInviteListFrame()
 		for i = 1,30 do
 			if not SGI_Invites.items[i] then
 				SGI_Invites.items[i] = CreateFrame("Button","InviteBar"..i,SGI_Invites)
-				SGI_Invites.items[i]:SetWidth(300)
-				SGI_Invites.items[i]:SetHeight(15)
+				SGI_Invites.items[i]:SetWidth(350)
+				SGI_Invites.items[i]:SetHeight(20)
 				SGI_Invites.items[i]:EnableMouse(true)
 				SGI_Invites.items[i]:SetPoint("TOP",SGI_Invites,"TOP",0,y)
 				SGI_Invites.items[i].text = SGI_Invites.items[i]:CreateFontString(nil,"OVERLAY","GameFontNormal")
@@ -253,7 +253,7 @@ end
 
 function SGI:CreateSmallSuperScanFrame()
 	CreateFrame("Frame", "SuperScanFrame");
-	SuperScanFrame:SetWidth(100);
+	SuperScanFrame:SetWidth(130);
 	SuperScanFrame:SetHeight(30);
 	local backdrop =
 	{
@@ -261,8 +261,8 @@ function SGI:CreateSmallSuperScanFrame()
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true,
 		tileSize = 16,
-		edgeSize = 8,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
 	}
 	SetFramePosition(SuperScanFrame)
 	SuperScanFrame:SetMovable(true)
@@ -313,7 +313,7 @@ function SGI:CreateSmallSuperScanFrame()
 				local totalScanTime = SGI:GetTotalScanTime();
 				local percentageDone = (totalScanTime - remainingTime) / totalScanTime;
 				SuperScanFrame.time:SetText(format("|cff00ff00%d%%|r|cffffff00 %s|r",100*(percentageDone > 1 and 1 or percentageDone),SGI:FormatTime(remainingTime)))
-				SuperScanFrame.progressTexture:SetWidth(100 * (percentageDone > 1 and 1 or percentageDone));
+				SuperScanFrame.progressTexture:SetWidth(120 * (percentageDone > 1 and 1 or percentageDone));
 			end
 
 			SuperScanFrame.nextUpdate = GetTime() + 0.2;
@@ -409,8 +409,8 @@ local function CreateWhisperDefineFrame()
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true,
 		tileSize = 16,
-		edgeSize = 8,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
 	}
 	SGI_Whisper:SetWidth(500)
 	SGI_Whisper:SetHeight(365)
@@ -573,8 +573,8 @@ local function CreateFilterFrame()
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true,
 		tileSize = 16,
-		edgeSize = 8,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
 	}
 	SGI_Filters:SetBackdrop(backdrop)
 	local close = CreateFrame("Button",nil,SGI_Filters,"UIPanelCloseButton")
@@ -967,8 +967,8 @@ local function CreateFilterHandleFrame()
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true,
 		tileSize = 16,
-		edgeSize = 8,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
 	}
 	SGI_FilterHandle:SetBackdrop(backdrop)
 	local close = CreateFrame("Button",nil,SGI_FilterHandle,"UIPanelCloseButton")
@@ -1168,8 +1168,8 @@ local function ChangeLog()
 		edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
 		tile = false,
 		tileSize = 16,
-		edgeSize = 8,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
 	}
 	)
 	SetFramePosition(SGI_ChangeLog)
@@ -1247,8 +1247,8 @@ local function CreateTroubleShooter()
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true,
 		tileSize = 16,
-		edgeSize = 8,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
 	}
 	SGI_TroubleShooter:SetBackdrop(backdrop)
 	local close = CreateFrame("Button",nil,SGI_TroubleShooter,"UIPanelCloseButton")
@@ -1292,8 +1292,8 @@ end
 
 local function CreateOptions()
 	CreateFrame("Frame","SGI_Options")
-	SGI_Options:SetWidth(520)
-	SGI_Options:SetHeight(250)
+	SGI_Options:SetWidth(530)
+	SGI_Options:SetHeight(280)
 	SetFramePosition(SGI_Options)
 	SGI_Options:SetMovable(true)
 	SGI_Options:SetScript("OnMouseDown",function(self)
@@ -1309,8 +1309,8 @@ local function CreateOptions()
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true,
 		tileSize = 16,
-		edgeSize = 8,
-		insets = { left = 1, right = 1, top = 1, bottom = 1 }
+		edgeSize = 16,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
 	}
 	SGI_Options:SetBackdrop(backdrop)
 	local close = CreateFrame("Button",nil,SGI_Options,"UIPanelCloseButton")
@@ -1339,11 +1339,11 @@ local function CreateOptions()
 		SGI.L["Whisper only"],
 	}
 
-	local spacing = 15;
+	local spacing = 25;
 
-	--SGI_Options.dropDown1 = CreateDropDown("DROPDOWN_INVITE_MODE", SGI_Options, SGI.L["Invite Mode"], WhisperMode, anchor);
+	SGI_Options.dropDown1 = CreateDropDown("DROPDOWN_INVITE_MODE", SGI_Options, SGI.L["Invite Mode"], WhisperMode, anchor);
 		anchor.yOfs = anchor.yOfs - spacing - 7;
-		anchor.xOfs = anchor.xOfs + 5;
+		anchor.xOfs = anchor.xOfs + 13;
 --	SGI_Options.checkBox1 = CreateCheckbox("CHECKBOX_MUTE_SGI", SGI_Options, SGI.L["Mute SGI"], anchor);
 --		anchor.yOfs = anchor.yOfs - spacing;
 	SGI_Options.checkBox2 = CreateCheckbox("CHECKBOX_ADV_SCAN", SGI_Options, SGI.L["Advanced scan options"], anchor);
@@ -1366,19 +1366,19 @@ local function CreateOptions()
 
 		anchor.point = "BOTTOMLEFT"
 		anchor.relativePoint = "BOTTOMLEFT"
-		anchor.xOfs = 100
-		anchor.yOfs = 10
+		anchor.xOfs = 20
+		anchor.yOfs = 25
 
 	--onClickTester
-	SGI_Options.button1 = CreateButton("BUTTON_CUSTOM_WHISPER", SGI_Options, 100, 30, SGI.L["Whispers"], anchor, function(self) ShowWhisperFrame() SGI_Options:Hide() SGI_Options.showAgain = true end);
-		anchor.xOfs = anchor.xOfs + 110;
-	SGI_Options.button2 = CreateButton("BUTTON_SUPER_SCAN", SGI_Options, 100, 30, SGI.L["Scan"], anchor, OptBtn2_OnClick);
-		anchor.xOfs = anchor.xOfs + 110;
-	--SGI_Options.button3 = CreateButton("BUTTON_INVITE", SGI_Options, 120, 30, format(SGI.L["Invite: %d"],SGI:GetNumQueued()), anchor, SGI.SendGuildInvite);
-		--anchor.xOfs = anchor.xOfs + 110;
-	--SGI_Options.button4 = CreateButton("BUTTON_CHOOSE_INVITES", SGI_Options, 120, 30, SGI.L["Choose invites"], anchor, SGI.ShowInviteList);
-		--anchor.yOfs = 60;
-	SGI_Options.button5 = CreateButton("BUTTON_EDIT_FILTERS", SGI_Options, 100, 30, SGI.L["Filters"], anchor, function() SGI:ShowFilterHandle() SGI_Options:Hide() end);
+	SGI_Options.button1 = CreateButton("BUTTON_CUSTOM_WHISPER", SGI_Options, 120, 30, SGI.L["Edit whisper"], anchor, function(self) ShowWhisperFrame() SGI_Options:Hide() SGI_Options.showAgain = true end);
+		anchor.xOfs = anchor.xOfs + 125;
+	SGI_Options.button2 = CreateButton("BUTTON_SUPER_SCAN", SGI_Options, 120, 30, SGI.L["SuperScan"], anchor, OptBtn2_OnClick);
+		anchor.xOfs = anchor.xOfs + 125;
+	SGI_Options.button3 = CreateButton("BUTTON_INVITE", SGI_Options, 120, 30, format(SGI.L["Invite: %d"],SGI:GetNumQueued()), anchor, SGI.SendGuildInvite);
+		anchor.xOfs = anchor.xOfs + 125;
+	SGI_Options.button4 = CreateButton("BUTTON_CHOOSE_INVITES", SGI_Options, 120, 30, SGI.L["Choose invites"], anchor, SGI.ShowInviteList);
+		anchor.yOfs = 60;
+	SGI_Options.button5 = CreateButton("BUTTON_EDIT_FILTERS", SGI_Options, 120, 30, SGI.L["Filters"], anchor, function() SGI:ShowFilterHandle() SGI_Options:Hide() end);
 		anchor.xOfs = anchor.xOfs - 125;
 	--SGI_Options.button6 = CreateButton("BUTTON_HELP", SGI_Options, 120, 30, SGI.L["Help"],anchor, function() SGI:ShowTroubleShooter() SGI_Options:Hide() SGI_Options.showAgain = true end);
 		--anchor.xOfs = anchor.xOfs - 125;
