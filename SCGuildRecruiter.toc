@@ -7,9 +7,6 @@
 ## SavedVariables: GR_DATA,AG_GratsMessage,AGW_GratsTimeMin,AGW_GratsTimeMax,AGW_GratsTimeWait,AGW_GuildJoinMessageToggle,AGW_Guild,AGW_Say,AGW_Party,AGW_Delay,AGW_GuildDisabledOverride,AGW_GroupingTime,AGW_GuildJoinMessageToggle,AGW_GuildWelcomeMessage
 ## SavedVariablesPerCharacter: GR_BACKUP
 
---libs\agw\agw.xml
---libs\agw\agw.lua
-
 libs\ChatIntercept\ChatIntercept.lua
 libs\Alerts\Alerts.lua
 
