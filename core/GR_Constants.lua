@@ -13,7 +13,7 @@ GR_MIN_LEVEL_SUPER_SCAN = 1;
 
 -- Version realted
 GR.VERSION_MAJOR = "1.1";
-GR.VERSION_MINOR = ".2";
+GR.VERSION_MINOR = ".4";
 GR.versionChanges = {
 	version = "Version |cff55EE55"..GR.VERSION_MAJOR..GR.VERSION_MINOR.."|r",
 	items = {
