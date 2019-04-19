@@ -112,7 +112,120 @@ local function SaveFramePosition(frame)
 	local point, parent, relativePoint, xOfs, yOfs = frame:GetPoint();
 	GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()] = {point = point, relativePoint = relativePoint, xOfs = xOfs, yOfs = yOfs};
 end
+local function CreatePlayerListFrame()
+	CreateFrame("Frame","GR_PlayerList")
+	
+	local GR_QUEUE = GR:GetInviteQueue();
+	GR_PlayerList:SetWidth(370)
+	GR_PlayerList:SetHeight(20*GR:CountTable(GR_QUEUE) + 40)
+	GR_PlayerList:SetMovable(true)
+	SetFramePosition(GR_PlayerList)
+		
+		GR_PlayerList:SetScript("OnMouseDown",function(self)
+			self:StartMoving()
+		end)
+		GR_PlayerList:SetScript("OnMouseUp",function(self)
+			self:StopMovingOrSizing()
+			SaveFramePosition(GR_PlayerList)
+		end)
+	
+	local backdrop =
+	{
+		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
+		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		tile = true,
+		tileSize = 16,
+		edgeSize = 4,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
+	}
+	
+	GR_PlayListSetBackdrop(backdrop)
+	
+	GR_PlayerList.time = GR_PlayerList:CreateFontString(nil,"OVERLAY","GameFontNormal")
+	GR_PlayerList.time:SetPoint("TOP","TOP")
+	GR_PlayerList.time:SetTextSetText(format("|cff00ff00%d%%|r|cffffff00 %s|r    ",0,GR:GetSuperScanETR()))
+	GR_PlayerList.progressTexture = GR_PlayerList:CreateTexture();
+	GR_PlayerList.progressTexture:SetPoint("LEFT", 5, 0);
+	GR_PlayerList.progressTexture:SetHeight(18);
+	GR_PlayerList.progressTexture:SetWidth(140);
+	GR_PlayerList.progressTexture:SetTexture(1,0.5,0,0.4);
+	GR_PlayerList.progressTexture:SetTexture(0,0.0,0,0.0);
+	
+	GR_PlayerList.text = GR_PlayerList:CreateFontString(nil,"OVERLAY","GameFontNormal")
+	GR_PlayerList.text:SetPoint("CCENTER",GR_PlayerList,"TOP",-15,-15)
+	GR_PlayerList.text:SetText(GR.L["Left Click Name to Invite, Right Click to Blacklist"])
+	
+	local close = CreateFrame("Button",nil,GR_PlayerList,"UIPanelCloseButton")
+	close:SetPoint("TOPRIGHT",GR_PlayerList,"TOPRIGHT",-4,-4)
+	GR_PlayerList.items = {}
+	local update = 0
+	local toolUpdate = 0
+		GR_PlayerList:SetScript("OnUpdate",function()
+		if (not GR_PlayerList:IsShown() or GetTime() < update) then return end
 
+		GR_QUEUE = GR:GetInviteQueue();
+
+		for k,_ in pairs(GR_PlayerList.items) do
+			GR_PlayerList.items[k]:Hide()
+		end
+
+		local i = 0
+		local x,y = 10,-30
+		for i = 1,30 do
+			if not GR_PlayerList.items[i] then
+				GR_PlayerList.items[i] = CreateFrame("Button","InviteBar"..i,GR_PlayerList)
+				GR_PlayerList.items[i]:SetWidth(350)
+				GR_PlayerList.items[i]:SetHeight(20)
+				GR_PlayerList.items[i]:EnableMouse(true)
+				GR_PlayerList.items[i]:SetPoint("TOP",GR_PlayerList,"TOP",0,y)
+				GR_PlayerList.items[i].text = GR_PlayerList.items[i]:CreateFontString(nil,"OVERLAY","GameFontNormal")
+				GR_PlayerList.items[i].text:SetPoint("LEFT",GR_PlayerList.items[i],"LEFT",3,0)
+				GR_PlayerList.items[i].text:SetJustifyH("LEFT")
+				GR_PlayerList.items[i].text:SetWidth(GR_PlayerList.items[i]:GetWidth()-10);
+				GR_PlayerList.items[i].player = "unknown"
+				GR_PlayerList.items[i]:RegisterForClicks("LeftButtonDown","RightButtonDown")
+				GR_PlayerList.items[i]:SetScript("OnClick",GR.SendGuildInvite)
+
+				GR_PlayerList.items[i].highlight = GR_PlayerList.items[i]:CreateTexture()
+				GR_PlayerList.items[i].highlight:SetAllPoints()
+				GR_PlayerList.items[i].highlight:SetTexture(1,1,0,0.2)
+				GR_PlayerList.items[i].highlight:Hide()
+
+				GR_PlayerList.items[i]:SetScript("OnEnter",function()
+					GR_PlayerList.items[i].highlight:Show()
+					--GR_PlayerList.tooltip:Show()
+					GR_PlayerList.items[i]:SetScript("OnUpdate",function()
+						if GetTime() > toolUpdate and GR_QUEUE[GR_PlayerList.items[i].player] then
+							--GR_PlayerList.tooltip.text:SetText("Found |cff"..GR:GetClassColor(GR_QUEUE[GR_PlayerList.items[i].player].classFile)..GR_PlayerList.items[i].player.."|r "..GR:FormatTime(floor(GetTime()-GR_QUEUE[GR_PlayerList.items[i].player].found)).." ago")
+							--local h,w = GR_PlayerList.tooltip.text:GetHeight(),GR_PlayerList.tooltip.text:GetWidth()
+							--GR_PlayerList.tooltip:SetWidth(w+20)
+							--GR_PlayerList.tooltip:SetHeight(h+20)
+							--toolUpdate = GetTime() + 0.1
+						end
+					end)
+				end)
+				GR_PlayerList.items[i]:SetScript("OnLeave",function()
+					GR_PlayerList.items[i].highlight:Hide()
+					--GR_PlayerList.tooltip:Hide()
+					GR_PlayerList.items[i]:SetScript("OnUpdate",nil)
+				end)
+			end
+			y = y - 20
+		end
+		i = 0
+		for k,_ in pairs(GR_QUEUE) do
+			i = i + 1
+			local level,classFile,race,class,found = GR_QUEUE[k].level, GR_QUEUE[k].classFile, GR_QUEUE[k].race, GR_QUEUE[k].class, GR_QUEUE[k].found
+			local Text = i..". |cff"..GR:GetClassColor(classFile)..k.."|r Lvl "..level.." "..race.." |cff"..GR:GetClassColor(classFile)..class.."|r"
+			GR_PlayerList.items[i].text:SetText(Text)
+			GR_PlayerList.items[i].player = k
+			GR_PlayerList.items[i]:Show()
+			if i >= 30 then break end
+		end
+		GR_PlayerList:SetHeight(i * 20 + 40)
+		update = GetTime() + 0.5
+	end)
+end
 
 local function CreateInviteListFrame()
 	CreateFrame("Frame","GR_Invites")
@@ -154,7 +267,13 @@ local function CreateInviteListFrame()
 
 	local close = CreateFrame("Button",nil,GR_Invites,"UIPanelCloseButton")
 	close:SetPoint("TOPRIGHT",GR_Invites,"TOPRIGHT",-4,-4)
-
+	--local close = CreateFrame("Button",nil,GR_Invites,"UIPanelCloseButton",anchor,SSBtn3_OnClick)
+	--close:SetPoint("TOPLEFT",GR_Invites,"TOPLEFT",-4,-4)
+	--GR_Invites.play = CreateButton("GR_SUPERSCAN_PLAYPAUSE","",anchor,SSBtn3_OnClick)
+	--GR_Invites.play:SetNormalTexture("Interface\\TimeManager\\PauseButton")
+	--GR_Invites.play:SetPoint("TOPLEFT",GR_Invites,"TOPLEFT",-4,-4)
+	--local play = CreateFrame("Button",nil,GR_Invites,"PauseButton")
+	--play:SetPoint("TOPRIGHT",GR_Invites,"TOPRIGHT",-4,-4)
 	GR_Invites.items = {}
 	local update = 0
 	local toolUpdate = 0
@@ -251,121 +370,122 @@ local function SSBtn3_OnClick(self)
 	end
 end
 
-function GR:CreateSmallSuperScanFrame()
-	CreateFrame("Frame", "SuperScanFrame");
-	SuperScanFrame:SetWidth(130);
-	SuperScanFrame:SetHeight(30);
-	local backdrop =
-	{
-		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		tile = true,
-		tileSize = 16,
-		edgeSize = 4,
-		insets = { left = 4, right = 4, top = 4, bottom = 4 }
-	}
-	SetFramePosition(SuperScanFrame)
-	SuperScanFrame:SetMovable(true)
-	SuperScanFrame:SetScript("OnMouseDown",function(self)
-		self:StartMoving()
-	end)
-	SuperScanFrame:SetScript("OnMouseUp",function(self)
-		self:StopMovingOrSizing()
-		SaveFramePosition(self)
-	end)
-	SuperScanFrame:SetBackdrop(backdrop)
-
-	local close = CreateFrame("Button",nil,SuperScanFrame,"UIPanelCloseButton")
-	close:SetPoint("LEFT",SuperScanFrame,"RIGHT",-5,0)
-
-	SuperScanFrame.time = SuperScanFrame:CreateFontString(nil,"OVERLAY","GameFontNormal")
-	SuperScanFrame.time:SetPoint("CENTER")
-	--SuperScanFrame.time:SetText(format("|cff00ff00%d%%|r|cffffff00 %s|r    ",0,GR:GetSuperScanETR()))
-
-	SuperScanFrame.progressTexture = SuperScanFrame:CreateTexture();
-	SuperScanFrame.progressTexture:SetPoint("LEFT", 5, 0);
-	SuperScanFrame.progressTexture:SetHeight(18);
-	SuperScanFrame.progressTexture:SetWidth(140);
+--function GR:CreateSmallSuperScanFrame()
+--	CreateFrame("Frame", "SuperScanFrame");
+--	SuperScanFrame:SetWidth(130);
+--	SuperScanFrame:SetHeight(30);
+--	local backdrop =
+--	{
+--		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
+--		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+--		tile = true,
+--		tileSize = 16,
+--		edgeSize = 4,
+--		insets = { left = 4, right = 4, top = 4, bottom = 4 }
+--	}
+--	SetFramePosition(SuperScanFrame)
+--	SuperScanFrame:SetMovable(true)
+--	SuperScanFrame:SetScript("OnMouseDown",function(self)
+--		self:StartMoving()
+--	end)
+--	SuperScanFrame:SetScript("OnMouseUp",function(self)
+--		self:StopMovingOrSizing()
+--		SaveFramePosition(self)
+--	end)
+--	SuperScanFrame:SetBackdrop(backdrop)
+--
+--	local close = CreateFrame("Button",nil,SuperScanFrame,"UIPanelCloseButton")
+--	close:SetPoint("LEFT",SuperScanFrame,"RIGHT",-5,0)
+--
+--	SuperScanFrame.time = SuperScanFrame:CreateFontString(nil,"OVERLAY","GameFontNormal")
+--	SuperScanFrame.time:SetPoint("CENTER")
+--	--SuperScanFrame.time:SetText(format("|cff00ff00%d%%|r|cffffff00 %s|r    ",0,GR:GetSuperScanETR()))
+--
+--
+--	SuperScanFrame.progressTexture = SuperScanFrame:CreateTexture();
+--	SuperScanFrame.progressTexture:SetPoint("LEFT", 5, 0);
+--	SuperScanFrame.progressTexture:SetHeight(18);
+--	SuperScanFrame.progressTexture:SetWidth(140);
 --	SuperScanFrame.progressTexture:SetTexture(1,0.5,0,0.4);
-	SuperScanFrame.progressTexture:SetTexture(0,0.0,0,0.0);
-	local anchor = {
-		point = "TOPLEFT",
-		relativePoint = "BOTTOMLEFT",
-		xOfs = 0,
-		yOfs = 0,
-	}
-
-	SuperScanFrame.button1 = CreateButton("GR_INVITE_BUTTON2", SuperScanFrame, 70, 30, format("",GR:GetNumQueued()), anchor, GR.SendGuildInvite)
-		anchor.xOfs = 85;
-	SuperScanFrame.button2 = CreateButton("GR_PURGE_QUEUE", SuperScanFrame, 55, 30, "Clear", anchor, GR.PurgeQueue);
-		anchor.xOfs = 57;
-	SuperScanFrame.button2 = CreateButton("GR_SUPERSCAN_PLAYPAUSE", SuperScanFrame, 40,30,"",anchor,SSBtn3_OnClick);
-	GR_SUPERSCAN_PLAYPAUSE:SetNormalTexture("Interface\\TimeManager\\PauseButton");
-
-	SuperScanFrame.nextUpdate = 0;
-	SuperScanFrame:SetScript("OnUpdate", function()
-		if (SuperScanFrame.nextUpdate < GetTime()) then
-
-			SuperScanFrame.button1.label:SetText(format("Invite: %d",GR:GetNumQueued()));
-
-			if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
-				local remainingTime = SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR);
-				local totalScanTime = GR:GetTotalScanTime();
-				local percentageDone = (totalScanTime - remainingTime) / totalScanTime;
-				SuperScanFrame.time:SetText(format("|cff00ff00%d%%|r|cffffff00 %s|r",100*(percentageDone > 1 and 1 or percentageDone),GR:FormatTime(remainingTime)))
-				SuperScanFrame.progressTexture:SetWidth(120 * (percentageDone > 1 and 1 or percentageDone));
-			end
-
-			SuperScanFrame.nextUpdate = GetTime() + 0.2;
-		end
-	end)
-
-
-	SuperScanFrame:Hide();
-	-- Interface\Buttons\UI-SpellbookIcon-NextPage-Up
-	-- Interface\TimeManager\PauseButton
-end
-
-function GR:GetPercentageDone()
-	if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
-		local remainingTime = SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR);
-		local totalScanTime = GR:GetTotalScanTime();
-		local percentageDone = (totalScanTime - remainingTime) / totalScanTime;
-		return percentageDone * 100;
-	end
-	return 0;
-end
-
-function GR:GetSuperScanTimeLeft()
-	if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
-		return GR:FormatTime(SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR));
-	end
-	return 0;
-end
+--	SuperScanFrame.progressTexture:SetTexture(0,0.0,0,0.0);
+--	local anchor = {
+--		point = "TOPLEFT",
+--		relativePoint = "BOTTOMLEFT",
+--		xOfs = 0,
+--		yOfs = 0,
+--	}
+--
+--	SuperScanFrame.button1 = CreateButton("GR_INVITE_BUTTON2", SuperScanFrame, 70, 30, format("",GR:GetNumQueued()), anchor, GR.SendGuildInvite)
+--		anchor.xOfs = 85;
+--	SuperScanFrame.button2 = CreateButton("GR_PURGE_QUEUE", SuperScanFrame, 55, 30, "Clear", anchor, GR.PurgeQueue);
+--		anchor.xOfs = 57;
+--	SuperScanFrame.button2 = CreateButton("GR_SUPERSCAN_PLAYPAUSE", SuperScanFrame, 40,30,"",anchor,SSBtn3_OnClick);
+--	GR_SUPERSCAN_PLAYPAUSE:SetNormalTexture("Interface\\TimeManager\\PauseButton");
+--
+--	SuperScanFrame.nextUpdate = 0;
+--	SuperScanFrame:SetScript("OnUpdate", function()
+--		if (SuperScanFrame.nextUpdate < GetTime()) then
+--
+--			SuperScanFrame.button1.label:SetText(format("Invite: %d",GR:GetNumQueued()));
+--
+--			if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
+--				local remainingTime = SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR);
+--				local totalScanTime = GR:GetTotalScanTime();
+--				local percentageDone = (totalScanTime - remainingTime) / totalScanTime;
+--				SuperScanFrame.time:SetText(format("|cff00ff00%d%%|r|cffffff00 %s|r",100*(percentageDone > 1 and 1 or percentageDone),GR:FormatTime(remainingTime)))
+--				SuperScanFrame.progressTexture:SetWidth(120 * (percentageDone > 1 and 1 or percentageDone));
+--			end
+--
+--			SuperScanFrame.nextUpdate = GetTime() + 0.2;
+--		end
+--	end)
 
 
-function GR:ShowSuperScanFrame()
-	if (SuperScanFrame and not (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_BACKGROUND_MODE"])) then
-		SuperScanFrame:Show();
-	else
-		if (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_BACKGROUND_MODE"]) then
-			GR:CreateSmallSuperScanFrame();
-			SuperScanFrame:Hide();
-			return;
-		else
-			GR:CreateSmallSuperScanFrame();
-			SuperScanFrame:Show();
-		end
-
-	end
-end
-
-function GR:HideSuperScanFrame()
-	if (SuperScanFrame) then
-		SuperScanFrame:Hide();
-	end
-end
-
+--	SuperScanFrame:Hide();
+--	-- Interface\Buttons\UI-SpellbookIcon-NextPage-Up
+--	-- Interface\TimeManager\PauseButton
+--end
+--
+--function GR:GetPercentageDone()
+--	if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
+--		local remainingTime = SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR);
+--		local totalScanTime = GR:GetTotalScanTime();
+--		local percentageDone = (totalScanTime - remainingTime) / totalScanTime;
+--		return percentageDone * 100;
+--	end
+--	return 0;
+--end
+--
+--function GR:GetSuperScanTimeLeft()
+--	if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
+--		return GR:FormatTime(SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR));
+--	end
+--	return 0;
+--end
+--
+--
+--function GR:ShowSuperScanFrame()
+--	if (SuperScanFrame and not (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_BACKGROUND_MODE"])) then
+--		SuperScanFrame:Show();
+--	else
+--		if (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_BACKGROUND_MODE"]) then
+--			GR:CreateSmallSuperScanFrame();
+--			SuperScanFrame:Hide();
+--			return;
+--		else
+--			GR:CreateSmallSuperScanFrame();
+--			SuperScanFrame:Show();
+--		end
+--
+--	end
+--end
+--
+--function GR:HideSuperScanFrame()
+--	if (SuperScanFrame) then
+--		SuperScanFrame:Hide();
+--	end
+--end
+--
 local function CreateWhisperDefineFrame()
 
 end
@@ -1286,7 +1406,7 @@ end
 
 
 local function OptBtn2_OnClick()
-	GR:ShowSuperScanFrame();
+	--GR:ShowSuperScanFrame();
 	SSBtn3_OnClick(GR_SUPERSCAN_PLAYPAUSE2);
 end
 
@@ -1647,7 +1767,7 @@ local function CreateOptions()
 				GR_SUPERSCAN_PLAYPAUSE2:Hide();
 				GR_Options.superScanText:Hide();
 				if (GR:IsScanning()) then
-					GR:ShowSuperScanFrame();
+					--GR:ShowSuperScanFrame();
 				end
 			end
 
@@ -1714,8 +1834,8 @@ end
 
 local function CreateMinimapButton()
 	local f = CreateFrame("Button","GR_MiniMapButton",Minimap)
-	f:SetWidth(38)
-	f:SetHeight(38)
+	f:SetWidth(40)
+	f:SetHeight(40)
 	f:SetFrameStrata("MEDIUM")
 	f:SetMovable(true)
 	SetFramePosition(f)

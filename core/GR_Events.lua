@@ -111,8 +111,8 @@ function GR_EVENTS:ADDON_LOADED()
 --		GR:debug("Show changes");
 	end
 	--Need to load the SuperScan frame for certain functions
-	GR:CreateSmallSuperScanFrame();
-	SuperScanFrame:Hide();
+	--GR:CreateSmallSuperScanFrame();
+	--SuperScanFrame:Hide();
 
 end
 
