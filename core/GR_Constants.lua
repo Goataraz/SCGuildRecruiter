@@ -13,11 +13,11 @@ GR_MIN_LEVEL_SUPER_SCAN = 1;
 
 -- Version realted
 GR.VERSION_MAJOR = "1.1";
-GR.VERSION_MINOR = ".6";
+GR.VERSION_MINOR = ".7";
 GR.versionChanges = {
 	version = "Version |cff55EE55"..GR.VERSION_MAJOR..GR.VERSION_MINOR.."|r",
 	items = {
-		"Integrated a right click option to invite to guild and an auto guild welcomer...",
+		"Guild Sync",
 	},
 }
 
