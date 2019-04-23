@@ -1,98 +1,18 @@
-lightweight tag 4e86644c2b6673f9422cc01ef4126e71f982d9c5 v1.1.0
+lightweight tag fe35389530599401c5b8c5b7a6e17aec8ba6d8fe v1.1.4
 Author:	GitHub <noreply@github.com>
-Date:	Thu Apr 18 16:36:42 2019 -0400
+Date:	Fri Apr 19 12:44:30 2019 -0400
 
-commit 4e86644c2b6673f9422cc01ef4126e71f982d9c5
+commit fe35389530599401c5b8c5b7a6e17aec8ba6d8fe
 Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:36:42 2019 -0400
+Date:   Fri Apr 19 12:44:30 2019 -0400
 
-    Change Minimap button image path
+    Update Vers.
 
-commit 1b10a98543f19a4b260be7797f9240e8247f0ed5
+commit 1fe91d67d111aaf6dc15057046ab5306f9dade42
 Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:26:44 2019 -0400
+Date:   Fri Apr 19 12:43:10 2019 -0400
 
-    Rename GuildRecruiter.toc to SCGuildRecruiter.toc
-
-commit 4f693ff01354cea18c394604002750bb9ccb949b
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:17:55 2019 -0400
-
-    Version Update to 1.1.0
-
-commit 1a51fbf06fff83c1c2481371fd15dc921841d407
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:16:52 2019 -0400
-
-    Delete LICENSE
-
-commit 881d68089e5656aabb7749b8e4c30059cb99b8ed
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:16:39 2019 -0400
-
-    Update README.md
-
-commit 7a571aeb6b004d1df7a3be15529d1101c2f57401
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:14:45 2019 -0400
-
-    GuildRecruiter Rebrand
+    Remove Progress Bar and Play/Pause
     
-    As far as I know, all errors have been resolved.
-
-commit 53d698fc1a690eb71c1d819d2bef5e24e1b56e7c
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:10:17 2019 -0400
-
-    removing old files
-
-commit 53d698fc1a690eb71c1d819d2bef5e24e1b56e7c
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:10:17 2019 -0400
-
-    removing old files
-
-commit 759fab7f4446cefb4f9b85441aeaa58176f65c8e
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:08:16 2019 -0400
-
-    Delete SGI_Blacklist.lua
-
-commit 1a0812ee000cdcc7f3559a397d07715bd08ad755
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:08:06 2019 -0400
-
-    Delete SGI_AddOn_Message.lua
-
-commit 0c769d59012089763b00aaad28c1acafbc76676b
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 18 16:02:05 2019 -0400
-
-    Delete embeds.xml
-
-commit 3b23a870233334d6d56f48b30dff23b851164d74
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Wed Apr 17 21:32:13 2019 -0400
-
-    Add files via upload
-
-commit 3290a998924c5b8d0ee9c9f47e7b5883cb0862bc
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Wed Apr 17 21:17:32 2019 -0400
-
-    Update SGI_Constants.lua
-
-commit d38a923452896bffd11915c0aa441b1ff639ac22
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Wed Apr 17 21:16:47 2019 -0400
-
-    Update SCGuildRecruiter.toc
-
-commit 7bd006b2f8b0e0f87006424d3ddd03e4a6d49549
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Wed Apr 17 21:15:04 2019 -0400
-
-    Removed options to Invite.
-    
-    You can only Whisper now.
+    Removed the window with the progress bar and the play pause button until I can figure out a fix.
 
