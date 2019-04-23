@@ -4,7 +4,7 @@
 ## Title: Guild Recruiter
 ## Notes: Guild Recruitment Addon developed by The Shadow Collective
 ## Version: 1.1.0
-## SavedVariables: GR_DATA,AG_GratsMessage,AGW_GratsTimeMin,AGW_GratsTimeMax,AGW_GratsTimeWait,AGW_GuildJoinMessageToggle,AGW_Guild,AGW_Say,AGW_Party,AGW_Delay,AGW_GuildDisabledOverride,AGW_GroupingTime,AGW_GuildJoinMessageToggle,AGW_GuildWelcomeMessage
+## SavedVariables: GR_DATA,GR_GratsMessage,GR_GratsTimeMin,GR_GratsTimeMax,GR_GratsTimeWait,GR_GuildJoinMessageToggle,GR_Guild,GR_Say,GR_Party,GR_Delay,GR_GuildDisabledOverride,GR_GroupingTime,GR_GuildJoinMessageToggle,GR_GuildWelcomeMessage
 ## SavedVariablesPerCharacter: GR_BACKUP
 
 libs\ChatIntercept\ChatIntercept.lua
