@@ -1,6 +1,6 @@
 ﻿<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="Autogratzer.lua" />
-	<Frame name="autogratzerMainFrame">
+	<Script file="GR_Grats.lua" />
+	<Frame name="guildgratsMainFrame">
 		<Scripts>
 			<OnLoad>
 				GR_OnLoad(self);
