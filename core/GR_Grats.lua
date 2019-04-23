@@ -38,7 +38,7 @@
 		GR_GuildWelcomeMessage = "Welcome to the Guild!";
 	end
 	GR_SetupOptionsUI();
-	GR_Print("GR Enabled. Visit http://shadowco.io for support.");
+	GR_Print("GuildRecruiter Loaded. Visit http://shadowco.io for support.");
 end
 
 function GR_SetupOptionsUI()
