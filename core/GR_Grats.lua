@@ -1,4 +1,4 @@
-﻿function GR_OnLoad(self)
+function GR_OnLoad(self)
     self:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
     self:RegisterEvent("CHAT_MSG_ACHIEVEMENT")
     self:RegisterEvent("CHAT_MSG_PARTY")

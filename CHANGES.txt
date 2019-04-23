@@ -1,18 +1,16 @@
-lightweight tag fe35389530599401c5b8c5b7a6e17aec8ba6d8fe v1.1.4
+lightweight tag 342f3a7d387454b24e74c6d130b69f3c05038991 v1.1.6
 Author:	GitHub <noreply@github.com>
-Date:	Fri Apr 19 12:44:30 2019 -0400
+Date:	Tue Apr 23 12:37:50 2019 -0400
 
-commit fe35389530599401c5b8c5b7a6e17aec8ba6d8fe
+commit 342f3a7d387454b24e74c6d130b69f3c05038991
 Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Fri Apr 19 12:44:30 2019 -0400
+Date:   Tue Apr 23 12:37:50 2019 -0400
 
-    Update Vers.
+    Update GR_Constants.lua
 
-commit 1fe91d67d111aaf6dc15057046ab5306f9dade42
+commit 1df08d9bca4f5c79bb3a58044e3d8f554f578f9a
 Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Fri Apr 19 12:43:10 2019 -0400
+Date:   Tue Apr 23 12:25:18 2019 -0400
 
-    Remove Progress Bar and Play/Pause
-    
-    Removed the window with the progress bar and the play pause button until I can figure out a fix.
+    Update GR_Grats.xml
 

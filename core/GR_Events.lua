@@ -87,9 +87,9 @@ function GR_EVENTS:ADDON_LOADED()
 	--Tell guildies what version you're running
 	--GR:BroadcastVersion("GUILD"); legacy
 	--Request lock sync from guildies
-	--GR:RequestSync();
+	GR:RequestSync();
 	--Remove locks that are > 1 months old
-	--GR:RemoveOutdatedLocks();
+	GR:RemoveOutdatedLocks();
 
 	--GR_DATA[GR_DATA_INDEX].settings.checkBox["Mute GR"]=true
 	--GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_HIDE_SYSTEM"]=true
