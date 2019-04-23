@@ -3,7 +3,7 @@
 ## Updated by: Nimueh - Eldre'thalas US
 ## Title: Guild Recruiter
 ## Notes: Guild Recruitment Addon developed by The Shadow Collective
-## Version: 1.1.0
+## Version: 1.1.5
 ## SavedVariables: GR_DATA,GR_GratsMessage,GR_GratsTimeMin,GR_GratsTimeMax,GR_GratsTimeWait,GR_GuildJoinMessageToggle,GR_Guild,GR_Say,GR_Party,GR_Delay,GR_GuildDisabledOverride,GR_GroupingTime,GR_GuildJoinMessageToggle,GR_GuildWelcomeMessage
 ## SavedVariablesPerCharacter: GR_BACKUP
 
