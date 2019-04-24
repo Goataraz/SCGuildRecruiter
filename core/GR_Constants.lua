@@ -12,8 +12,8 @@ GR_BREAK_POINT_SUPER_SCAN = 90;
 GR_MIN_LEVEL_SUPER_SCAN = 1;
 
 -- Version realted
-GR.VERSION_MAJOR = "1.1";
-GR.VERSION_MINOR = ".9";
+GR.VERSION_MAJOR = "2.0";
+GR.VERSION_MINOR = ".0";
 GR.versionChanges = {
 	version = "Version |cff55EE55"..GR.VERSION_MAJOR..GR.VERSION_MINOR.."|r",
 	items = {
@@ -55,7 +55,7 @@ local debugMode = false;
 local old = print
 function GR:print(...)
 	if (GR_DATA_INDEX == "?" or type(GR_DATA) ~= "table") then return end
-	if (not GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_GR_MUTE"]) then
+	if (not GR_DATA.settings.checkBox["CHECKBOX_GR_MUTE"]) then
 		old("|cffffff00<|r|cff16ABB5GR|r|cffffff00>|r|cffffff00",...,"|r")
 	end
 end

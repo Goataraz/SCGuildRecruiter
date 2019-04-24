@@ -127,7 +127,7 @@ function GR:divideString(str,div)
 end
 
 local function FrameReset()
-	GR_DATA[GR_DATA_INDEX].settings.frames = {}
+	GR_DATA.settings.frames = {}
 	ReloadUI();
 end
 
@@ -152,13 +152,13 @@ function SlashCmdList.GUILDRECRUITER(msg)
 	elseif (msg == "opt" or msg == "options" or msp == "config" or msg == "settings" or msg == "show") then
 		GR:ShowOptions();
 	elseif (msg == "debug") then
-		GR_DATA[GR_DATA_INDEX].debug = not GR_DATA[GR_DATA_INDEX].debug;
-		if (GR_DATA[GR_DATA_INDEX].debug) then
+		GR_DATA.debug = not GR_DATA.debug;
+		if (GR_DATA.debug) then
 			GR:print("Activated debugging!");
 		else
 			GR:print("Deactivated debugging!");
 		end
-		GR:DebugState(GR_DATA[GR_DATA_INDEX].debug);
+		GR:DebugState(GR_DATA.debug);
 	elseif (msg == "changes") then
 		GR:ShowChanges();
 	elseif (msg == "stats") then
@@ -169,21 +169,21 @@ function SlashCmdList.GUILDRECRUITER(msg)
 		GR:print("Total players scanned this session: |r|cff0062FF"..sessionTotal.."|r");
 	elseif (msg == "unbind" or msg == "removekeybind") then
 		GR:print("Cleared GR invite keybind");
-		GR_DATA[GR_DATA_INDEX].keyBind = nil;
+		GR_DATA.keyBind = nil;
 	elseif (strfind(msg, "lock")) then
 		local name = strsub(msg, 6);
 		if (name) then
 			GR:LockPlayer(name);
 		end
 	else
-		local temp = GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_GR_MUTE"];
-		GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_GR_MUTE"] = false;
+		local temp = GR_DATA.settings.checkBox["CHECKBOX_GR_MUTE"];
+		GR_DATA.settings.checkBox["CHECKBOX_GR_MUTE"] = false;
 		GR:print("|cffffff00Commands: |r|cff00A2FF/gr or /guildrecruiter|r")
 		GR:print("|cff00A2FFreset |r|cffffff00to reset all data except locks|r")
 		GR:print("|cff00A2FFframereset|r|cffffff00 resets the positions of the frames |r")
 		GR:print("|cff00A2FFunbind|r|cffffff00 removes the saved keybind|r");
 		GR:print("|cff00A2FFoptions|r|cffffff00 shows the options. Same effect as clicking the minimap button|r")
-		GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_GR_MUTE"] = temp;
+		GR_DATA.settings.checkBox["CHECKBOX_GR_MUTE"] = temp;
 	end
 end
 

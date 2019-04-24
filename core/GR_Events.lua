@@ -5,7 +5,7 @@ function GR_EVENTS:ADDON_LOADED()
 
 
 	-- Index used to separate settings for different characters.
-	GR_DATA_INDEX = UnitName("player").." - "..GetRealmName();
+	--GR_DATA_INDEX = UnitName("player").." - "..GetRealmName();
 
 
 
@@ -29,11 +29,11 @@ function GR_EVENTS:ADDON_LOADED()
 	end
 
 	--Character based settings.
-	if type(GR_DATA[GR_DATA_INDEX]) ~= "table" then
-		GR_DATA[GR_DATA_INDEX] = {}
+	if type(GR_DATA) ~= "table" then
+		GR_DATA = {}
 	end
-	if type(GR_DATA[GR_DATA_INDEX].settings) ~= "table" then
-		GR_DATA[GR_DATA_INDEX].settings = {
+	if type(GR_DATA.settings) ~= "table" then
+		GR_DATA.settings = {
 			inviteMode = 2,
 			lowLimit = GR_MIN_LEVEL_SUPER_SCAN,
 			highLimit = GR_MAX_LEVEL_SUPER_SCAN,
@@ -46,16 +46,16 @@ function GR_EVENTS:ADDON_LOADED()
 			filters = {},
 		}
 	end
-	if type(GR_DATA[GR_DATA_INDEX].settings.whispers) ~= "table" then
-		GR_DATA[GR_DATA_INDEX].settings.whispers = {}
+	if type(GR_DATA.settings.whispers) ~= "table" then
+		GR_DATA.settings.whispers = {}
 	end
 	if type(GR_BACKUP) ~= "table" then
 		GR_BACKUP = GR_DATA.lock
 	end
 
 	-- If there is a saved keybind, activate it.
-	if (GR_DATA[GR_DATA_INDEX].keyBind) then
-		SetBindingClick(GR_DATA[GR_DATA_INDEX].keyBind,"GR_INVITE_BUTTON");
+	if (GR_DATA.keyBind) then
+		SetBindingClick(GR_DATA.keyBind,"GR_INVITE_BUTTON");
 	end
 
 	-- Anti spam. Users of the AddOn GuildShield are ignored.
@@ -63,11 +63,11 @@ function GR_EVENTS:ADDON_LOADED()
 	-- Load locale
 	GR:LoadLocale();
 	-- Load the minimap button
-	if (not GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_HIDE_MINIMAP"]) then
+	if (not GR_DATA.settings.checkBox["CHECKBOX_HIDE_MINIMAP"]) then
 		GR:ShowMinimapButton(1);
 	end
-	if (not GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_ADV_SCAN"]) then
-		GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_ADV_SCAN"] = FALSE;
+	if (not GR_DATA.settings.checkBox["CHECKBOX_ADV_SCAN"]) then
+		GR_DATA.settings.checkBox["CHECKBOX_ADV_SCAN"] = FALSE;
 	end
 
 
@@ -76,14 +76,14 @@ function GR_EVENTS:ADDON_LOADED()
 
 	-- Removed Keybind button, too dangerous code. 
 	-- Activate the keybind, if any.
-	if (GR_DATA[GR_DATA_INDEX].keyBind) then
-		SetBindingClick(GR_DATA[GR_DATA_INDEX].keyBind, "GR_INVITE_BUTTON2");
+	if (GR_DATA.keyBind) then
+		SetBindingClick(GR_DATA.keyBind, "GR_INVITE_BUTTON2");
 	end
 
 
 
 	--Debugging, used for development
-	--GR:DebugState(GR_DATA[GR_DATA_INDEX].debug);
+	--GR:DebugState(GR_DATA.debug);
 	--Tell guildies what version you're running
 	--GR:BroadcastVersion("GUILD"); legacy
 	--Request lock sync from guildies
@@ -91,21 +91,21 @@ function GR_EVENTS:ADDON_LOADED()
 	--Remove locks that are > 1 months old
 	GR:RemoveOutdatedLocks();
 
-	--GR_DATA[GR_DATA_INDEX].settings.checkBox["Mute GR"]=true
-	--GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_HIDE_SYSTEM"]=true
-	--print(GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_HIDE_SYSTEM"]);
+	--GR_DATA.settings.checkBox["Mute GR"]=true
+	--GR_DATA.settings.checkBox["CHECKBOX_HIDE_SYSTEM"]=true
+	--print(GR_DATA.settings.checkBox["CHECKBOX_HIDE_SYSTEM"]);
 
 	--Chat Intercept
-			--ChatIntercept:StateSystem(GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_HIDE_SYSTEM"]);
+			--ChatIntercept:StateSystem(GR_DATA.settings.checkBox["CHECKBOX_HIDE_SYSTEM"]);
 	ChatIntercept:StateSystem(false);
 
 
-	ChatIntercept:StateWhisper(GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_HIDE_WHISPER"]);
+	ChatIntercept:StateWhisper(GR_DATA.settings.checkBox["CHECKBOX_HIDE_WHISPER"]);
 	--ChatIntercept:StateRealm(true);
 
 	--Show changes, if needed
-	--GR:debug((GR_DATA[GR_DATA_INDEX].settings.checkBox["GR_CHANGES"] and "true" or "nil").." "..(GR_DATA.showChanges and "true" or "nil"));
-	if (not GR_DATA[GR_DATA_INDEX].settings.checkBox["GR_CHANGES"] and GR_DATA.showChanges ~= GR.VERSION_MAJOR) then
+	--GR:debug((GR_DATA.settings.checkBox["GR_CHANGES"] and "true" or "nil").." "..(GR_DATA.showChanges and "true" or "nil"));
+	if (not GR_DATA.settings.checkBox["GR_CHANGES"] and GR_DATA.showChanges ~= GR.VERSION_MAJOR) then
 --		GR:ShowChanges();
 --		GR_DATA.showChanges = GR.VERSION_MAJOR;
 --		GR:debug("Show changes");

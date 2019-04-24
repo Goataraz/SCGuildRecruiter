@@ -19,7 +19,7 @@
 ]]
 
 local function AddFilter(filter)
-	tinsert(GR_DATA[GR_DATA_INDEX].settings.filters, filter);
+	tinsert(GR_DATA.settings.filters, filter);
 end
 
 function GR:CreateFilter(nameOfFilter,class, name, minLvl, maxLvl, race, maxVowels, maxConsonants, active)
@@ -163,7 +163,7 @@ local function match(filter, player)
 end
 
 local function GetActiveFilters()
-	local filters, activeFilters = GR_DATA[GR_DATA_INDEX].settings.filters, {};
+	local filters, activeFilters = GR_DATA.settings.filters, {};
 	if (type(filters) ~= "table") then 
 		return {};
 	end
@@ -176,7 +176,7 @@ local function GetActiveFilters()
 end
 
 function GR:FilterPlayer(player)
-	local filters = GetActiveFilters();--GR_DATA[GR_DATA_INDEX].settings.filters;
+	local filters = GetActiveFilters();--GR_DATA.settings.filters;
 	
 	if (type(filters) ~= "table" or type(player) ~= "table") then
 		--if invalid parameter, return as filtered

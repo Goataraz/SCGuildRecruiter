@@ -33,9 +33,9 @@ local function CreateCheckbox(name, parent, label, anchor)
 	end
 
 	f:HookScript("OnClick", function(self)
-		GR_DATA[GR_DATA_INDEX].settings.checkBox[name] = self:GetChecked()
+		GR_DATA.settings.checkBox[name] = self:GetChecked()
 	end)
-	if GR_DATA[GR_DATA_INDEX].settings.checkBox[name] then
+	if GR_DATA.settings.checkBox[name] then
 		f:SetChecked()
 	end
 	return f;
@@ -53,7 +53,7 @@ local function CreateDropDown(name, parent, label, items, anchor)
 
 	local function OnClick(self)
 		UIDropDownMenu_SetSelectedID(f, self:GetID());
-		GR_DATA[GR_DATA_INDEX].settings.dropDown[name] = self:GetID();
+		GR_DATA.settings.dropDown[name] = self:GetID();
 	end
 
 	local function initialize(self, level)
@@ -70,47 +70,47 @@ local function CreateDropDown(name, parent, label, items, anchor)
 	UIDropDownMenu_Initialize(f, initialize)
 	UIDropDownMenu_SetWidth(f, 100);
 	UIDropDownMenu_SetButtonWidth(f, 124)
-	GR_DATA[GR_DATA_INDEX].settings.dropDown[name] = GR_DATA[GR_DATA_INDEX].settings.dropDown[name] or 1
-	UIDropDownMenu_SetSelectedID(f, GR_DATA[GR_DATA_INDEX].settings.dropDown[name] or 1)
+	GR_DATA.settings.dropDown[name] = GR_DATA.settings.dropDown[name] or 1
+	UIDropDownMenu_SetSelectedID(f, GR_DATA.settings.dropDown[name] or 1)
 	UIDropDownMenu_JustifyText(f, "LEFT")
 	return f
 end
 
 local function SetFramePosition(frame)
-	if (type(GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()]) ~= "table") then
+	if (type(GR_DATA.settings.frames[frame:GetName()]) ~= "table") then
 		if (frame:GetName() == "GR_MiniMapButton") then
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()] = {point = "CENTER", relativePoint = "CENTER", xOfs = -31, yOfs = -31};
+			GR_DATA.settings.frames[frame:GetName()] = {point = "CENTER", relativePoint = "CENTER", xOfs = -31, yOfs = -31};
 		else
 			frame:SetPoint("CENTER");
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()] = {point = "CENTER", relativePoint = "CENTER", xOfs = 0, yOfs = 0};
+			GR_DATA.settings.frames[frame:GetName()] = {point = "CENTER", relativePoint = "CENTER", xOfs = 0, yOfs = 0};
 			return;
 		end
 	end
 	if (frame:GetName() == "GR_MiniMapButton") then
 		frame:SetPoint(
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()].point,
+			GR_DATA.settings.frames[frame:GetName()].point,
 			Minimap,
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()].relativePoint,
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()].xOfs,
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()].yOfs
+			GR_DATA.settings.frames[frame:GetName()].relativePoint,
+			GR_DATA.settings.frames[frame:GetName()].xOfs,
+			GR_DATA.settings.frames[frame:GetName()].yOfs
 		);
 	else
 		frame:SetPoint(
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()].point,
+			GR_DATA.settings.frames[frame:GetName()].point,
 			UIParent,
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()].relativePoint,
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()].xOfs,
-			GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()].yOfs
+			GR_DATA.settings.frames[frame:GetName()].relativePoint,
+			GR_DATA.settings.frames[frame:GetName()].xOfs,
+			GR_DATA.settings.frames[frame:GetName()].yOfs
 		);
 	end
 end
 
 local function SaveFramePosition(frame)
-	if (type(GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()]) ~= "table") then
-		GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()] = {};
+	if (type(GR_DATA.settings.frames[frame:GetName()]) ~= "table") then
+		GR_DATA.settings.frames[frame:GetName()] = {};
 	end
 	local point, parent, relativePoint, xOfs, yOfs = frame:GetPoint();
-	GR_DATA[GR_DATA_INDEX].settings.frames[frame:GetName()] = {point = point, relativePoint = relativePoint, xOfs = xOfs, yOfs = yOfs};
+	GR_DATA.settings.frames[frame:GetName()] = {point = point, relativePoint = relativePoint, xOfs = xOfs, yOfs = yOfs};
 end
 local function CreatePlayerListFrame()
 	CreateFrame("Frame","GR_PlayerList")
@@ -465,10 +465,10 @@ end
 --
 --
 --function GR:ShowSuperScanFrame()
---	if (SuperScanFrame and not (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_BACKGROUND_MODE"])) then
+--	if (SuperScanFrame and not (GR_DATA.settings.checkBox["CHECKBOX_BACKGROUND_MODE"])) then
 --		SuperScanFrame:Show();
 --	else
---		if (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_BACKGROUND_MODE"]) then
+--		if (GR_DATA.settings.checkBox["CHECKBOX_BACKGROUND_MODE"]) then
 --			GR:CreateSmallSuperScanFrame();
 --			SuperScanFrame:Hide();
 --			return;
@@ -508,7 +508,7 @@ end
 --		if (SetBindingClick(key, "GR_INVITE_BUTTON2")) then
 --			Alerter:SendAlert("|cff00ff00Successfully bound "..key.." to InviteButton!|r",1.5);
 --			GR:print("Successfully bound "..key.." to InviteButton!");
---			GR_DATA[GR_DATA_INDEX].keyBind = key;
+--			GR_DATA.keyBind = key;
 --			BUTTON_KEYBIND.label:SetText("Set Keybind ("..key..")");
 --		else
 --			Alerter:SendAlert("|cffff0000Error binding "..key.." to InviteButton!|r",1.5);
@@ -567,9 +567,9 @@ local function CreateWhisperDefineFrame()
 	GR_Whisper.edit:SetTextInsets(10,10,10,10)
 	GR_Whisper.edit:SetMaxLetters(256)
 	GR_Whisper.edit:SetBackdrop(backdrop)
-	GR_Whisper.edit:SetText(GR_DATA[GR_DATA_INDEX].settings.whispers[GR_DATA[GR_DATA_INDEX].settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
+	GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
 	GR_Whisper.edit:SetScript("OnHide",function()
-		GR_Whisper.edit:SetText(GR_DATA[GR_DATA_INDEX].settings.whispers[GR_DATA[GR_DATA_INDEX].settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
+		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
 	end)
 	GR_Whisper.edit.text = GR_Whisper.edit:CreateFontString(nil,"OVERLAY","GameFontNormal")
 	GR_Whisper.edit.text:SetPoint("TOPLEFT",GR_Whisper.edit,"TOPLEFT",10,13)
@@ -586,9 +586,9 @@ local function CreateWhisperDefineFrame()
 		GR_Whisper.status[i].box.index = i
 		GR_Whisper.status[i].box:SetPoint("LEFT",GR_Whisper,"CENTER",50,yOfs)
 		GR_Whisper.status[i].box:SetScript("OnEnter",function(self)
-			if GR_DATA[GR_DATA_INDEX].settings.whispers[self.index] then
+			if GR_DATA.settings.whispers[self.index] then
 				--GameTooltip:SetOwner(self,"ANCHOR_CURSOR")
-				--GameTooltip:SetText(GR:FormatWhisper(GR_DATA[GR_DATA_INDEX].settings.whispers[self.index],UnitName("Player")))
+				--GameTooltip:SetText(GR:FormatWhisper(GR_DATA.settings.whispers[self.index],UnitName("Player")))
 			end
 		end)
 		GR_Whisper.status[i].box:SetScript("OnLeave",function(self)
@@ -624,8 +624,8 @@ local function CreateWhisperDefineFrame()
 	--CreateButton(name, parent, width, height, label, anchor, onClick)
 	CreateButton("GR_SAVEWHISPER",GR_Whisper,120,30,GR.L["Save"],anchor,function()
 		local text = GR_Whisper.edit:GetText()
-		local ID = GR_DATA[GR_DATA_INDEX].settings.dropDown["GR_WHISPER_DROP"]
-		GR_DATA[GR_DATA_INDEX].settings.whispers[ID] = text
+		local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
+		GR_DATA.settings.whispers[ID] = text
 		GR_Whisper.edit:SetText("")
 	end)
 	anchor.xOfs = 280
@@ -638,18 +638,18 @@ local function CreateWhisperDefineFrame()
 	GR_Whisper:SetScript("OnUpdate",function()
 		if GetTime() > GR_Whisper.update then
 			for i = 1,6 do
-				if type(GR_DATA[GR_DATA_INDEX].settings.whispers[i]) == "string" then
+				if type(GR_DATA.settings.whispers[i]) == "string" then
 					GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: |cff00ff00Good|r")
 				else
 					GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: |cffff0000Undefined|r")
 				end
 			end
-			local ID = GR_DATA[GR_DATA_INDEX].settings.dropDown["GR_WHISPER_DROP"]
+			local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
 			GR_Whisper.status[ID].text:SetText("Whisper #"..ID.." status: |cffff8800Editing...|r")
 
 			if ID ~= GR_Whisper.changed then
 				GR_Whisper.changed = ID
-				GR_Whisper.edit:SetText(GR_DATA[GR_DATA_INDEX].settings.whispers[GR_DATA[GR_DATA_INDEX].settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
+				GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
 			end
 
 			GR_Whisper.update = GetTime() + 0.5
@@ -1174,7 +1174,7 @@ local function CreateFilterHandleFrame()
 				anchor.xOfs = -175
 				anchor.yOfs = 110
 
-			local F = GR_DATA[GR_DATA_INDEX].settings.filters;
+			local F = GR_DATA.settings.filters;
 
 			if (GR_FilterHandle.needRedraw) then
 				for k,_ in pairs(GR_FilterHandle.filterFrames) do
@@ -1205,7 +1205,7 @@ local function CreateFilterHandleFrame()
 					GR_FilterHandle.filterFrames[k]:RegisterForClicks("LeftButtonDown","RightButtonDown");
 					GR_FilterHandle.filterFrames[k].highlight = GR_FilterHandle.filterFrames[k]:CreateTexture();
 					GR_FilterHandle.filterFrames[k].highlight:SetAllPoints();
-					if (GR_DATA[GR_DATA_INDEX].settings.filters[k].active) then
+					if (GR_DATA.settings.filters[k].active) then
 						GR_FilterHandle.filterFrames[k].highlight:SetTexture(0,1,0,0.2);
 					else
 						GR_FilterHandle.filterFrames[k].highlight:SetTexture(1,0,0,0.2);
@@ -1241,12 +1241,12 @@ local function CreateFilterHandleFrame()
 				GR_FilterHandle.filterFrames[k]:SetScript("OnClick", function(self, button)
 					GR:debug(button);
 					if (button == "LeftButton") then
-						if (GR_DATA[GR_DATA_INDEX].settings.filters[k].active) then
-							GR_DATA[GR_DATA_INDEX].settings.filters[k].active = nil;
+						if (GR_DATA.settings.filters[k].active) then
+							GR_DATA.settings.filters[k].active = nil;
 							GR_FilterHandle.filterFrames[k].highlight:SetTexture(1,0,0,0.2);
 							GR:debug("Click: RED");
 						else
-							GR_DATA[GR_DATA_INDEX].settings.filters[k].active = true;
+							GR_DATA.settings.filters[k].active = true;
 							GR_FilterHandle.filterFrames[k].highlight:SetTexture(0,1,0,0.2);
 							GR:debug("Click: GREEN");
 						end
@@ -1257,7 +1257,7 @@ local function CreateFilterHandleFrame()
 						--GR_FilterHandle.tooltip:SetWidth(GR_FilterHandle.tooltip.text:GetWidth() + 10);
 						--GR_FilterHandle.tooltip:Show();
 					else
-						GR_DATA[GR_DATA_INDEX].settings.filters[k] = nil;
+						GR_DATA.settings.filters[k] = nil;
 						GR_FilterHandle.needRedraw = true;
 					end
 
@@ -1506,7 +1506,7 @@ local function CreateOptions()
 
 --Take out keybinding, no way to escape from it once you click it. Very dangerous and poor design.
 
---	GR_Options.button7 = CreateButton("BUTTON_KEYBIND", GR_Options, 120, 30, GR.L["Set Keybind ("..(GR_DATA[GR_DATA_INDEX].keyBind and GR_DATA[GR_DATA_INDEX].keyBind or "NONE")..")"], anchor, KeyHarvestFrame.GetNewKeybindKey);
+--	GR_Options.button7 = CreateButton("BUTTON_KEYBIND", GR_Options, 120, 30, GR.L["Set Keybind ("..(GR_DATA.keyBind and GR_DATA.keyBind or "NONE")..")"], anchor, KeyHarvestFrame.GetNewKeybindKey);
 --		anchor.xOfs = anchor.xOfs - 125;
 --	GR_Options.button8 = CreateButton("BUTTON_FILTER", GR_Options, 120, 30, GR.L["Filters"], anchor, onClickTester);
 
@@ -1561,25 +1561,25 @@ local function CreateOptions()
 		--GR_Options.limitTooltip:Hide(nil)
 	end)
 
-	GR_Options.limitLow.text:SetText(GR_DATA[GR_DATA_INDEX].settings.lowLimit.."  - ")
+	GR_Options.limitLow.text:SetText(GR_DATA.settings.lowLimit.."  - ")
 	GR_Options.limitLow:SetScript("OnMouseWheel",function(self,delta)
-		if delta == 1 and GR_DATA[GR_DATA_INDEX].settings.lowLimit + 1 <= GR_DATA[GR_DATA_INDEX].settings.highLimit then
-			GR_DATA[GR_DATA_INDEX].settings.lowLimit = GR_DATA[GR_DATA_INDEX].settings.lowLimit + 1
-			GR_Options.limitLow.text:SetText(GR_DATA[GR_DATA_INDEX].settings.lowLimit.." - ")
-		elseif delta == -1 and GR_DATA[GR_DATA_INDEX].settings.lowLimit - 1 >= GR_MIN_LEVEL_SUPER_SCAN then
-			GR_DATA[GR_DATA_INDEX].settings.lowLimit = GR_DATA[GR_DATA_INDEX].settings.lowLimit - 1
-			GR_Options.limitLow.text:SetText(GR_DATA[GR_DATA_INDEX].settings.lowLimit.." - ")
+		if delta == 1 and GR_DATA.settings.lowLimit + 1 <= GR_DATA.settings.highLimit then
+			GR_DATA.settings.lowLimit = GR_DATA.settings.lowLimit + 1
+			GR_Options.limitLow.text:SetText(GR_DATA.settings.lowLimit.." - ")
+		elseif delta == -1 and GR_DATA.settings.lowLimit - 1 >= GR_MIN_LEVEL_SUPER_SCAN then
+			GR_DATA.settings.lowLimit = GR_DATA.settings.lowLimit - 1
+			GR_Options.limitLow.text:SetText(GR_DATA.settings.lowLimit.." - ")
 		end
 	end)
 
-	GR_Options.limitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.highLimit)
+	GR_Options.limitHigh.text:SetText(GR_DATA.settings.highLimit)
 	GR_Options.limitHigh:SetScript("OnMouseWheel",function(self,delta)
-		if delta == 1 and GR_DATA[GR_DATA_INDEX].settings.highLimit + 1 <= GR_MAX_LEVEL_SUPER_SCAN then
-			GR_DATA[GR_DATA_INDEX].settings.highLimit = GR_DATA[GR_DATA_INDEX].settings.highLimit + 1
-			GR_Options.limitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.highLimit)
-		elseif delta == -1 and GR_DATA[GR_DATA_INDEX].settings.highLimit > GR_DATA[GR_DATA_INDEX].settings.lowLimit then
-			GR_DATA[GR_DATA_INDEX].settings.highLimit = GR_DATA[GR_DATA_INDEX].settings.highLimit - 1
-			GR_Options.limitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.highLimit)
+		if delta == 1 and GR_DATA.settings.highLimit + 1 <= GR_MAX_LEVEL_SUPER_SCAN then
+			GR_DATA.settings.highLimit = GR_DATA.settings.highLimit + 1
+			GR_Options.limitHigh.text:SetText(GR_DATA.settings.highLimit)
+		elseif delta == -1 and GR_DATA.settings.highLimit > GR_DATA.settings.lowLimit then
+			GR_DATA.settings.highLimit = GR_DATA.settings.highLimit - 1
+			GR_Options.limitHigh.text:SetText(GR_DATA.settings.highLimit)
 		end
 	end)
 
@@ -1612,15 +1612,15 @@ local function CreateOptions()
 	GR_Options.raceLimitText:SetPoint("BOTTOM",GR_Options.raceLimitHigh,"TOP",0,3)
 	GR_Options.raceLimitText:SetText(GR.L["Racefilter Start:"])
 
-	GR_Options.raceLimitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.raceStart)
+	GR_Options.raceLimitHigh.text:SetText(GR_DATA.settings.raceStart)
 	GR_Options.raceLimitHigh:SetScript("OnMouseWheel",function(self,delta)
-		if delta == -1 and GR_DATA[GR_DATA_INDEX].settings.raceStart > 1 then
-			GR_DATA[GR_DATA_INDEX].settings.raceStart = GR_DATA[GR_DATA_INDEX].settings.raceStart - 1
-			GR_Options.raceLimitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.raceStart)
-		elseif delta == 1 and GR_DATA[GR_DATA_INDEX].settings.raceStart < GR_MAX_LEVEL_SUPER_SCAN + 1 then
-			GR_DATA[GR_DATA_INDEX].settings.raceStart = GR_DATA[GR_DATA_INDEX].settings.raceStart + 1
-			GR_Options.raceLimitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.raceStart)
-			if GR_DATA[GR_DATA_INDEX].settings.raceStart > GR_MAX_LEVEL_SUPER_SCAN then
+		if delta == -1 and GR_DATA.settings.raceStart > 1 then
+			GR_DATA.settings.raceStart = GR_DATA.settings.raceStart - 1
+			GR_Options.raceLimitHigh.text:SetText(GR_DATA.settings.raceStart)
+		elseif delta == 1 and GR_DATA.settings.raceStart < GR_MAX_LEVEL_SUPER_SCAN + 1 then
+			GR_DATA.settings.raceStart = GR_DATA.settings.raceStart + 1
+			GR_Options.raceLimitHigh.text:SetText(GR_DATA.settings.raceStart)
+			if GR_DATA.settings.raceStart > GR_MAX_LEVEL_SUPER_SCAN then
 				GR_Options.raceLimitHigh.text:SetText(GR.L["OFF"])
 			end
 		end
@@ -1661,15 +1661,15 @@ local function CreateOptions()
 	GR_Options.classLimitText:SetPoint("BOTTOM",GR_Options.classLimitHigh,"TOP",0,3)
 	GR_Options.classLimitText:SetText(GR.L["Classfilter Start:"])
 
-	GR_Options.classLimitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.classStart)
+	GR_Options.classLimitHigh.text:SetText(GR_DATA.settings.classStart)
 	GR_Options.classLimitHigh:SetScript("OnMouseWheel",function(self,delta)
-		if delta == -1 and GR_DATA[GR_DATA_INDEX].settings.classStart > 1 then
-			GR_DATA[GR_DATA_INDEX].settings.classStart = GR_DATA[GR_DATA_INDEX].settings.classStart - 1
-			GR_Options.classLimitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.classStart)
-		elseif delta == 1 and GR_DATA[GR_DATA_INDEX].settings.classStart < GR_MAX_LEVEL_SUPER_SCAN + 1 then
-			GR_DATA[GR_DATA_INDEX].settings.classStart = GR_DATA[GR_DATA_INDEX].settings.classStart + 1
-			GR_Options.classLimitHigh.text:SetText(GR_DATA[GR_DATA_INDEX].settings.classStart)
-			if GR_DATA[GR_DATA_INDEX].settings.classStart > GR_MAX_LEVEL_SUPER_SCAN then
+		if delta == -1 and GR_DATA.settings.classStart > 1 then
+			GR_DATA.settings.classStart = GR_DATA.settings.classStart - 1
+			GR_Options.classLimitHigh.text:SetText(GR_DATA.settings.classStart)
+		elseif delta == 1 and GR_DATA.settings.classStart < GR_MAX_LEVEL_SUPER_SCAN + 1 then
+			GR_DATA.settings.classStart = GR_DATA.settings.classStart + 1
+			GR_Options.classLimitHigh.text:SetText(GR_DATA.settings.classStart)
+			if GR_DATA.settings.classStart > GR_MAX_LEVEL_SUPER_SCAN then
 				GR_Options.classLimitHigh.text:SetText(GR.L["OFF"])
 			end
 		end
@@ -1710,14 +1710,14 @@ local function CreateOptions()
 	GR_Options.intervalText:SetPoint("BOTTOM",GR_Options.Interval,"TOP",0,3)
 	GR_Options.intervalText:SetText(GR.L["Interval:"])
 
-	GR_Options.Interval.text:SetText(GR_DATA[GR_DATA_INDEX].settings.interval)
+	GR_Options.Interval.text:SetText(GR_DATA.settings.interval)
 	GR_Options.Interval:SetScript("OnMouseWheel",function(self,delta)
-		if delta == -1 and GR_DATA[GR_DATA_INDEX].settings.interval > 1 then
-			GR_DATA[GR_DATA_INDEX].settings.interval = GR_DATA[GR_DATA_INDEX].settings.interval - 1
-			GR_Options.Interval.text:SetText(GR_DATA[GR_DATA_INDEX].settings.interval)
-		elseif delta == 1 and GR_DATA[GR_DATA_INDEX].settings.interval < 30 then
-			GR_DATA[GR_DATA_INDEX].settings.interval = GR_DATA[GR_DATA_INDEX].settings.interval + 1
-			GR_Options.Interval.text:SetText(GR_DATA[GR_DATA_INDEX].settings.interval)
+		if delta == -1 and GR_DATA.settings.interval > 1 then
+			GR_DATA.settings.interval = GR_DATA.settings.interval - 1
+			GR_Options.Interval.text:SetText(GR_DATA.settings.interval)
+		elseif delta == 1 and GR_DATA.settings.interval < 30 then
+			GR_DATA.settings.interval = GR_DATA.settings.interval + 1
+			GR_Options.Interval.text:SetText(GR_DATA.settings.interval)
 		end
 	end)
 
@@ -1751,15 +1751,15 @@ local function CreateOptions()
 
 
 
-			if GR_DATA[GR_DATA_INDEX].settings.classStart > GR_MAX_LEVEL_SUPER_SCAN then
+			if GR_DATA.settings.classStart > GR_MAX_LEVEL_SUPER_SCAN then
 				GR_Options.classLimitHigh.text:SetText(GR.L["OFF"])
 			end
 
-			if GR_DATA[GR_DATA_INDEX].settings.raceStart > GR_MAX_LEVEL_SUPER_SCAN then
+			if GR_DATA.settings.raceStart > GR_MAX_LEVEL_SUPER_SCAN then
 				GR_Options.raceLimitHigh.text:SetText(GR.L["OFF"])
 			end
 
-			if (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_BACKGROUND_MODE"]) then
+			if (GR_DATA.settings.checkBox["CHECKBOX_BACKGROUND_MODE"]) then
 				GR_SUPERSCAN_PLAYPAUSE2:Show();
 				GR_Options.superScanText:Show();
 				if SuperScanFrame then SuperScanFrame:Hide() end;
@@ -1771,7 +1771,7 @@ local function CreateOptions()
 				end
 			end
 
-			if (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_ADV_SCAN"]) then
+			if (GR_DATA.settings.checkBox["CHECKBOX_ADV_SCAN"]) then
 
 
 			-- print ( GR_Options.nextUpdate) 
@@ -1798,15 +1798,15 @@ local function CreateOptions()
 
 
 			BUTTON_INVITE.label:SetText(format(GR.L["Invite: %d"],GR:GetNumQueued()));
---			BUTTON_KEYBIND.label:SetText(GR.L["Set Keybind ("..(GR_DATA[GR_DATA_INDEX].keyBind and GR_DATA[GR_DATA_INDEX].keyBind or "NONE")..")"]);
+--			BUTTON_KEYBIND.label:SetText(GR.L["Set Keybind ("..(GR_DATA.keyBind and GR_DATA.keyBind or "NONE")..")"]);
 
-			if (GR_DATA[GR_DATA_INDEX].debug) then
+			if (GR_DATA.debug) then
 				GR_Options.title:SetText("|cffff3300(DEBUG MODE) |rGuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
 			else
 				GR_Options.title:SetText("GuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
 			end
 
-			if (not GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_HIDE_MINIMAP"]) then
+			if (not GR_DATA.settings.checkBox["CHECKBOX_HIDE_MINIMAP"]) then
 				GR:ShowMinimapButton();
 			else
 				GR:HideMinimapButton();
@@ -1834,8 +1834,8 @@ end
 
 local function CreateMinimapButton()
 	local f = CreateFrame("Button","GR_MiniMapButton",Minimap)
-	f:SetWidth(40)
-	f:SetHeight(40)
+	f:SetWidth(32)
+	f:SetHeight(32)
 	f:SetFrameStrata("MEDIUM")
 	f:SetMovable(true)
 	SetFramePosition(f)

@@ -19,7 +19,7 @@ C_ChatInfo.RegisterAddonMessagePrefix(ID_STOP);
 
 function GR:AddonMessage(event,...)
 	local ID, msg, channel, sender = ...;
-	if (not GR_DATA[GR_DATA_INDEX].debug and sender == UnitName("player")) then return end
+	if (not GR_DATA.debug and sender == UnitName("player")) then return end
 	
 	
 	if (ID == ID_SHIELD) then

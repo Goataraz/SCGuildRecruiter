@@ -8,11 +8,11 @@ CreateFrame("Frame", "GR_WHISPER_QUEUE_FRAME");
 
 LibStub:GetLibrary("LibWho-2.0"):Embed(GR.libWho);
 
-local start-- = GR_DATA[GR_DATA_INDEX].settings.lowLimit;
-local stop-- = GR_DATA[GR_DATA_INDEX].settings.highLimit;
-local race-- = GR_DATA[GR_DATA_INDEX].settings.raceStart;
-local class-- = GR_DATA[GR_DATA_INDEX].settings.classStart;
-local interval-- = GR_DATA[GR_DATA_INDEX].settings.interval;
+local start-- = GR_DATA.settings.lowLimit;
+local stop-- = GR_DATA.settings.highLimit;
+local race-- = GR_DATA.settings.raceStart;
+local class-- = GR_DATA.settings.classStart;
+local interval-- = GR_DATA.settings.interval;
 
 -- Fix for WhoLib bug
 local oldFlags;
@@ -271,12 +271,12 @@ local L = GR.L;
 function GR:PickRandomWhisper()
 	local i = 0
 	local tbl = {}
-	for k,_ in pairs(GR_DATA[GR_DATA_INDEX].settings.whispers) do
+	for k,_ in pairs(GR_DATA.settings.whispers) do
 		i = i + 1
-		tbl[i] = GR_DATA[GR_DATA_INDEX].settings.whispers[k]
+		tbl[i] = GR_DATA.settings.whispers[k]
 	end
 	if #tbl == 0 then
-		return GR_DATA[GR_DATA_INDEX].settings.whisper
+		return GR_DATA.settings.whisper
 	end
 	return tbl[random(#tbl)]
 end
@@ -367,7 +367,7 @@ local function ValidateName(player)
 		return false;
 	end
 
-	if (GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_ENABLE_FILTERS"] and not GR:FilterPlayer(player)) then
+	if (GR_DATA.settings.checkBox["CHECKBOX_ENABLE_FILTERS"] and not GR:FilterPlayer(player)) then
 		return false;
 	end
 
@@ -455,7 +455,7 @@ end
 
 local function CreateSuperScanQuery(start, stop, interval, class, race)
 
-	if (not GR_DATA[GR_DATA_INDEX].settings.checkBox["CHECKBOX_ADV_SCAN"]) then
+	if (not GR_DATA.settings.checkBox["CHECKBOX_ADV_SCAN"]) then
 		interval = 5;
 		class = 999;
 		race = 999;
@@ -581,16 +581,16 @@ local function CreateSuperScanQuery(start, stop, interval, class, race)
 end
 
 local function CanResume()
-	local s = GR_DATA[GR_DATA_INDEX].settings;
+	local s = GR_DATA.settings;
 	return (start == s.lowLimit and stop == s.highLimit and race == s.raceStart and class == s.classStart and interval == s.interval);
 end
 
 local function ResetSuperScan()
-	start = GR_DATA[GR_DATA_INDEX].settings.lowLimit;
-	stop = GR_DATA[GR_DATA_INDEX].settings.highLimit;
-	race = GR_DATA[GR_DATA_INDEX].settings.raceStart;
-	class = GR_DATA[GR_DATA_INDEX].settings.classStart;
-	interval = GR_DATA[GR_DATA_INDEX].settings.interval;
+	start = GR_DATA.settings.lowLimit;
+	stop = GR_DATA.settings.highLimit;
+	race = GR_DATA.settings.raceStart;
+	class = GR_DATA.settings.classStart;
+	interval = GR_DATA.settings.interval;
 
 	amountGuildless = 0;
 	sessionTotal = sessionTotal + amountScanned;
@@ -672,19 +672,19 @@ function GR:SendGuildInvite(button)
 
 	if (button == "LeftButton") then
 
-		if (GR_DATA[GR_DATA_INDEX].settings.dropDown["DROPDOWN_INVITE_MODE"] == 1) then
+		if (GR_DATA.settings.dropDown["DROPDOWN_INVITE_MODE"] == 1) then
 
 			GR:SendWhisper(GR:FormatWhisper(GR:PickRandomWhisper(), name), name, 4);
 			GR:LockPlayer(name);
 			--GR:print("Only Invite: "..name);
 
-		elseif (GR_DATA[GR_DATA_INDEX].settings.dropDown["DROPDOWN_INVITE_MODE"] == 2) then
+		elseif (GR_DATA.settings.dropDown["DROPDOWN_INVITE_MODE"] == 2) then
 
 			GR:SendWhisper(GR:FormatWhisper(GR:PickRandomWhisper(), name), name, 4);
 			GR:LockPlayer(name);
 			--GR:print("Invite, then whisper: "..name);
 
-		elseif (GR_DATA[GR_DATA_INDEX].settings.dropDown["DROPDOWN_INVITE_MODE"] == 3) then
+		elseif (GR_DATA.settings.dropDown["DROPDOWN_INVITE_MODE"] == 3) then
 
 			GR:SendWhisper(GR:FormatWhisper(GR:PickRandomWhisper(), name), name, 4);
 			GR:LockPlayer(name);
