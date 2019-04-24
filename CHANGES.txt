@@ -1,16 +1,16 @@
-lightweight tag 342f3a7d387454b24e74c6d130b69f3c05038991 v1.1.6
+lightweight tag 36cb55a2c61722c57cc05032c0e023b044f4d865 v1.1.7
 Author:	GitHub <noreply@github.com>
-Date:	Tue Apr 23 12:37:50 2019 -0400
+Date:	Tue Apr 23 16:48:52 2019 -0400
 
-commit 342f3a7d387454b24e74c6d130b69f3c05038991
+commit 36cb55a2c61722c57cc05032c0e023b044f4d865
 Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Tue Apr 23 12:37:50 2019 -0400
+Date:   Tue Apr 23 16:48:52 2019 -0400
 
-    Update GR_Constants.lua
+    Guild Sync
 
-commit 1df08d9bca4f5c79bb3a58044e3d8f554f578f9a
+commit b5c2db48502eb0bbc6f26555c0a28daa0fb574a6
 Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Tue Apr 23 12:25:18 2019 -0400
+Date:   Tue Apr 23 16:46:36 2019 -0400
 
-    Update GR_Grats.xml
+    Guild Sync
 

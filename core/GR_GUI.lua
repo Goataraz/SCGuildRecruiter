@@ -677,7 +677,7 @@ end
 local function CreateFilterFrame()
 	CreateFrame("Frame","GR_Filters")
 	GR_Filters:SetWidth(550)
-	GR_Filters:SetHeight(380)
+	GR_Filters:SetHeight(400)
 	SetFramePosition(GR_Filters)
 	GR_Filters:SetMovable(true)
 	GR_Filters:SetScript("OnMouseDown",function(self)
@@ -1461,8 +1461,8 @@ local function CreateOptions()
 	}
 
 	local spacing = 25;
-
-	GR_Options.dropDown1 = CreateDropDown("DROPDOWN_INVITE_MODE", GR_Options, GR.L["Invite Mode"], WhisperMode, anchor);
+	--GR_Options.dropDown1 = CreateDropDown("DROPDOWN_PROFILE_SELECT", GR_Options, GR.L["Select Profile"], ProfileSelect, anchor);
+	--GR_Options.dropDown1 = CreateDropDown("DROPDOWN_INVITE_MODE", GR_Options, GR.L["Invite Mode"], WhisperMode, anchor);
 		anchor.yOfs = anchor.yOfs - spacing - 7;
 		anchor.xOfs = anchor.xOfs + 13;
 --	GR_Options.checkBox1 = CreateCheckbox("CHECKBOX_MUTE_GR", GR_Options, GR.L["Mute GR"], anchor);
