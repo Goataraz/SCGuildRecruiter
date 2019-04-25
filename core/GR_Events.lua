@@ -34,7 +34,7 @@ function GR_EVENTS:ADDON_LOADED()
 	end
 	if type(GR_DATA.settings) ~= "table" then
 		GR_DATA.settings = {
-			inviteMode = 2,
+			inviteMode = 3,
 			lowLimit = GR_MIN_LEVEL_SUPER_SCAN,
 			highLimit = GR_MAX_LEVEL_SUPER_SCAN,
 			raceStart = GR_MAX_LEVEL_SUPER_SCAN,

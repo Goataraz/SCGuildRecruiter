@@ -318,7 +318,7 @@ function GR_GuildWelcome()
 	if(GR_GuildJoinMessageToggle and (GetTime() - GR_LastMessage > (GR_GroupingTime/1000)))then
 		GR_LastMessage = GetTime();
 		if(GR_Delay > 0)then
-			C_Timer.After((GR_Delay/1000), function() SendChatMessage("Welcome to the guild!", "GUILD"); end)
+			C_Timer.After((GR_Delay/1000), function() SendChatMessage(GR_GuildWelcomeMessage, "GUILD"); end)
 		else
 			SendChatMessage(GR_GuildWelcomeMessage, "GUILD");
 		end
