@@ -46,8 +46,8 @@ function GR_EVENTS:ADDON_LOADED()
 			filters = {},
 		}
 	end
-	if type(GR_DATA.settings.whisper) ~= "table" then
-		GR_DATA.settings.whisper = {}
+	if type(GR_DATA.settings.whispers) ~= "table" then
+		GR_DATA.settings.whispers = {}
 	end
 	if type(GR_BACKUP) ~= "table" then
 		GR_BACKUP = GR_DATA.lock

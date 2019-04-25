@@ -1,16 +1,48 @@
-lightweight tag 36cb55a2c61722c57cc05032c0e023b044f4d865 v1.1.7
+lightweight tag 77cec14a40aa712797df9ba6010f453425e35d20 v2.0.0
 Author:	GitHub <noreply@github.com>
-Date:	Tue Apr 23 16:48:52 2019 -0400
+Date:	Wed Apr 24 15:54:43 2019 -0400
 
-commit 36cb55a2c61722c57cc05032c0e023b044f4d865
+commit 77cec14a40aa712797df9ba6010f453425e35d20
+Author: Goat <45670122+Goataraz@users.noreply.github.com>
+Date:   Wed Apr 24 15:54:43 2019 -0400
+
+    v2.0.0 Account Wide Settings
+    
+    Settings are account wide now. You will have to set your whispers back up and your blacklist will have to be remade. This information should still be located in your saved variables file if you want to copy it over from there.
+
+commit 051afb843e2ac31472ea28e95fb4491bba2df71e
 Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Tue Apr 23 16:48:52 2019 -0400
+Date:   Wed Apr 24 13:30:30 2019 -0400
 
-    Guild Sync
+    Update SCGuildRecruiter.toc
 
-commit b5c2db48502eb0bbc6f26555c0a28daa0fb574a6
+commit af06a1bc4efbc42dcfb916f75c364885e53ae31d
+Author: Goat <45670122+Goataraz@users.noreply.github.com>
+Date:   Wed Apr 24 13:13:26 2019 -0400
+
+    Version Change
+    
+    v1.1.9
+
+commit 754468f9a81d45456a5a0f669e0faf1bbe588b2c
+Author: Goat <45670122+Goataraz@users.noreply.github.com>
+Date:   Wed Apr 24 12:51:32 2019 -0400
+
+    Version Change
+    
+    v1.1.9
+
+commit f1887e7051f54a54d0e1ef95eae2e06208ab8f7a
+Author: Goat <45670122+Goataraz@users.noreply.github.com>
+Date:   Wed Apr 24 12:49:44 2019 -0400
+
+    Version Change
+    
+    v1.1.8
+
+commit 73a4cc8abc48dc9a1ad2f7a73df74fec7b603915
 Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Tue Apr 23 16:46:36 2019 -0400
+Date:   Wed Apr 24 12:41:03 2019 -0400
 
-    Guild Sync
+    Added Ace3 Libs for future use.
 

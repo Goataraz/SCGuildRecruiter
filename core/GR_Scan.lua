@@ -268,22 +268,22 @@ local tonumber = tonumber;
 
 local L = GR.L;
 
---function GR:PickRandomWhisper()
---	local i = 0
---	local tbl = {}
---	for k,_ in pairs(GR_DATA.settings.whisper) do
---		i = i + 1
---		tbl[i] = GR_DATA.settings.whisper[k]
---	end
---	if #tbl == 0 then
---		return GR_DATA.settings.whisper
---	end
---	return tbl[random(#tbl)]
---end
+function GR:PickRandomWhisper()
+	local i = 0
+	local tbl = {}
+	for k,_ in pairs(GR_DATA.settings.whispers) do
+		i = i + 1
+		tbl[i] = GR_DATA.settings.whispers[k]
+	end
+	if #tbl == 0 then
+		return GR_DATA.settings.whisper
+	end
+	return tbl[random(#tbl)]
+end
 
 function GR:FormatWhisper(msg, name)
 	local whisper = msg
-	if not msg then GR:print("You have not set your whisper!") msg = "Would you like to join a guild?" whisper = "Would you like to join a guild?" end
+	if not msg then GR:print("You have not set your whispers!") msg = "<NO WHISPER SET>" whisper = "<NO WHISPER SET>" end
 	if not name then name = "ExampleName" end
 	local guildName,guildLevel = GetGuildInfo(UnitName("Player"))
 	if not guildName then guildName = "<InvalidName>" end
