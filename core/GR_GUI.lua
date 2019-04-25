@@ -567,9 +567,9 @@ local function CreateWhisperDefineFrame()
 	GR_Whisper.edit:SetTextInsets(10,10,10,10)
 	GR_Whisper.edit:SetMaxLetters(256)
 	GR_Whisper.edit:SetBackdrop(backdrop)
-	GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
+	GR_Whisper.edit:SetText(GR_DATA.settings.whisper[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
 	GR_Whisper.edit:SetScript("OnHide",function()
-		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
+		GR_Whisper.edit:SetText(GR_DATA.settings.whisper[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
 	end)
 	GR_Whisper.edit.text = GR_Whisper.edit:CreateFontString(nil,"OVERLAY","GameFontNormal")
 	GR_Whisper.edit.text:SetPoint("TOPLEFT",GR_Whisper.edit,"TOPLEFT",10,13)
@@ -586,28 +586,24 @@ local function CreateWhisperDefineFrame()
 		GR_Whisper.status[i].box.index = i
 		GR_Whisper.status[i].box:SetPoint("LEFT",GR_Whisper,"CENTER",50,yOfs)
 		GR_Whisper.status[i].box:SetScript("OnEnter",function(self)
-			if GR_DATA.settings.whispers[self.index] then
+			if GR_DATA.settings.whisper[self.index] then
 				--GameTooltip:SetOwner(self,"ANCHOR_CURSOR")
-				--GameTooltip:SetText(GR:FormatWhisper(GR_DATA.settings.whispers[self.index],UnitName("Player")))
+				--GameTooltip:SetText(GR:FormatWhisper(GR_DATA.settings.whisper[self.index],UnitName("Player")))
 			end
 		end)
 		GR_Whisper.status[i].box:SetScript("OnLeave",function(self)
 			--GameTooltip:Hide()
 		end)
 		GR_Whisper.status[i].text = GR_Whisper:CreateFontString(nil,nil,"GameFontNormal")
-		GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: ")
+		GR_Whisper.status[i].text:SetText("Whisper status: ")
 		GR_Whisper.status[i].text:SetWidth(200)
 		GR_Whisper.status[i].text:SetJustifyH("LEFT")
 		GR_Whisper.status[i].text:SetPoint("LEFT",GR_Whisper,"CENTER",50,yOfs)
 		yOfs = yOfs - 18
 	end
 	local whispers = {
-		"Whisper #1",
-		"Whisper #2",
-		"Whisper #3",
-		"Whisper #4",
-		"Whisper #5",
-		"Whisper #6",
+		"Whisper",
+		
 	}
 
 	anchor = {}
@@ -617,15 +613,15 @@ local function CreateWhisperDefineFrame()
 		anchor.yOfs = 120
 
 	--CreateDropDown(name, parent, label, items, anchor)
-	GR_Whisper.drop = CreateDropDown("GR_WHISPER_DROP",GR_Whisper,GR.L["Select whisper"],whispers,anchor)
-
+	--GR_Whisper.drop = CreateDropDown("GR_WHISPER_DROP",GR_Whisper,GR.L["Select whisper"],whispers,anchor)
+	--	
 		anchor.xOfs = 100
 		anchor.yOfs = 20
 	--CreateButton(name, parent, width, height, label, anchor, onClick)
 	CreateButton("GR_SAVEWHISPER",GR_Whisper,120,30,GR.L["Save"],anchor,function()
 		local text = GR_Whisper.edit:GetText()
 		local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-		GR_DATA.settings.whispers[ID] = text
+		GR_DATA.settings.whisper = text
 		GR_Whisper.edit:SetText("")
 	end)
 	anchor.xOfs = 280
@@ -638,18 +634,18 @@ local function CreateWhisperDefineFrame()
 	GR_Whisper:SetScript("OnUpdate",function()
 		if GetTime() > GR_Whisper.update then
 			for i = 1,6 do
-				if type(GR_DATA.settings.whispers[i]) == "string" then
-					GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: |cff00ff00Good|r")
+				if type(GR_DATA.settings.whisper) == "string" then
+					GR_Whisper.status[i].text:SetText("Whisper status: |cff00ff00Good|r")
 				else
-					GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: |cffff0000Undefined|r")
+					GR_Whisper.status[i].text:SetText("Whisper status: |cffff0000Undefined|r")
 				end
 			end
 			local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-			GR_Whisper.status[ID].text:SetText("Whisper #"..ID.." status: |cffff8800Editing...|r")
+			GR_Whisper.status[ID].text:SetText("Whisper status: |cffff8800Editing...|r")
 
 			if ID ~= GR_Whisper.changed then
 				GR_Whisper.changed = ID
-				GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
+				GR_Whisper.edit:SetText(GR_DATA.settings.whisper[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
 			end
 
 			GR_Whisper.update = GetTime() + 0.5
