@@ -520,7 +520,59 @@ end
 --	self:EnableKeyboard(true);
 --
 --end
+local function CreateWhisperPreviewFrame()
+	CreateFrame("Frame","GR_Preview")
+	local backdrop =
+	{
+		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
+		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		tile = true,
+		tileSize = 16,
+		edgeSize = 4,
+		insets = { left = 4, right = 4, top = 4, bottom = 4 }
+	}
+	GR_Preview:SetWidth(500)
+	GR_Preview:SetHeight(175)
+	GR_Preview:SetBackdrop(backdrop)
+	SetFramePosition(GR_Preview)
+	GR_Preview:SetMovable(true)
+	GR_Preview:SetScript("OnMouseDown",function(self)
+		self:StartMoving()
+	end)
+	GR_Preview:SetScript("OnMouseUp",function(self)
+		self:StopMovingOrSizing()
+		SaveFramePosition(GR_Preview)
+	end)
 
+	local close = CreateFrame("Button",nil,GR_Preview,"UIPanelCloseButton")
+	close:SetPoint("TOPRIGHT",GR_Preview,"TOPRIGHT",-4,-4)
+
+	GR_Preview.title = GR_Preview:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
+	GR_Preview.title:SetText(GR.L["GuildRecruiter Whisper Preview"])
+	GR_Preview.title:SetPoint("TOP",GR_Preview,"TOP",0,-20)
+
+	GR_Preview.info = GR_Preview:CreateFontString(nil,"OVERLAY","GameFontNormal")
+	GR_Preview.info:SetPoint("TOPLEFT",GR_Preview,"TOPLEFT",33,-55)
+	GR_Preview.info:SetText("Whisper #"..i..": ",GR_DATA.settings.whispers[i])
+	GR_Preview.info:SetWidth(450)
+	GR_Preview.info:SetJustifyH("LEFT")
+	
+end
+
+local function ShowPreviewFrame()
+	if GR_Preview then
+		GR_Preview:Show()
+	else
+		CreateWhisperPreviewFrame()
+		GR_Preview:Show()
+	end
+end
+
+local function HidePreviewFrame()
+	if GR_Preview then
+		GR_Preview:Hide()
+	end
+end
 local function CreateWhisperDefineFrame()
 	CreateFrame("Frame","GR_Whisper")
 	local backdrop =
@@ -622,15 +674,19 @@ local function CreateWhisperDefineFrame()
 		anchor.xOfs = 100
 		anchor.yOfs = 20
 	--CreateButton(name, parent, width, height, label, anchor, onClick)
-	CreateButton("GR_SAVEWHISPER",GR_Whisper,120,30,GR.L["Save"],anchor,function()
+	CreateButton("GR_SAVEWHISPER",GR_Whisper,100,30,GR.L["Save"],anchor,function()
 		local text = GR_Whisper.edit:GetText()
-		local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-		GR_DATA.settings.whispers[ID] = text
+		--local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
+		GR_DATA.settings.whisper = text
 		GR_Whisper.edit:SetText("")
 	end)
-	anchor.xOfs = 280
-	CreateButton("GR_CANCELWHISPER",GR_Whisper,120,30,GR.L["Cancel"],anchor,function()
+	anchor.xOfs = 210
+	CreateButton("GR_CANCELWHISPER",GR_Whisper,100,30,GR.L["Cancel"],anchor,function()
 		GR_Whisper:Hide()
+	end)
+	anchor.xOfs = 320
+	CreateButton("GR_PREVIEWWHISPER",GR_Whisper,100,30,GR.L["Preview"],anchor, function(self) ShowPreviewFrame() GR_Whisper:Hide()
+		
 	end)
 
 	GR_Whisper.update = 0
