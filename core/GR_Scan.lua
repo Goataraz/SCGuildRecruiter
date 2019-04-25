@@ -283,7 +283,7 @@ end
 
 function GR:FormatWhisper(msg, name)
 	local whisper = msg
-	if not msg then GR:print("You have not set your whispers!") msg = "<NO WHISPER SET>" whisper = "<NO WHISPER SET>" end
+	if not msg then GR:print("You have not set your whispers!") msg = "Hey! Do you want to join a guild?" whisper = "Hey! Do you want to join a guild?" end
 	if not name then name = "ExampleName" end
 	local guildName,guildLevel = GetGuildInfo(UnitName("Player"))
 	if not guildName then guildName = "<InvalidName>" end
@@ -691,8 +691,9 @@ function GR:SendGuildInvite(button)
 			--GR:print("Only whisper: "..name);
 
 		else
-			GR:print(GR.L["You need to specify the mode in which you wish to invite"])
-			GR:print(GR.L["Go to Options and select your Invite Mode"])
+			GR:SendWhisper(GR:FormatWhisper(GR:PickRandomWhisper(), name), name, 4);
+			GR:LockPlayer(name);
+			--GR:print("Only whisper: "..name);
 		end
 		--GuildShield:IsShielded(name);
 		GR:LiveSync(name)

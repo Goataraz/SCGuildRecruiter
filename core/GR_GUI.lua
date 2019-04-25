@@ -629,7 +629,7 @@ local function CreateWhisperDefineFrame()
 
 	local yOfs = -20
 	GR_Whisper.status = {}
-	for i = 1,6 do
+	for i = 1,3 do
 		GR_Whisper.status[i] = {}
 		GR_Whisper.status[i].box = CreateFrame("Frame",nil,GR_Whisper)
 		GR_Whisper.status[i].box:SetWidth(170)
@@ -657,9 +657,6 @@ local function CreateWhisperDefineFrame()
 		"Whisper #1",
 		"Whisper #2",
 		"Whisper #3",
-		"Whisper #4",
-		"Whisper #5",
-		"Whisper #6",
 	}
 
 	anchor = {}
@@ -674,26 +671,22 @@ local function CreateWhisperDefineFrame()
 		anchor.xOfs = 100
 		anchor.yOfs = 20
 	--CreateButton(name, parent, width, height, label, anchor, onClick)
-	CreateButton("GR_SAVEWHISPER",GR_Whisper,100,30,GR.L["Save"],anchor,function()
+	CreateButton("GR_SAVEWHISPER",GR_Whisper,120,30,GR.L["Save"],anchor,function()
 		local text = GR_Whisper.edit:GetText()
-		--local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-		GR_DATA.settings.whisper = text
+		local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
+		GR_DATA.settings.whispers[ID] = text
 		GR_Whisper.edit:SetText("")
 	end)
-	anchor.xOfs = 210
-	CreateButton("GR_CANCELWHISPER",GR_Whisper,100,30,GR.L["Cancel"],anchor,function()
+	anchor.xOfs = 280
+	CreateButton("GR_CANCELWHISPER",GR_Whisper,120,30,GR.L["Cancel"],anchor,function()
 		GR_Whisper:Hide()
-	end)
-	anchor.xOfs = 320
-	CreateButton("GR_PREVIEWWHISPER",GR_Whisper,100,30,GR.L["Preview"],anchor, function(self) ShowPreviewFrame() GR_Whisper:Hide()
-		
 	end)
 
 	GR_Whisper.update = 0
 	GR_Whisper.changed = false
 	GR_Whisper:SetScript("OnUpdate",function()
 		if GetTime() > GR_Whisper.update then
-			for i = 1,6 do
+			for i = 1,3 do
 				if type(GR_DATA.settings.whispers[i]) == "string" then
 					GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: |cff00ff00Good|r")
 				else
@@ -701,7 +694,7 @@ local function CreateWhisperDefineFrame()
 				end
 			end
 			local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-			GR_Whisper.status[ID].text:SetText("Whisper #"..ID.." status: |cffff8800Editing...|r")
+			GR_Whisper.status[ID].text:SetText("Whisper #"..i.." status: |cffff8800Editing...|r")
 
 			if ID ~= GR_Whisper.changed then
 				GR_Whisper.changed = ID
@@ -1496,8 +1489,8 @@ local function CreateOptions()
 	GR_Options.title = GR_Options:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
 	GR_Options.title:SetText("GuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
 	GR_Options.title:SetPoint("TOP",GR_Options,"TOP",0,-15)
-	GR_Options.bottom = GR_Options:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
-	GR_Options.bottom:SetText("Updated by The Shadow Collective")
+	GR_Options.bottom = GR_Options:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
+	GR_Options.bottom:SetText("Updated and Maintained by The Shadow Collective http://shadowco.io")
 	GR_Options.bottom:SetPoint("BOTTOM",GR_Options,"BOTTOM",0,5)
 
 	GR_Options.optionHelpText = GR_Options:CreateFontString(nil, "OVERLAY","GameFontNormal");
@@ -1518,7 +1511,7 @@ local function CreateOptions()
 
 	local spacing = 25;
 	--GR_Options.dropDown1 = CreateDropDown("DROPDOWN_PROFILE_SELECT", GR_Options, GR.L["Select Profile"], ProfileSelect, anchor);
-	GR_Options.dropDown1 = CreateDropDown("DROPDOWN_INVITE_MODE", GR_Options, GR.L["Invite Mode"], WhisperMode, anchor);
+--	GR_Options.dropDown1 = CreateDropDown("DROPDOWN_INVITE_MODE", GR_Options, GR.L["Invite Mode"], WhisperMode, anchor);
 		anchor.yOfs = anchor.yOfs - spacing - 7;
 		anchor.xOfs = anchor.xOfs + 13;
 --	GR_Options.checkBox1 = CreateCheckbox("CHECKBOX_MUTE_GR", GR_Options, GR.L["Mute GR"], anchor);
@@ -1527,16 +1520,16 @@ local function CreateOptions()
 		anchor.yOfs = anchor.yOfs - spacing;
 --	GR_Options.checkBox3 = CreateCheckbox("CHECKBOX_HIDE_SYSTEM", GR_Options, GR.L["Hide system messages"], anchor);
 --		anchor.yOfs = anchor.yOfs - spacing;
-	GR_Options.checkBox7 = CreateCheckbox("CHECKBOX_HIDE_WHISPER", GR_Options, GR.L["Hide outgoing whispers"], anchor);
-		anchor.yOfs = anchor.yOfs - spacing;
-	GR_Options.checkBox4 = CreateCheckbox("CHECKBOX_HIDE_MINIMAP", GR_Options, GR.L["Hide minimap button"], anchor);
-		anchor.yOfs = anchor.yOfs - spacing;
+--	GR_Options.checkBox7 = CreateCheckbox("CHECKBOX_HIDE_WHISPER", GR_Options, GR.L["Hide outgoing whispers"], anchor);
+--		anchor.yOfs = anchor.yOfs - spacing;
+--	GR_Options.checkBox4 = CreateCheckbox("CHECKBOX_HIDE_MINIMAP", GR_Options, GR.L["Hide minimap button"], anchor);
+--		anchor.yOfs = anchor.yOfs - spacing;
 	GR_Options.checkBox5 = CreateCheckbox("CHECKBOX_BACKGROUND_MODE", GR_Options, GR.L["Run Scan in the background"], anchor);
 		anchor.yOfs = anchor.yOfs - spacing;
 	GR_Options.checkBox6 = CreateCheckbox("CHECKBOX_ENABLE_FILTERS", GR_Options, GR.L["Enable filtering"], anchor);
 
 --	GR_Options.checkBox3:HookScript("PostClick", function(self) ChatIntercept:StateSystem(self:GetChecked()) end);
-	GR_Options.checkBox7:HookScript("PostClick", function(self) ChatIntercept:StateWhisper(self:GetChecked()) end);
+--	GR_Options.checkBox7:HookScript("PostClick", function(self) ChatIntercept:StateWhisper(self:GetChecked()) end);
 
 
 -- ANchor point for the bottom row of buttons
@@ -1792,9 +1785,9 @@ local function CreateOptions()
 		xOfs = 4,
 		yOfs = 4,
 	}
-	GR_Options.superScanText = GR_Options:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge");
+	GR_Options.superScanText = GR_Options:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
 	GR_Options.superScanText:SetPoint("BOTTOMLEFT", GR_Options, "BOTTOMLEFT", 35, 10);
-	GR_Options.superScanText:SetText("SuperScan");
+	GR_Options.superScanText:SetText("Player Scan");
 	GR_Options.buttonPlayPause = CreateButton("GR_SUPERSCAN_PLAYPAUSE2", GR_Options, 40,30,"",anchor,SSBtn3_OnClick);
 	GR_SUPERSCAN_PLAYPAUSE2:SetNormalTexture("Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up");
 	GR_SUPERSCAN_PLAYPAUSE2:Hide();
@@ -1860,6 +1853,7 @@ local function CreateOptions()
 				GR_Options.title:SetText("|cffff3300(DEBUG MODE) |rGuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
 			else
 				GR_Options.title:SetText("GuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
+				
 			end
 
 			if (not GR_DATA.settings.checkBox["CHECKBOX_HIDE_MINIMAP"]) then
