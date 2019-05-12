@@ -131,7 +131,7 @@ local function CreatePlayerListFrame()
 	
 	local backdrop =
 	{
-		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
+		bgFile = "Interface\\AddOns\\SCDispelMonkey\\textures\\Charcoal.tga",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true,
 		tileSize = 16,
@@ -153,7 +153,7 @@ local function CreatePlayerListFrame()
 	
 	GR_PlayerList.text = GR_PlayerList:CreateFontString(nil,"OVERLAY","GameFontNormal")
 	GR_PlayerList.text:SetPoint("CCENTER",GR_PlayerList,"TOP",-15,-15)
-	GR_PlayerList.text:SetText(GR.L["Left Click Name to Invite, Right Click to Blacklist"])
+	GR_PlayerList.text:SetText(GR.L["Left Click Name to Whisper, Right Click to Blacklist"])
 	
 	local close = CreateFrame("Button",nil,GR_PlayerList,"UIPanelCloseButton")
 	close:SetPoint("TOPRIGHT",GR_PlayerList,"TOPRIGHT",-4,-4)
@@ -254,7 +254,7 @@ local function CreateInviteListFrame()
 
 	GR_Invites.text = GR_Invites:CreateFontString(nil,"OVERLAY","GameFontNormal")
 	GR_Invites.text:SetPoint("TOP",GR_Invites,"TOP",-15,-15)
-	GR_Invites.text:SetText(GR.L["Left Click Name to Invite, Right Click to Blacklist"])
+	GR_Invites.text:SetText(GR.L["Left Click Name to Whisper, Right Click to Blacklist"])
 	--GR_Invites.tooltip = CreateFrame("Frame","InviteTime",GR_Invites,"GameTooltipTemplate")
 
 		--GR_Invites.tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
@@ -1537,18 +1537,18 @@ local function CreateOptions()
 		anchor.point = "BOTTOMLEFT"
 		anchor.relativePoint = "BOTTOMLEFT"
 		anchor.xOfs = 20
-		anchor.yOfs = 25
+		anchor.yOfs = 40
 
 	--onClickTester
 	GR_Options.button1 = CreateButton("BUTTON_CUSTOM_WHISPER", GR_Options, 120, 30, GR.L["Edit whisper"], anchor, function(self) ShowWhisperFrame() GR_Options:Hide() GR_Options.showAgain = true end);
 		anchor.xOfs = anchor.xOfs + 125;
 	GR_Options.button2 = CreateButton("BUTTON_SUPER_SCAN", GR_Options, 120, 30, GR.L["Scan"], anchor, OptBtn2_OnClick);
 		anchor.xOfs = anchor.xOfs + 125;
-	GR_Options.button3 = CreateButton("BUTTON_INVITE", GR_Options, 120, 30, format(GR.L["Invite: %d"],GR:GetNumQueued()), anchor, GR.SendGuildInvite);
+	GR_Options.button3 = CreateButton("BUTTON_INVITE", GR_Options, 120, 30, format(GR.L["Whisper: %d"],GR:GetNumQueued()), anchor, GR.SendGuildInvite);
 		anchor.xOfs = anchor.xOfs + 125;
-	GR_Options.button4 = CreateButton("BUTTON_CHOOSE_INVITES", GR_Options, 120, 30, GR.L["Choose invites"], anchor, GR.ShowInviteList);
-		anchor.yOfs = 60;
 	GR_Options.button5 = CreateButton("BUTTON_EDIT_FILTERS", GR_Options, 120, 30, GR.L["Filters"], anchor, function() GR:ShowFilterHandle() GR_Options:Hide() end);
+		anchor.yOfs = 60;
+	--GR_Options.button5 = CreateButton("BUTTON_EDIT_FILTERS", GR_Options, 120, 30, GR.L["Filters"], anchor, function() --GR:ShowFilterHandle() GR_Options:Hide() end);
 		anchor.xOfs = anchor.xOfs - 125;
 	--GR_Options.button6 = CreateButton("BUTTON_HELP", GR_Options, 120, 30, GR.L["Help"],anchor, function() GR:ShowTroubleShooter() GR_Options:Hide() GR_Options.showAgain = true end);
 	--	anchor.xOfs = anchor.xOfs - 125;
@@ -1846,7 +1846,7 @@ local function CreateOptions()
 
 
 
-			BUTTON_INVITE.label:SetText(format(GR.L["Invite: %d"],GR:GetNumQueued()));
+			BUTTON_INVITE.label:SetText(format(GR.L["Whisper: %d"],GR:GetNumQueued()));
 --			BUTTON_KEYBIND.label:SetText(GR.L["Set Keybind ("..(GR_DATA.keyBind and GR_DATA.keyBind or "NONE")..")"]);
 
 			if (GR_DATA.debug) then
