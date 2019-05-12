@@ -4,7 +4,7 @@
 ##-------------------------------------------------------------
 ## Title: |cffeaeaeaGuild|r|cffffa012Recruiter|r
 ## Notes: Guild Recruitment Addon developed by Janniie, updated and maintained by The Shadow Collective Korialstrasz.
-## Version: 2.0.3
+## Version: 2.0.4
 ##-------------------------------------------------------------
 ## SavedVariables: GR_DATA,GR_GratsMessage,GR_GratsTimeMin,GR_GratsTimeMax,GR_GratsTimeWait,GR_GuildJoinMessageToggle,GR_Guild,GR_Say,GR_Party,GR_Delay,GR_GuildDisabledOverride,GR_GroupingTime,GR_GuildJoinMessageToggle,GR_GuildWelcomeMessage
 ## SavedVariablesPerCharacter: GR_BACKUP
