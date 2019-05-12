@@ -19,12 +19,12 @@ function GR_OnLoad(self)
 	if(GR_Guild == nil)then
 		GR_Guild = false;
 	end
---	if(GR_Say == nil)then
---		GR_Say = true;
---	end
---	if(GR_Party == nil)then
---		GR_Party = false;
---	end
+	if(GR_Say == nil)then
+		GR_Say = true;
+	end
+	if(GR_Party == nil)then
+		GR_Party = false;
+	end
 	if(GR_Delay == nil)then
 		GR_Delay=4000;
 	end
@@ -59,26 +59,26 @@ function GR_SetupOptionsUI()
 	end)
 
 	--Party Check Button
-	--GuildGrats.ui.partyCheckButton = CreateFrame("CheckButton","GR_PartyCheckButton",GuildGrats.ui.panel,"UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
-	--GuildGrats.ui.partyCheckButton:SetPoint("TOPLEFT",20,-40)
-	--GuildGrats.ui.partyCheckButton.text:SetText("Party Gratzing")
-	--GuildGrats.ui.partyCheckButton:SetScript("OnShow", function(self,event,arg1) 
-	--	self:SetChecked(GR_Party);
-	--end)
-	--GuildGrats.ui.partyCheckButton:SetScript("OnClick", function(self,event,arg1) 
-	--	GR_ToggleParty();
-	--end)
+	GuildGrats.ui.partyCheckButton = CreateFrame("CheckButton","GR_PartyCheckButton",GuildGrats.ui.panel,"UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
+	GuildGrats.ui.partyCheckButton:SetPoint("TOPLEFT",20,-40)
+	GuildGrats.ui.partyCheckButton.text:SetText("Party Gratzing")
+	GuildGrats.ui.partyCheckButton:SetScript("OnShow", function(self,event,arg1) 
+		self:SetChecked(GR_Party);
+	end)
+	GuildGrats.ui.partyCheckButton:SetScript("OnClick", function(self,event,arg1) 
+		GR_ToggleParty();
+	end)
 
 	--Say Check Button
-	--GuildGrats.ui.sayCheckButton = CreateFrame("CheckButton","GR_SayCheckButton",GuildGrats.ui.panel,"UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
-	--GuildGrats.ui.sayCheckButton:SetPoint("TOPLEFT",20,-60)
-	--GuildGrats.ui.sayCheckButton.text:SetText("Say Gratzing")
-	--GuildGrats.ui.sayCheckButton:SetScript("OnShow", function(self,event,arg1) 
-	--	self:SetChecked(GR_Say);
-	--end)
-	--GuildGrats.ui.sayCheckButton:SetScript("OnClick", function(self,event,arg1) 
-	--	GR_ToggleSay();
-	--end)
+	GuildGrats.ui.sayCheckButton = CreateFrame("CheckButton","GR_SayCheckButton",GuildGrats.ui.panel,"UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
+	GuildGrats.ui.sayCheckButton:SetPoint("TOPLEFT",20,-60)
+	GuildGrats.ui.sayCheckButton.text:SetText("Say Gratzing")
+	GuildGrats.ui.sayCheckButton:SetScript("OnShow", function(self,event,arg1) 
+		self:SetChecked(GR_Say);
+	end)
+	GuildGrats.ui.sayCheckButton:SetScript("OnClick", function(self,event,arg1) 
+		GR_ToggleSay();
+	end)
 
 	--Guild Welcome Check Button
 	GuildGrats.ui.guildWelcomeCheckButton = CreateFrame("CheckButton","GR_GuildWelcomeCheckButton",GuildGrats.ui.panel,"UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
@@ -118,18 +118,18 @@ function GR_SetupOptionsUI()
 		self:SetNumber(GR_GroupingTime);
 	end)
 	GuildGrats.ui.groupingSlider:SetPoint("TOPRIGHT",-120,-100)
-	--GuildGrats.ui.delayLabel = GuildGrats.ui.panel:CreateFontString(nil,"OVERLAY","GameFontNormal", 200,200)
-	--GuildGrats.ui.delayLabel:SetText("delay")
-	--GuildGrats.ui.delayEditBox = CreateFrame("EditBox","GR_DelayEditBox",GuildGrats.ui.panel,"InputBoxTemplate") --frameType, frameName, frameParent, frameTemplate    
-	--GuildGrats.ui.delayEditBox:SetSize(50,30)
- --   GuildGrats.ui.delayEditBox:ClearAllPoints()
-	--GuildGrats.ui.delayEditBox:SetPoint("TOPLEFT",120,-120)
- --   GuildGrats.ui.delayEditBox:SetText("test");
- --   GuildGrats.ui.delayEditBox:SetAutoFocus(false)
-	--GuildGrats.ui.delayEditBox.text:SetText("Delay(ms)")
-	--GuildGrats.ui.delayEditBox:SetScript("OnShow", function(self,event,arg1) 
-		--self:SetChecked(GR_Say);
-	--end)
+--	GuildGrats.ui.delayLabel = GuildGrats.ui.panel:CreateFontString(nil,"OVERLAY","GameFontNormal", 200,200)
+--	GuildGrats.ui.delayLabel:SetText("delay")
+--	GuildGrats.ui.delayEditBox = CreateFrame("EditBox","GR_DelayEditBox",GuildGrats.ui.panel,"InputBoxTemplate") frameType, frameName, frameParent, frameTemplate    
+--	GuildGrats.ui.delayEditBox:SetSize(50,30)
+--  GuildGrats.ui.delayEditBox:ClearAllPoints()
+--	GuildGrats.ui.delayEditBox:SetPoint("TOPLEFT",120,-120)
+--    GuildGrats.ui.delayEditBox:SetText("test");
+--    GuildGrats.ui.delayEditBox:SetAutoFocus(false)
+--	GuildGrats.ui.delayEditBox.text:SetText("Delay(ms)")
+--	GuildGrats.ui.delayEditBox:SetScript("OnShow", function(self,event,arg1) 
+--		self:SetChecked(GR_Say);
+--	end)
 
 	--Grats Message
 	GuildGrats.ui.gratsMessageEditBox = CreateFrame("EditBox", "GR_GratsMessage", GuildGrats.ui.panel, "InputBoxTemplate")
@@ -207,27 +207,27 @@ function GR_ToggleGuild()
 	GuildGrats.ui.guildCheckButton:SetChecked(GR_Guild);
 end
 
---function GR_ToggleSay()
---	if(GR_Say) then 
---		GR_Say = false; 
---		GR_Print("Say gratzing now off");
---	else
---		GR_Say = true;
---		GR_Print("Say gratzing now on");
---	end;
---	GuildGrats.ui.sayCheckButton:SetChecked(GR_Say);
---end
+function GR_ToggleSay()
+	if(GR_Say) then 
+		GR_Say = false; 
+		GR_Print("Say gratzing now off");
+	else
+		GR_Say = true;
+		GR_Print("Say gratzing now on");
+	end;
+	GuildGrats.ui.sayCheckButton:SetChecked(GR_Say);
+end
 
---function GR_ToggleParty()
---	if(GR_Party) then 
---		GR_Party = false; 
---		GR_Print("Party gratzing now off");
---	else
---		GR_Party = true; 
---		GR_Print("Party gratzing now on");
---	end;
---	GuildGrats.ui.partyCheckButton:SetChecked(GR_Party);
---end
+function GR_ToggleParty()
+	if(GR_Party) then 
+		GR_Party = false; 
+		GR_Print("Party gratzing now off");
+	else
+		GR_Party = true; 
+		GR_Print("Party gratzing now on");
+	end;
+	GuildGrats.ui.partyCheckButton:SetChecked(GR_Party);
+end
 
 function GR_ToggleGuildWelcome()
 	if(GR_GuildJoinMessageToggle) then 
@@ -263,10 +263,10 @@ function GR_Command(msg)
 		InterfaceOptionsFrame_OpenToCategory(GuildGrats.ui.panel);
     elseif (Cmd == "guild")then
         GR_ToggleGuild();
-    --elseif (Cmd == "say")then
-    --    GR_ToggleSay();
-    --elseif (Cmd == "party")then
-     --   GR_ToggleParty();
+    elseif (Cmd == "say")then
+        GR_ToggleSay();
+    elseif (Cmd == "party")then
+       GR_ToggleParty();
 	elseif (Cmd == "guildwelcome")then
         GR_ToggleGuildWelcome();
 	elseif (string.find(Cmd,"delay") == 1)then
@@ -285,8 +285,8 @@ function GR_OnEvent(self,event,arg1,arg2)
     end
     if(not GR_IsMe(arg2))then
 	    if(event == "CHAT_MSG_GUILD_ACHIEVEMENT" and not GR_GuildDisabledOverride)then GR_DoGrats("GUILD");
-	    --elseif(event == "CHAT_MSG_ACHIEVEMENT")then GR_DoGrats("SAY");
-	    --elseif(event == "CHAT_MSG_ACHIEVEMENT")then GR_DoGrats("PARTY");
+	    elseif(event == "CHAT_MSG_ACHIEVEMENT")then GR_DoGrats("SAY");
+	    elseif(event == "CHAT_MSG_ACHIEVEMENT")then GR_DoGrats("PARTY");
 	    elseif(event == "CHAT_MSG_SYSTEM" and not GR_GuildDisabledOverride) then
 	    	if(arg1 ~= nil) then
 				if(string.find(arg1,"has joined the guild.")) then GR_GuildWelcome();
@@ -326,7 +326,7 @@ function GR_GuildWelcome()
 end
 
 function GR_IsMe(nameString)
-	--local name,server = split(nameString,"-")
+	local name,server = split(nameString,"-")
 	local myName, myServer = UnitName("player")
 	if(myServer == nil)then
 		myServer = GetRealmName();
@@ -364,24 +364,24 @@ function GR_Print(msg)
 	print("\124cffffFF00[GR]\124r",msg);
 end
 
---function split(str, pat)
---   local t = {n = 0}  -- NOTE: use {n = 0} in Lua-5.0
---   local fpat = "(.-)" .. pat
---   local last_end = 1
---   local s, e, cap = str:find(fpat, 1)
---   while s do
---      if s ~= 1 or cap ~= "" then
---	 table.insert(t,cap)
---      end
---      last_end = e+1
---      s, e, cap = str:find(fpat, last_end)
---   end
---   if last_end <= #str then
---      cap = str:sub(last_end)
---      table.insert(t, cap)
---   end
---   return unpack(t)
---end
+function split(str, pat)
+   local t = {}  -- NOTE: use {n = 0} in Lua-5.0
+   local fpat = "(.-)" .. pat
+   local last_end = 1
+   local s, e, cap = str:find(fpat, 1)
+   while s do
+      if s ~= 1 or cap ~= "" then
+	 table.insert(t,cap)
+      end
+      last_end = e+1
+      s, e, cap = str:find(fpat, last_end)
+   end
+   if last_end <= #str then
+      cap = str:sub(last_end)
+      table.insert(t, cap)
+   end
+   return unpack(t)
+end
 
 
   
