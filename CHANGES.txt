@@ -1,66 +1,22 @@
-lightweight tag b9eb15201ed77c90d34d4ae9dbe676022c2e4050 v2.0.2
+lightweight tag 2a962e0981ce31d13da56e7c8a36e0d30d9ffd97 v2.0.5
 Author:	GitHub <noreply@github.com>
-Date:	Tue Apr 30 11:33:07 2019 -0400
+Date:	Sun May 12 18:04:02 2019 -0400
 
-commit b9eb15201ed77c90d34d4ae9dbe676022c2e4050
+commit 2a962e0981ce31d13da56e7c8a36e0d30d9ffd97
 Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Tue Apr 30 11:33:07 2019 -0400
-
-    2.0.2
-    
-    Made a simple change to update for lua 5.x
-
-commit a5e3d01a13c9694f75e547ba34a4f1a3bd18fae1
-Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Tue Apr 30 11:30:54 2019 -0400
-
-    2.0.2
-
-commit 3e08eeb2213505d067353e6bdfc884b960c3faf1
-Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Tue Apr 30 11:30:26 2019 -0400
-
-    2.0.2
-
-commit e2ff5d230c12c13e6c648d88d43c37a8d0146d4b
-Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Thu Apr 25 12:45:56 2019 -0400
-
-    2.0.1
-
-commit 4755d5d96119a5c9668b3f35a576a2b06228b4b3
-Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Thu Apr 25 12:45:26 2019 -0400
-
-    2.0.1
-
-commit 15d38ba2c928c3943e8ddf0b0fd5080d54c4d40a
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 25 12:43:30 2019 -0400
-
-    UI and whisper changes.
-
-commit c66cf2b955ac451ca54f066708f5aa20f580e6f9
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 25 10:47:43 2019 -0400
-
-    Update GR_GUI.lua
-
-commit a9d5ef69420c81a8a59ca487ab846b269321ec1b
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 25 10:35:45 2019 -0400
-
-    Whisper changes
-
-commit 4f4085b136bb673e72824993f63a80abe191a98a
-Author: Chris Swink <45670122+cswink@users.noreply.github.com>
-Date:   Thu Apr 25 08:47:05 2019 -0400
-
-    Whisper Changes
-
-commit d98e14a62cbf8d9ae4c23ae72d3c7dec0e82473f
-Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Thu Apr 25 08:15:06 2019 -0400
+Date:   Sun May 12 18:04:02 2019 -0400
 
     Add files via upload
+
+commit 539a65bcd8b9a9a94ff97b9d6996c23b0121c6cb
+Author: Goat <45670122+Goataraz@users.noreply.github.com>
+Date:   Sun May 12 18:03:29 2019 -0400
+
+    Update GR_Constants.lua
+
+commit 3421cfa7ecb0f4e425bacbf2b2e2c1d57d010a44
+Author: Goat <45670122+Goataraz@users.noreply.github.com>
+Date:   Sun May 12 18:03:03 2019 -0400
+
+    Update SCGuildRecruiter.toc
 

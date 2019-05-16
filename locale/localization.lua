@@ -28,7 +28,7 @@ local English = setmetatable({}, {__index=defaultFunc})
 	English["Amount of levels to search every ~7 seconds (higher numbers increase the risk of capping the search results)"] = nil
 	English["Interval:"] = nil
 	English["GuildRecruiter Custom Whisper"] = nil
-	English["WhisperInstructions"] = "Create a customized whisper to send people you invite! If you enter the words (must be caps) |cff00ff00NAME|r, |cff0000ffLEVEL|r or |cffff0000PLAYER|r these will be replaced by your Guildname, Guildlevel and the recieving players name"
+	English["WhisperInstructions"] = "Create a customized whisper to send people you invite! 256 Character max. If the addon does not send whispers, you may need to fill all 3 slots."
 	English["Enter your whisper"] = nil
 	English["Save"] = nil
 	English["Cancel"] = nil
@@ -62,7 +62,7 @@ local English = setmetatable({}, {__index=defaultFunc})
 	English["whisper to everyone"] = "|cffff8800I keep sending a whisper to everyone I invite, OR I just want to send whispers and not invite, but your AddOn does both!|r|cff00A2FF This is because you specified to both invite and whisper on the dropdown menu in options.|r|cff00ff00 Click to fix|r"
 	English["can't get GR to invite"] = "|cffff8800I can't get GR to invite people, all it does is sending whispers.|r|cff00A2FF This is because you picked that option in the dropdown menu.|r|cff00ff00 Click to fix|r"
 	English["can't see any messages"] = "|cffff8800I can't see any messages from GR at all!|r|cff00A2FF This is because you have muted GR in the options.|r|cff00ff00 Click to fix|r"
-	English["None of the above"] = "|cffff8800None of the above solved my problem!|r|cff00A2FF There might be an issue with the localization (language) you are using. You can try to load your locale manually: /GR locale:deDE loads German (frFR for french). Please contact me at:|r|cff00ff00 shadowco.io|r"
+	English["None of the above"] = "|cffff8800None of the above solved my problem!|r|cff00A2FF There might be an issue with the localization (language) you are using. You can try to load your locale manually: /GR locale:deDE loads German (frFR for french). Please contact me at:|r|cff00ff00 https://discord.gg/x4tR4sX|r"
 	English["Enabled whispers"] = nil
 	English['Changed invite mode to "Invite and Whisper"'] = nil
 	English["Mute has been turned off"] = nil

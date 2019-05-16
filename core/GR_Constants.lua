@@ -13,7 +13,7 @@ GR_MIN_LEVEL_SUPER_SCAN = 1;
 
 -- Version realted
 GR.VERSION_MAJOR = "2.0";
-GR.VERSION_MINOR = ".5";
+GR.VERSION_MINOR = ".6";
 GR.versionChanges = {
 	version = "Version |cff55EE55"..GR.VERSION_MAJOR..GR.VERSION_MINOR.."|r",
 	items = {
@@ -22,7 +22,7 @@ GR.versionChanges = {
 }
 
 GR.CommonIssues = {
-	"Please post bug reports on #bugs channel in our Discord at shadowco.io and I'll try to fix them.",
+	"Please post bug reports on #bugs channel in our Discord at https://discord.gg/x4tR4sX and I'll try to fix them.",
 	"Test2",
 	"Test3",
 }

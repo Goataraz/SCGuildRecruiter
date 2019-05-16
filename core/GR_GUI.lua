@@ -1490,7 +1490,7 @@ local function CreateOptions()
 	GR_Options.title:SetText("GuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
 	GR_Options.title:SetPoint("TOP",GR_Options,"TOP",0,-15)
 	GR_Options.bottom = GR_Options:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
-	GR_Options.bottom:SetText("Updated and Maintained by The Shadow Collective http://shadowco.io")
+	GR_Options.bottom:SetText("Updated and Maintained by The Shadow Collective https://discord.gg/x4tR4sX")
 	GR_Options.bottom:SetPoint("BOTTOM",GR_Options,"BOTTOM",0,5)
 
 	GR_Options.optionHelpText = GR_Options:CreateFontString(nil, "OVERLAY","GameFontNormal");
