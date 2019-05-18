@@ -694,7 +694,7 @@ local function CreateWhisperDefineFrame()
 				end
 			end
 			local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-			GR_Whisper.status[ID].text:SetText("Whisper #"..i.." status: |cffff8800Editing...|r")
+			GR_Whisper.status[ID].text:SetText("Whisper #", i, " status: |cffff8800Editing...|r")
 
 			if ID ~= GR_Whisper.changed then
 				GR_Whisper.changed = ID
