@@ -36,6 +36,4 @@ core\GR_Events.lua
 
 core\GR_GUI.lua
 
-core\GR_Grats.lua
-core\GR_Grats.xml
 
