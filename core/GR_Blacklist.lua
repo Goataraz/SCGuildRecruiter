@@ -13,12 +13,12 @@ GR_MESSAGE_TIMER:SetScript("OnUpdate", function()
 				if (GR.ForceStop[messageToBeSent.receiver]) then
 					MessageQueue[key] = nil;
 					GR.ForceStop[messageToBeSent.receiver] = nil;
-					GR:debug("Forced sendstop!");
+					GR:print("Forced sendstop!");
 					return;
 				end
 				 C_ChatInfo.SendAddonMessageLogged(ID_MASSLOCK, messageToBeSent.msg, "WHISPER", messageToBeSent.receiver);
 				MessageQueue[key] = nil;
-				GR:debug("Send AddonMessage ("..messageToBeSent.msg..") to "..messageToBeSent.receiver);
+				GR:print("Send AddonMessage ("..messageToBeSent.msg..") to "..messageToBeSent.receiver);
 
 			end
 		end
@@ -84,7 +84,7 @@ function GR:ReceivedNewLocks(rawLocks)
 	for k,_ in pairs(locks) do
 		GR:LockPlayer(locks[k]);
 	end
-	GR:debug("Received locks!");
+	GR:print("Received locks!");
 end
 
 function GR:RemoveOutdatedLocks()
@@ -111,4 +111,4 @@ end
 
 
 
-GR:debug(">> Blacklist.lua");
+GR:print(">> Blacklist.lua");
