@@ -9,7 +9,7 @@ local function CreateButton(name, parent, width, height, label, anchor, onClick)
 	local f = CreateFrame("Button", name, parent, "UIPanelButtonTemplate");
 	f:SetWidth(width);
 	f:SetHeight(height);
-	f.label = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
+	f.label = f:CreateFontString(nil, "OVERLAY", "GameFontNormalTiny");
 	f.label:SetText(label);
 	f.label:SetPoint("CENTER");
 	f:SetWidth(width - 10);
@@ -24,7 +24,7 @@ end
 
 local function CreateCheckbox(name, parent, label, anchor)
 	local f = CreateFrame("CheckButton", name, parent, "ChatConfigCheckButtonTemplate");   --ChatConfigCheckButtonTemplate     OptionsBaseCheckButtonTemplate
-	f.label = f:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+	f.label = f:CreateFontString(nil, "OVERLAY", "GameFontNormalTiny");
 	f.label:SetText(label);
 	f.label:SetPoint("LEFT", f, "RIGHT", 5, 1);
 
@@ -113,14 +113,14 @@ local function SaveFramePosition(frame)
 	GR_DATA.settings.frames[frame:GetName()] = {point = point, relativePoint = relativePoint, xOfs = xOfs, yOfs = yOfs};
 end
 local function CreatePlayerListFrame()
-	CreateFrame("Frame","GR_PlayerList")
+	CreateFrame("Frame","GR_PlayerList", UIParent, "BasicFrameTemplate")
 	
 	local GR_QUEUE = GR:GetInviteQueue();
 	GR_PlayerList:SetWidth(370)
 	GR_PlayerList:SetHeight(20*GR:CountTable(GR_QUEUE) + 40)
 	GR_PlayerList:SetMovable(true)
 	SetFramePosition(GR_PlayerList)
-		
+	--GR_PlayerList:SetPoint("TOP", UIParent, "CENTER")	
 		GR_PlayerList:SetScript("OnMouseDown",function(self)
 			self:StartMoving()
 		end)
@@ -129,19 +129,10 @@ local function CreatePlayerListFrame()
 			SaveFramePosition(GR_PlayerList)
 		end)
 	
-	local backdrop =
-	{
-		bgFile = "Interface\\AddOns\\SCDispelMonkey\\textures\\Charcoal.tga",
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		tile = true,
-		tileSize = 16,
-		edgeSize = 4,
-		insets = { left = 4, right = 4, top = 4, bottom = 4 }
-	}
 	
-	GR_PlayListSetBackdrop(backdrop)
 	
-	GR_PlayerList.time = GR_PlayerList:CreateFontString(nil,"OVERLAY","GameFontNormal")
+		
+	GR_PlayerList.time = GR_PlayerList:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
 	GR_PlayerList.time:SetPoint("TOP","TOP")
 	GR_PlayerList.time:SetTextSetText(format("|cff00ff00%d%%|r|cffffff00 %s|r    ",0,GR:GetSuperScanETR()))
 	GR_PlayerList.progressTexture = GR_PlayerList:CreateTexture();
@@ -151,7 +142,7 @@ local function CreatePlayerListFrame()
 	GR_PlayerList.progressTexture:SetTexture(1,0.5,0,0.4);
 	GR_PlayerList.progressTexture:SetTexture(0,0.0,0,0.0);
 	
-	GR_PlayerList.text = GR_PlayerList:CreateFontString(nil,"OVERLAY","GameFontNormal")
+	GR_PlayerList.text = GR_PlayerList:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
 	GR_PlayerList.text:SetPoint("CCENTER",GR_PlayerList,"TOP",-15,-15)
 	GR_PlayerList.text:SetText(GR.L["Left Click Name to Whisper, Right Click to Blacklist"])
 	
@@ -486,7 +477,9 @@ end
 --	end
 --end
 --
-local function CreateWhisperDefineFrame()
+
+--Welcome Frame
+local function CreateWelcomeDefineFrame()
 
 end
 
@@ -520,6 +513,222 @@ end
 --	self:EnableKeyboard(true);
 --
 --end
+local function CreateWelcomePreviewFrame()
+	--Window Defaults
+	CreateFrame("Frame","GR_Whisper", UIParent, "BasicFrameTemplate");
+	GR_Whisper:SetSize(500,365);
+	GR_Whisper:SetPoint("CENTER", UIParent, "CENTER");
+	GR_Whisper:SetMovable(true)
+	GR_Whisper:SetScript("OnMouseDown",function(self)
+		self:StartMoving()
+	end)
+	GR_Whisper:SetScript("OnMouseUp",function(self)
+		self:StopMovingOrSizing()
+		SaveFramePosition(GR_Whisper)
+	end)
+	
+	--Config
+	local close = CreateFrame("Button",nil,GR_wPreview,"UIPanelCloseButton")
+	close:SetPoint("TOPRIGHT",GR_wPreview,"TOPRIGHT",-4,-4)
+
+	GR_wPreview.title = GR_wPreview:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
+	GR_wPreview.title:SetText(GR.L["GuildRecruiter Welcome Preview"])
+	GR_wPreview.title:SetPoint("TOP",GR_wPreview,"TOP",0,-20)
+
+	GR_wPreview.info = GR_wPreview:CreateFontString(nil,"OVERLAY","GameFontNormal")
+	GR_wPreview.info:SetPoint("TOPLEFT",GR_wPreview,"TOPLEFT",33,-55)
+	GR_wPreview.info:SetText("Welcome #"..i..": ",GR_DATA.settings.welcomes[i])
+	GR_wPreview.info:SetWidth(450)
+	GR_wPreview.info:SetJustifyH("LEFT")
+	
+end
+
+local function ShowPreviewFrame()
+	if GR_wPreview then
+		GR_wPreview:Show()
+	else
+		CreateWelcomePreviewFrame()
+		GR_wPreview:Show()
+	end
+end
+
+local function HidePreviewFrame()
+	if GR_wPreview then
+		GR_wPreview:Hide()
+	end
+end
+local function CreateWelcomeDefineFrame()
+	--Window Defaults
+	CreateFrame("Frame","GR_Welcome", UIParent, "BasicFrameTemplate");
+	GR_Welcome:SetSize(500,365);
+	GR_Welcome:SetPoint("CENTER", UIParent, "CENTER");
+	GR_Welcome:SetMovable(true)
+	GR_Welcome:SetScript("OnMouseDown",function(self)
+		self:StartMoving()
+	end)
+	GR_Welcome:SetScript("OnMouseUp",function(self)
+		self:StopMovingOrSizing()
+		SaveFramePosition(GR_Welcome)
+	end)
+	--Config
+	
+	GR_Welcome.title = GR_Welcome:CreateFontString(nil, "OVERLAY");
+	GR_Welcome.title:SetFontObject("GameFontHighlight");
+	GR_Welcome.title:SetPoint("CENTER", GR_Welcome.TitleBg, "CENTER", 5, 0);
+	GR_Welcome.title:SetText("Guild Recruiter Custom Welcome");
+
+	GR_Welcome.info = GR_Welcome:CreateFontString(nil,"OVERLAY","GameFontHighlight")
+	GR_Welcome.info:SetPoint("CENTER",GR_Welcome,"CENTER",0,115)
+	GR_Welcome.info:SetText("Create a custom welcome message to be sent in guild chat to new guild members on joining.")
+	GR_Welcome.info:SetWidth(450)
+	GR_Welcome.info:SetJustifyH("CENTER")
+
+	GR_Welcome.edit = CreateFrame("EditBox", "GR_Edit", GR_Welcome, "InsetFrameTemplate3")
+	GR_Welcome.edit:SetWidth(450)
+	GR_Welcome.edit:SetHeight(65)
+	GR_Welcome.edit:SetMultiLine(true)
+	GR_Welcome.edit:SetPoint("CENTER",GR_Welcome,"CENTER",0,30)
+	GR_Welcome.edit:SetFontObject("GameFontNormal")
+	GR_Welcome.edit:SetTextInsets(10,10,10,10)
+	GR_Welcome.edit:SetMaxLetters(256)
+		GR_Welcome.edit:SetText(GR_DATA.settings.welcomes[GR_DATA.settings.dropDown["GR_WELCOME_DROP"] or 1] or "")
+	GR_Welcome.edit:SetScript("OnHide",function()
+		GR_Welcome.edit:SetText(GR_DATA.settings.welcomes[GR_DATA.settings.dropDown["GR_WELCOME_DROP"] or 1] or "")
+	end)
+	GR_Welcome.edit.text = GR_Welcome.edit:CreateFontString(nil,"OVERLAY","GameFontNormal")
+	GR_Welcome.edit.text:SetPoint("CENTER",GR_Welcome.edit,"TOP",0,15)
+	GR_Welcome.edit.text:SetText("Edit your welcome message.")
+
+	local yOfs = -20
+	GR_Welcome.status = {}
+	for i = 1,3 do
+		GR_Welcome.status[i] = {}
+		GR_Welcome.status[i].box = CreateFrame("Frame",nil,GR_Welcome)
+		GR_Welcome.status[i].box:SetWidth(170)
+		GR_Welcome.status[i].box:SetHeight(18)
+		GR_Welcome.status[i].box:SetFrameStrata("HIGH")
+		GR_Welcome.status[i].box.index = i
+		GR_Welcome.status[i].box:SetPoint("LEFT",GR_Welcome,"CENTER",50,yOfs)
+		GR_Welcome.status[i].box:SetScript("OnEnter",function(self)
+			if GR_DATA.settings.welcomes[self.index] then
+				--GameTooltip:SetOwner(self,"ANCHOR_CURSOR")
+				--GameTooltip:SetText(GR:FormatWelcome(GR_DATA.settings.welcomes[self.index],UnitName("Player")))
+			end
+		end)
+		GR_Welcome.status[i].box:SetScript("OnLeave",function(self)
+			--GameTooltip:Hide()
+		end)
+		GR_Welcome.status[i].text = GR_Welcome:CreateFontString(nil,nil,"GameFontNormal")
+		GR_Welcome.status[i].text:SetText("Welcome #"..i.." status: ")
+		GR_Welcome.status[i].text:SetWidth(200)
+		GR_Welcome.status[i].text:SetJustifyH("LEFT")
+		GR_Welcome.status[i].text:SetPoint("LEFT",GR_Welcome,"CENTER",50,yOfs)
+		yOfs = yOfs - 18
+	end
+	local welcomes = {
+		"Welcome #1",
+		"Welcome #2",
+		"Welcome #3",
+	}
+
+	anchor = {}
+		anchor.point = "BOTTOMLEFT"
+		anchor.relativePoint = "BOTTOMLEFT"
+		anchor.xOfs = 50
+		anchor.yOfs = 120
+
+	--CreateDropDown(name, parent, label, items, anchor)
+	--GR_Welcome.drop = CreateDropDown("GR_WELCOME_DROP",GR_Welcome,GR.L["Select welcome"],whispers,anchor)
+
+		anchor.xOfs = 100
+		anchor.yOfs = 20
+	--CreateButton(name, parent, width, height, label, anchor, onClick)
+	CreateButton("GR_SAVEWELCOME",GR_Welcome,120,30,GR.L["Save"],anchor,function()
+		local text = GR_Welcome.edit:GetText()
+		local ID = GR_DATA.settings.dropDown["GR_WELCOME_DROP"]
+		GR_DATA.settings.welcomes[ID] = text
+		GR_Welcome.edit:SetText("")
+	end)
+	anchor.xOfs = 280
+	CreateButton("GR_CANCELWELCOME",GR_Welcome,120,30,GR.L["Cancel"],anchor,function()
+		GR_Welcome:Hide()
+	end)
+
+	GR_Welcome.update = 0
+	GR_Welcome.changed = false
+	GR_Welcome:SetScript("OnUpdate",function()
+		if GetTime() > GR_Welcome.update then
+			for i = 1,3 do
+				if type(GR_DATA.settings.welcomes[i]) == "string" then
+					GR_Welcome.status[i].text:SetText("Welcome #"..i.." status: |cff00ff00Good|r")
+				else
+					GR_Welcome.status[i].text:SetText("Welcome #"..i.." status: |cffff0000Undefined|r")
+				end
+			end
+			local ID = GR_DATA.settings.dropDown["GR_WELCOME_DROP"]
+			GR_Welcome.status[ID].text:SetText("Welcome #", i, " status: |cffff8800Editing...|r")
+
+			if ID ~= GR_Welcome.changed then
+				GR_Welcome.changed = ID
+				GR_Welcome.edit:SetText(GR_DATA.settings.welcomes[GR_DATA.settings.dropDown["GR_WELCOME_DROP"] or 1] or "")
+			end
+
+			GR_Welcome.update = GetTime() + 0.5
+		end
+	end)
+
+	GR_Welcome:HookScript("OnHide", function() if (GR_Options.showAgain) then GR:ShowOptions() GR_Options.showAgain = false end end)
+end
+
+local function ShowWelcomeFrame()
+	if GR_Welcome then
+		GR_Welcome:Show()
+	else
+		CreateWelcomeDefineFrame()
+		GR_Welcome:Show()
+	end
+end
+
+local function HideWelcomeFrame()
+	if GR_Welcome then
+		GR_Welcome:Hide()
+	end
+end
+
+--Whisper Frame
+local function CreateWhisperDefineFrame()
+
+end
+
+--local KeyHarvestFrame = CreateFrame("Frame", "GR_KeyHarvestFrame");
+--KeyHarvestFrame:SetPoint("CENTER",0,200);
+--KeyHarvestFrame:SetWidth(10);
+--KeyHarvestFrame:SetHeight(10);
+--KeyHarvestFrame.text = KeyHarvestFrame:CreateFontString(nil, "OVERLAY", "MovieSubtitleFont");
+--KeyHarvestFrame.text:SetPoint("CENTER");
+--KeyHarvestFrame.text:SetText("|cff00ff00Press the KEY you wish to bind now!|r");
+--KeyHarvestFrame:Hide();
+
+--function KeyHarvestFrame:GetNewKeybindKey()
+--	KeyHarvestFrame:Show();
+--	self:SetScript("OnKeyDown", function(self, key)
+--		if (SetBindingClick(key, "GR_INVITE_BUTTON2")) then
+--			Alerter:SendAlert("|cff00ff00Successfully bound "..key.." to InviteButton!|r",1.5);
+--			GR:print("Successfully bound "..key.." to InviteButton!");
+--			GR_DATA.keyBind = key;
+--			BUTTON_KEYBIND.label:SetText("Set Keybind ("..key..")");
+--		else
+--			Alerter:SendAlert("|cffff0000Error binding "..key.." to InviteButton!|r",1.5);
+--			GR:print("Error binding "..key.." to InviteButton!");
+--		end
+--		self:EnableKeyboard(false);
+--		KeyHarvestFrame:Hide();
+--	end)
+--	self:EnableKeyboard(true);
+--
+--end
+
+
 local function CreateWhisperPreviewFrame()
 	CreateFrame("Frame","GR_Preview")
 	local backdrop =
@@ -574,20 +783,10 @@ local function HidePreviewFrame()
 	end
 end
 local function CreateWhisperDefineFrame()
-	CreateFrame("Frame","GR_Whisper")
-	local backdrop =
-	{
-		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		tile = true,
-		tileSize = 16,
-		edgeSize = 4,
-		insets = { left = 4, right = 4, top = 4, bottom = 4 }
-	}
-	GR_Whisper:SetWidth(500)
-	GR_Whisper:SetHeight(365)
-	GR_Whisper:SetBackdrop(backdrop)
-	SetFramePosition(GR_Whisper)
+	--Window Defaults
+	CreateFrame("Frame","GR_Whisper", UIParent, "BasicFrameTemplate");
+	GR_Whisper:SetSize(500,365);
+	GR_Whisper:SetPoint("CENTER", UIParent, "CENTER");
 	GR_Whisper:SetMovable(true)
 	GR_Whisper:SetScript("OnMouseDown",function(self)
 		self:StartMoving()
@@ -596,36 +795,34 @@ local function CreateWhisperDefineFrame()
 		self:StopMovingOrSizing()
 		SaveFramePosition(GR_Whisper)
 	end)
+	--Config
+	
+	GR_Whisper.title = GR_Whisper:CreateFontString(nil, "OVERLAY");
+	GR_Whisper.title:SetFontObject("GameFontHighlight");
+	GR_Whisper.title:SetPoint("CENTER", GR_Whisper.TitleBg, "CENTER", 5,0);
+	GR_Whisper.title:SetText("Guild Recruiter Custom Whispers");
 
-	local close = CreateFrame("Button",nil,GR_Whisper,"UIPanelCloseButton")
-	close:SetPoint("TOPRIGHT",GR_Whisper,"TOPRIGHT",-4,-4)
-
-	GR_Whisper.title = GR_Whisper:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
-	GR_Whisper.title:SetText(GR.L["GuildRecruiter Custom Whisper"])
-	GR_Whisper.title:SetPoint("TOP",GR_Whisper,"TOP",0,-20)
-
-	GR_Whisper.info = GR_Whisper:CreateFontString(nil,"OVERLAY","GameFontNormal")
-	GR_Whisper.info:SetPoint("TOPLEFT",GR_Whisper,"TOPLEFT",33,-55)
-	GR_Whisper.info:SetText(GR.L["WhisperInstructions"])
+	GR_Whisper.info = GR_Whisper:CreateFontString(nil,"OVERLAY","GameFontHighlight")
+	GR_Whisper.info:SetPoint("CENTER",GR_Whisper,"CENTER",0,115)
+	GR_Whisper.info:SetText("Create up to 3 custom recruitment messages to whisper to people you would like to join your guild. Make it flashy and give as much information as you can, but don't go over the 256 character limit! Good Luck!")
 	GR_Whisper.info:SetWidth(450)
-	GR_Whisper.info:SetJustifyH("LEFT")
+	GR_Whisper.info:SetJustifyH("CENTER")
 
-	GR_Whisper.edit = CreateFrame("EditBox",nil,GR_Whisper)
+	GR_Whisper.edit = CreateFrame("EditBox", "GR_Edit", GR_Whisper, "InsetFrameTemplate3")
 	GR_Whisper.edit:SetWidth(450)
 	GR_Whisper.edit:SetHeight(65)
 	GR_Whisper.edit:SetMultiLine(true)
-	GR_Whisper.edit:SetPoint("TOPLEFT",GR_Whisper,"TOPLEFT",35,-110)
+	GR_Whisper.edit:SetPoint("CENTER",GR_Whisper,"CENTER",0,30)
 	GR_Whisper.edit:SetFontObject("GameFontNormal")
 	GR_Whisper.edit:SetTextInsets(10,10,10,10)
 	GR_Whisper.edit:SetMaxLetters(256)
-	GR_Whisper.edit:SetBackdrop(backdrop)
-	GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
+		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
 	GR_Whisper.edit:SetScript("OnHide",function()
 		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
 	end)
 	GR_Whisper.edit.text = GR_Whisper.edit:CreateFontString(nil,"OVERLAY","GameFontNormal")
-	GR_Whisper.edit.text:SetPoint("TOPLEFT",GR_Whisper.edit,"TOPLEFT",10,13)
-	GR_Whisper.edit.text:SetText(GR.L["Enter your whisper"])
+	GR_Whisper.edit.text:SetPoint("CENTER",GR_Whisper.edit,"TOP",0,15)
+	GR_Whisper.edit.text:SetText("Enter your recruitment message.")
 
 	local yOfs = -20
 	GR_Whisper.status = {}
@@ -636,7 +833,7 @@ local function CreateWhisperDefineFrame()
 		GR_Whisper.status[i].box:SetHeight(18)
 		GR_Whisper.status[i].box:SetFrameStrata("HIGH")
 		GR_Whisper.status[i].box.index = i
-		GR_Whisper.status[i].box:SetPoint("LEFT",GR_Whisper,"CENTER",50,yOfs)
+		GR_Whisper.status[i].box:SetPoint("LEFT",GR_Whisper,"CENTER",50,0)
 		GR_Whisper.status[i].box:SetScript("OnEnter",function(self)
 			if GR_DATA.settings.whispers[self.index] then
 				--GameTooltip:SetOwner(self,"ANCHOR_CURSOR")
@@ -666,7 +863,7 @@ local function CreateWhisperDefineFrame()
 		anchor.yOfs = 120
 
 	--CreateDropDown(name, parent, label, items, anchor)
-	GR_Whisper.drop = CreateDropDown("GR_WHISPER_DROP",GR_Whisper,GR.L["Select whisper"],whispers,anchor)
+	GR_Whisper.drop = CreateDropDown("GR_WHISPER_DROP",GR_Whisper,"Select Message",whispers,anchor)
 
 		anchor.xOfs = 100
 		anchor.yOfs = 20
@@ -688,13 +885,13 @@ local function CreateWhisperDefineFrame()
 		if GetTime() > GR_Whisper.update then
 			for i = 1,3 do
 				if type(GR_DATA.settings.whispers[i]) == "string" then
-					GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: |cff00ff00Good|r")
+					GR_Whisper.status[i].text:SetText("Whisper status: |cff00ff00Good|r")
 				else
-					GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: |cffff0000Undefined|r")
+					GR_Whisper.status[i].text:SetText("Whisper status: |cffff0000Undefined|r")
 				end
 			end
 			local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-			GR_Whisper.status[ID].text:SetText("Whisper #", i, " status: |cffff8800Editing...|r")
+			GR_Whisper.status[ID].text:SetText("Whisper status: |cffff8800Editing...|r")
 
 			if ID ~= GR_Whisper.changed then
 				GR_Whisper.changed = ID
@@ -1461,7 +1658,7 @@ end
 
 
 local function CreateOptions()
-	CreateFrame("Frame", "GR_Options")
+	CreateFrame("Frame", "GR_Options", UIParent, "BasicFrameTemplate")
 	GR_Options:SetWidth(530)
 	GR_Options:SetHeight(300)
 	SetFramePosition(GR_Options)
@@ -1473,102 +1670,111 @@ local function CreateOptions()
 		self:StopMovingOrSizing()
 		SaveFramePosition(GR_Options)
 	end)
-	local backdrop =
-	{
-		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		tile = true,
-		tileSize = 16,
-		edgeSize = 4,
-		insets = { left = 4, right = 4, top = 4, bottom = 4 }
-	}
-	GR_Options:SetBackdrop(backdrop)
-	local close = CreateFrame("Button",nil,GR_Options,"UIPanelCloseButton")
-	close:SetPoint("TOPRIGHT",GR_Options,"TOPRIGHT",-4,-4)
-
-	GR_Options.title = GR_Options:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
-	GR_Options.title:SetText("GuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
-	GR_Options.title:SetPoint("TOP",GR_Options,"TOP",0,-15)
-	GR_Options.bottom = GR_Options:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
-	GR_Options.bottom:SetText("Updated and Maintained by The Shadow Collective https://discord.gg/x4tR4sX")
-	GR_Options.bottom:SetPoint("BOTTOM",GR_Options,"BOTTOM",0,5)
-
-	GR_Options.optionHelpText = GR_Options:CreateFontString(nil, "OVERLAY","GameFontNormal");
+	
+	--Title Text	
+	GR_Options.title = GR_Options:CreateFontString(nil, "OVERLAY");
+	GR_Options.title:SetFontObject("GameFontHighlight");
+	GR_Options.title:SetPoint("CENTER", GR_Options.TitleBg, "CENTER", 5, 0);
+	GR_Options.title:SetText("Guild Recruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." ")
+	
+	--Bottom Text (Guild Ad)
+	GR_Options.bottom = GR_Options:CreateFontString(nil,"OVERLAY");
+	GR_Options.bottom:SetFontObject("GameFontNormalTiny");
+	GR_Options.bottom:SetPoint("BOTTOM", GR_Options, "BOTTOM",0,10);
+	GR_Options.bottom:SetText("|cff88aaffUpdated and Maintained by The Shadow Collective https://discord.gg/x4tR4sX|r");
+	
+	--Menu Text
+	GR_Options.top = GR_Options:CreateFontString(nil, "OVERLAY");
+	GR_Options.top:SetFontObject("GameFontHighlight");
+	GR_Options.top:SetPoint("TOP", GR_Options, "TOP", -5, -30);
+	GR_Options.top:SetText("Options Menu");
+	
+	--Scroll Text
+	GR_Options.optionHelpText = GR_Options:CreateFontString(nil, "OVERLAY","GameFontNormalTiny");
 	GR_Options.optionHelpText:SetText("|cff00D2FFScroll to change levels|r");
-	GR_Options.optionHelpText:SetPoint("TOP",GR_Options,"TOP",80,-120);
-
+	GR_Options.optionHelpText:SetPoint("TOP",GR_Options,"TOP",-5,-200);
+	--Easter Egg-- I love you, Alisha. <3
+	local egg = CreateFrame("Button","GR_EasterEgg",GR_Options)
+	egg:SetWidth(24)
+	egg:SetHeight(24)
+	egg:SetPoint("BOTTOMLEFT",GR_Options,"BOTTOMLEFT",70,70)
+	egg:SetNormalTexture(nil)
+	egg:SetPushedTexture(nil)
+	egg:SetHighlightTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\GR_MiniMapButton.tga")
+	egg:SetScript("OnClick",function(self,button)
+		if GR_EasterEgg then
+			SendChatMessage("Goataraz loves Algaroat! <3", "YELL");
+		else
+			SendChatMessage("Goataraz loves Algaroat! <3", "YELL");
+		end
+	end)
+	
+	--Logo
+	GR_Options.guildlogo = CreateFrame("Frame","guildlogo",GR_Options)
+	GR_Options.guildlogo:SetWidth(64)
+	GR_Options.guildlogo:SetHeight(64)
+	GR_Options.guildlogo:SetPoint("CENTER",GR_Options,"CENTER",-5,50)
+	GR_Options.guildlogo.text = GR_Options.guildlogo:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
+	GR_Options.guildlogo.text:SetPoint("CENTER")
+	GR_Options.guildlogo.texture = GR_Options.guildlogo:CreateTexture()
+	GR_Options.guildlogo.texture:SetAllPoints()
+	GR_Options.guildlogo.texture:SetTexture("Interface\\AddOns\\goat\\media\\logo64")
+	GR_Options.guildlogo.texture:Show()
+	
+	--Anchor Local Variable
 	local anchor = {}
-			anchor.point = "TOPLEFT"
-			anchor.relativePoint = "TOPLEFT"
-			anchor.xOfs = 7
-			anchor.yOfs = -50
+	
+	--Checkbox Anchor
+		anchor.point = "TOPLEFT"
+		anchor.relativePoint = "TOPLEFT"
+		anchor.xOfs = 7
+		anchor.yOfs = -60
 
-	local WhisperMode = {
-		GR.L["Whisper only"],
-		GR.L["Whisper only"],
-		GR.L["Whisper only"],
-	}
-
+	--Checkboxes
 	local spacing = 25;
-	--GR_Options.dropDown1 = CreateDropDown("DROPDOWN_PROFILE_SELECT", GR_Options, GR.L["Select Profile"], ProfileSelect, anchor);
---	GR_Options.dropDown1 = CreateDropDown("DROPDOWN_INVITE_MODE", GR_Options, GR.L["Invite Mode"], WhisperMode, anchor);
-		anchor.yOfs = anchor.yOfs - spacing - 7;
-		anchor.xOfs = anchor.xOfs + 13;
---	GR_Options.checkBox1 = CreateCheckbox("CHECKBOX_MUTE_GR", GR_Options, GR.L["Mute GR"], anchor);
---		anchor.yOfs = anchor.yOfs - spacing;
-	GR_Options.checkBox2 = CreateCheckbox("CHECKBOX_ADV_SCAN", GR_Options, GR.L["Advanced scan options"], anchor);
+	GR_Options.checkBox2 = CreateCheckbox("CHECKBOX_ADV_SCAN", GR_Options, "Show Advanced Scan Options", anchor);
 		anchor.yOfs = anchor.yOfs - spacing;
---	GR_Options.checkBox3 = CreateCheckbox("CHECKBOX_HIDE_SYSTEM", GR_Options, GR.L["Hide system messages"], anchor);
---		anchor.yOfs = anchor.yOfs - spacing;
---	GR_Options.checkBox7 = CreateCheckbox("CHECKBOX_HIDE_WHISPER", GR_Options, GR.L["Hide outgoing whispers"], anchor);
---		anchor.yOfs = anchor.yOfs - spacing;
---	GR_Options.checkBox4 = CreateCheckbox("CHECKBOX_HIDE_MINIMAP", GR_Options, GR.L["Hide minimap button"], anchor);
---		anchor.yOfs = anchor.yOfs - spacing;
-	GR_Options.checkBox5 = CreateCheckbox("CHECKBOX_BACKGROUND_MODE", GR_Options, GR.L["Run Scan in the background"], anchor);
+	GR_Options.checkBox7 = CreateCheckbox("CHECKBOX_HIDE_WHISPER", GR_Options, "Hide Outgoing Whispers (WIP)", anchor);
 		anchor.yOfs = anchor.yOfs - spacing;
-	GR_Options.checkBox6 = CreateCheckbox("CHECKBOX_ENABLE_FILTERS", GR_Options, GR.L["Enable filtering"], anchor);
+	GR_Options.checkBox5 = CreateCheckbox("CHECKBOX_BACKGROUND_MODE", GR_Options, "Run Scan in Background", anchor);
+		anchor.yOfs = anchor.yOfs - spacing;
+	GR_Options.checkBox6 = CreateCheckbox("CHECKBOX_ENABLE_FILTERS", GR_Options, "Enable Filtering", anchor);
+		anchor.yOfs = anchor.yOfs - spacing;
+	GR_Options.checkbox1 = CreateCheckbox("CHECKBOX_MEMBER_WELCOME", GR_Options, "Welcome New Members (WIP)", anchor);
+		anchor.yOfs = anchor.yOfs - spacing;
+		
+	--GR_Options.checkBox3:HookScript("PostClick", function(self) ChatIntercept:StateSystem(self:GetChecked()) end);
+	--GR_Options.checkBox7:HookScript("PostClick", function(self) ChatIntercept:StateWhisper(self:GetChecked()) end);
 
---	GR_Options.checkBox3:HookScript("PostClick", function(self) ChatIntercept:StateSystem(self:GetChecked()) end);
---	GR_Options.checkBox7:HookScript("PostClick", function(self) ChatIntercept:StateWhisper(self:GetChecked()) end);
 
-
--- ANchor point for the bottom row of buttons
-
+	--Anchor Point for the bottom row of buttons
 		anchor.point = "BOTTOMLEFT"
 		anchor.relativePoint = "BOTTOMLEFT"
 		anchor.xOfs = 20
-		anchor.yOfs = 40
+		anchor.yOfs = 25
 
 	--onClickTester
-	GR_Options.button1 = CreateButton("BUTTON_CUSTOM_WHISPER", GR_Options, 120, 30, GR.L["Edit whisper"], anchor, function(self) ShowWhisperFrame() GR_Options:Hide() GR_Options.showAgain = true end);
-		anchor.xOfs = anchor.xOfs + 125;
-	GR_Options.button2 = CreateButton("BUTTON_SUPER_SCAN", GR_Options, 120, 30, GR.L["Scan"], anchor, OptBtn2_OnClick);
-		anchor.xOfs = anchor.xOfs + 125;
-	GR_Options.button3 = CreateButton("BUTTON_INVITE", GR_Options, 120, 30, format(GR.L["Whisper: %d"],GR:GetNumQueued()), anchor, GR.SendGuildInvite);
-		anchor.xOfs = anchor.xOfs + 125;
-	GR_Options.button5 = CreateButton("BUTTON_EDIT_FILTERS", GR_Options, 120, 30, GR.L["Filters"], anchor, function() GR:ShowFilterHandle() GR_Options:Hide() end);
-		anchor.yOfs = 60;
-	--GR_Options.button5 = CreateButton("BUTTON_EDIT_FILTERS", GR_Options, 120, 30, GR.L["Filters"], anchor, function() --GR:ShowFilterHandle() GR_Options:Hide() end);
-		anchor.xOfs = anchor.xOfs - 125;
-	--GR_Options.button6 = CreateButton("BUTTON_HELP", GR_Options, 120, 30, GR.L["Help"],anchor, function() GR:ShowTroubleShooter() GR_Options:Hide() GR_Options.showAgain = true end);
-	--	anchor.xOfs = anchor.xOfs - 125;
-
---Take out keybinding, no way to escape from it once you click it. Very dangerous and poor design.
-
---	GR_Options.button7 = CreateButton("BUTTON_KEYBIND", GR_Options, 120, 30, GR.L["Set Keybind ("..(GR_DATA.keyBind and GR_DATA.keyBind or "NONE")..")"], anchor, KeyHarvestFrame.GetNewKeybindKey);
---		anchor.xOfs = anchor.xOfs - 125;
---	GR_Options.button8 = CreateButton("BUTTON_FILTER", GR_Options, 120, 30, GR.L["Filters"], anchor, onClickTester);
-
-
+	GR_Options.button1 = CreateButton("BUTTON_CUSTOM_WHISPER", GR_Options, 96, 30, "Edit Whispers", anchor, function(self) ShowWhisperFrame() GR_Options:Hide() GR_Options.showAgain = true end);
+		anchor.xOfs = anchor.xOfs + 100;
+	GR_Options.button4 = CreateButton("BUTTON_CUSTOM_WELCOME", GR_Options, 96, 30, "Set Welcome", anchor, function(self) ShowWelcomeFrame() GR_Options:Hide() GR_Options.showAgain = true end);
+		anchor.xOfs = anchor.xOfs + 100;
+	GR_Options.button4 = CreateButton("BUTTON_FILTER", GR_Options, 96, 30, "Set Filters", anchor, function() GR:ShowFilterHandle() GR_Options:Hide() end);
+		anchor.xOfs = anchor.xOfs + 100;
+	GR_Options.button2 = CreateButton("BUTTON_SUPER_SCAN", GR_Options, 96, 30, "Scan", anchor, OptBtn2_OnClick);
+		anchor.xOfs = anchor.xOfs + 100;
+	GR_Options.button3 = CreateButton("BUTTON_INVITE", GR_Options, 96, 30, format("Whisper: %d",GR:GetNumQueued()), anchor, GR.SendGuildInvite);
+		anchor.xOfs = anchor.xOfs + 100;
+	
+	--Low Limit Selector
 	GR_Options.limitLow = CreateFrame("Frame","GR_LowLimit",GR_Options)
 	GR_Options.limitLow:SetWidth(40)
 	GR_Options.limitLow:SetHeight(40)
-	GR_Options.limitLow:SetPoint("CENTER",GR_Options,"CENTER",40,40)
+	GR_Options.limitLow:SetPoint("CENTER",GR_Options,"CENTER",-20,-30)
 	GR_Options.limitLow.text = GR_Options.limitLow:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
 	GR_Options.limitLow.text:SetPoint("CENTER")
 	GR_Options.limitLow.texture = GR_Options.limitLow:CreateTexture()
 	GR_Options.limitLow.texture:SetAllPoints()
-	GR_Options.limitLow.texture:SetTexture(1,1,0,0.2)
+	--GR_Options.limitLow.texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark")
 	GR_Options.limitLow.texture:Hide()
 	--GR_Options.limitTooltip = CreateFrame("Frame","LimitTool",GR_Options.limitLow,"GameTooltipTemplate")
 
@@ -1589,16 +1795,17 @@ local function CreateOptions()
 		GR_Options.limitLow.texture:Hide()
 		--GR_Options.limitTooltip:Hide()
 	end)
-
+	
+	--High Limit Selector
 	GR_Options.limitHigh = CreateFrame("Frame","GR_HighLimit",GR_Options)
 	GR_Options.limitHigh:SetWidth(40)
 	GR_Options.limitHigh:SetHeight(40)
-	GR_Options.limitHigh:SetPoint("CENTER",GR_Options,"CENTER",90,40)
+	GR_Options.limitHigh:SetPoint("CENTER",GR_Options,"CENTER",20,-30)
 	GR_Options.limitHigh.text = GR_Options.limitHigh:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
 	GR_Options.limitHigh.text:SetPoint("CENTER")
 	GR_Options.limitHigh.texture = GR_Options.limitHigh:CreateTexture()
 	GR_Options.limitHigh.texture:SetAllPoints()
-	GR_Options.limitHigh.texture:SetTexture(1,1,0,0.2)
+	--GR_Options.limitHigh.texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark")
 	GR_Options.limitHigh.texture:Hide()
 
 	GR_Options.limitHigh:SetScript("OnEnter",function()
@@ -1610,7 +1817,7 @@ local function CreateOptions()
 		--GR_Options.limitTooltip:Hide(nil)
 	end)
 
-	GR_Options.limitLow.text:SetText(GR_DATA.settings.lowLimit.."  - ")
+	GR_Options.limitLow.text:SetText(GR_DATA.settings.lowLimit.." - ")
 	GR_Options.limitLow:SetScript("OnMouseWheel",function(self,delta)
 		if delta == 1 and GR_DATA.settings.lowLimit + 1 <= GR_DATA.settings.highLimit then
 			GR_DATA.settings.lowLimit = GR_DATA.settings.lowLimit + 1
@@ -1635,16 +1842,17 @@ local function CreateOptions()
 	GR_Options.limitText = GR_Options.limitLow:CreateFontString(nil,"OVERLAY","GameFontNormal")
 	GR_Options.limitText:SetPoint("BOTTOM",GR_Options.limitLow,"TOP",16,0)
 	GR_Options.limitText:SetText(GR.L["Level limits"])
-
+	
+	--Advanced Options
 	GR_Options.raceLimitHigh = CreateFrame("Frame","GR_RaceLimitHigh",GR_Options)
 	GR_Options.raceLimitHigh:SetWidth(40)
 	GR_Options.raceLimitHigh:SetHeight(40)
-	GR_Options.raceLimitHigh:SetPoint("CENTER",GR_Options,"CENTER",200,70)
+	GR_Options.raceLimitHigh:SetPoint("CENTER",GR_Options,"CENTER",200,80)
 	GR_Options.raceLimitHigh.text = GR_Options.raceLimitHigh:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
 	GR_Options.raceLimitHigh.text:SetPoint("CENTER")
 	GR_Options.raceLimitHigh.texture = GR_Options.raceLimitHigh:CreateTexture()
 	GR_Options.raceLimitHigh.texture:SetAllPoints()
-	GR_Options.raceLimitHigh.texture:SetTexture(1,1,0,0.2)
+	--GR_Options.raceLimitHigh.texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark")
 	GR_Options.raceLimitHigh.texture:Hide()
 	--GR_Options.raceTooltip = CreateFrame("Frame","LimitTool",GR_Options.raceLimitHigh,"GameTooltipTemplate")
 
@@ -1692,7 +1900,7 @@ local function CreateOptions()
 	GR_Options.classLimitHigh.text:SetPoint("CENTER")
 	GR_Options.classLimitHigh.texture = GR_Options.classLimitHigh:CreateTexture()
 	GR_Options.classLimitHigh.texture:SetAllPoints()
-	GR_Options.classLimitHigh.texture:SetTexture(1,1,0,0.2)
+	--GR_Options.classLimitHigh.texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark")
 	GR_Options.classLimitHigh.texture:Hide()
 	--GR_Options.classTooltip = CreateFrame("Frame","LimitTool",GR_Options.classLimitHigh,"GameTooltipTemplate")
 
@@ -1741,7 +1949,7 @@ local function CreateOptions()
 	GR_Options.Interval.text:SetPoint("CENTER")
 	GR_Options.Interval.texture = GR_Options.Interval:CreateTexture()
 	GR_Options.Interval.texture:SetAllPoints()
-	GR_Options.Interval.texture:SetTexture(1,1,0,0.2)
+	--GR_Options.Interval.texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark")
 	GR_Options.Interval.texture:Hide()
 	--GR_Options.intervalTooltip = CreateFrame("Frame","LimitTool",GR_Options.Interval,"GameTooltipTemplate")
 
@@ -1780,13 +1988,13 @@ local function CreateOptions()
 	end)
 
 	anchor = {
-		point = "BOTTOMLEFT",
-		relativePoint = "BOTTOMLEFT",
-		xOfs = 4,
-		yOfs = 4,
+		point = "TOPLEFT",
+		relativePoint = "TOPLEFT",
+		xOfs = 7,
+		yOfs = -27,
 	}
 	GR_Options.superScanText = GR_Options:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
-	GR_Options.superScanText:SetPoint("BOTTOMLEFT", GR_Options, "BOTTOMLEFT", 35, 10);
+	GR_Options.superScanText:SetPoint("TOPLEFT", GR_Options, "TOPLEFT", 40, -35);
 	GR_Options.superScanText:SetText("Player Scan");
 	GR_Options.buttonPlayPause = CreateButton("GR_SUPERSCAN_PLAYPAUSE2", GR_Options, 40,30,"",anchor,SSBtn3_OnClick);
 	GR_SUPERSCAN_PLAYPAUSE2:SetNormalTexture("Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up");
@@ -1850,9 +2058,9 @@ local function CreateOptions()
 --			BUTTON_KEYBIND.label:SetText(GR.L["Set Keybind ("..(GR_DATA.keyBind and GR_DATA.keyBind or "NONE")..")"]);
 
 			if (GR_DATA.debug) then
-				GR_Options.title:SetText("|cffff3300(DEBUG MODE) |rGuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
+				GR_Options.title:SetText("|cffff3300(DEBUG MODE) |rGuild Recruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." ")
 			else
-				GR_Options.title:SetText("GuildRecruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." Options")
+				GR_Options.title:SetText("Guild Recruiter "..GR.VERSION_MAJOR..GR.VERSION_MINOR.." ")
 				
 			end
 
@@ -1884,8 +2092,8 @@ end
 
 local function CreateMinimapButton()
 	local f = CreateFrame("Button","GR_MiniMapButton",Minimap)
-	f:SetWidth(32)
-	f:SetHeight(32)
+	f:SetWidth(24)
+	f:SetHeight(24)
 	f:SetFrameStrata("MEDIUM")
 	f:SetMovable(true)
 	SetFramePosition(f)

@@ -1,22 +1,16 @@
-lightweight tag 2a962e0981ce31d13da56e7c8a36e0d30d9ffd97 v2.0.5
+lightweight tag a22b70ea85a4936d7da0eb1896e3354b6f79a055 v2.0.8
 Author:	GitHub <noreply@github.com>
-Date:	Sun May 12 18:04:02 2019 -0400
+Date:	Sun May 19 18:44:37 2019 -0400
 
-commit 2a962e0981ce31d13da56e7c8a36e0d30d9ffd97
+commit a22b70ea85a4936d7da0eb1896e3354b6f79a055
 Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Sun May 12 18:04:02 2019 -0400
-
-    Add files via upload
-
-commit 539a65bcd8b9a9a94ff97b9d6996c23b0121c6cb
-Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Sun May 12 18:03:29 2019 -0400
+Date:   Sun May 19 18:44:37 2019 -0400
 
     Update GR_Constants.lua
 
-commit 3421cfa7ecb0f4e425bacbf2b2e2c1d57d010a44
+commit 5472cb79fc243c7bb329f9886ecea2a2e237a46a
 Author: Goat <45670122+Goataraz@users.noreply.github.com>
-Date:   Sun May 12 18:03:03 2019 -0400
+Date:   Sun May 19 18:44:12 2019 -0400
 
     Update SCGuildRecruiter.toc
 
