@@ -5,9 +5,7 @@
 			<OnLoad>
 				GR_OnLoad(self);
 			</OnLoad>
-			<OnEvent>
-				GR_OnEvent(self,event,...);
-			</OnEvent>
+			
 		</Scripts>
 	</Frame>
 </Ui>
