@@ -1,53 +1,62 @@
---[===[function GR_OnLoad(self)
+local function onClickTester(self)
+	if self then
+		GR:print("Click on "..self:GetName());
+	end
+end
+
+function GR_OnLoad(self)
     self:RegisterEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
     self:RegisterEvent("CHAT_MSG_ACHIEVEMENT")
     self:RegisterEvent("CHAT_MSG_PARTY")
     self:RegisterEvent("CHAT_MSG_SYSTEM")
 	self:RegisterEvent("CHAT_MSG_SYSTEM")
 	self:RegisterEvent("GUILD_ROSTER_UPDATE")
-    if(GR_GratsMessage == nil)then
-		GR_GratsMessage="Grats!";
-		--GR_Print("Grats message set to: Gratzzz");
+	if(GR_GratsMessage1 == nil or "")then
+		GR_GratsMessage1 = "Grats!";
 		GR_LastMessage = 1;
 	end
+	if(GR_GratsMessage2 == nil or "")then
+		GR_GratsMessage2 = GR_GratsMessage1;
+	end
+	if(GR_GratsMessage3 == nil or "")then
+		GR_GratsMessage3 = GR_GratsMessage1;
+	end
 	if(GR_GuildJoinMessageToggle == nil)then
-		GR_GuildJoinMessageToggle = false;
+		GR_GuildJoinMessageToggle = true;
 	end
 	if(GR_Guild == nil)then
-		GR_Guild = false;
+		GR_Guild = true;
 	end
 	if(GR_Say == nil)then
 		GR_Say = false;
 	end
 	if(GR_Party == nil)then
-		GR_Party = false;
+		GR_Party = true;
 	end
 	if(GR_Delay == nil)then
-		GR_Delay=4000;
+		GR_Delay = 4000;
 	end
 	if(GR_GroupingTime == nil)then
-		GR_GroupingTime=6000;
+		GR_GroupingTime = 6000;
 	end
 	if(GR_GuildDisabledOverride == nil)then
 		GR_GuildDisabledOverride = false;
 	end
-	if(GR_GuildWelcomeMessage == nil)then
-		GR_GuildWelcomeMessage = "Welcome to the guild!";
+	if(GR_GuildWelcomeMessage1 == nil)then
+		GR_GuildWelcomeMessage1 = "Welcome!";
 	end
-	GR_SetupOptionsUI();
-	--GR_Print("Guil Enabled");
-end
---]===]
-local function onClickTester(self)
-	if self then
-		GR:print("Click on "..self:GetName());
+	if(GR_GuildWelcomeMessage2 == nil or "")then
+		GR_GuildWelcomeMessage2 = GR_GuildWelcomeMessage1;
 	end
+	if(GR_GuildWelcomeMessage3 == nil or "")then
+		GR_GuildWelcomeMessage3 = GR_GuildWelcomeMessage1;
+	end
+	if(GR_HideWhisperToggle == nil)then
+		GR_HideWhisperToggle = false;
+	end
+	GR_Print("Guild Recruiter Enabled");
 end
-function CreateBasicFontString(parent, name, layer, template, text)
-    local fs = parent:CreateFontString(name,layer,template)
-    fs:SetText(text)
-    return fs
-end
+
 local function CreateButton(name, parent, width, height, label, anchor, onClick)
 	local f = CreateFrame("Button", name, parent, "UIPanelButtonTemplate");
 	f:SetWidth(width);
@@ -280,25 +289,6 @@ local function CreateInviteListFrame()
 	GR_Invites.text = GR_Invites:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
 	GR_Invites.text:SetPoint("TOP",GR_Invites,"TOP",-7,-7)
 	GR_Invites.text:SetText(GR.L["Left Click Name to Whisper, Right Click to Blacklist"])
---->
---	GR_Invites.tooltip = CreateFrame("Frame","InviteTime",GR_Invites,"GameTooltipTemplate")
-
-	--	GR_Invites.tooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
-	
-
---	GR_Invites.tooltip.text = GR_Invites.tooltip:CreateFontString(nil,"OVERLAY","GameFontNormal")
---	GR_Invites.tooltip:SetPoint("TOP",GR_Invites,"BOTTOM",0,-2)
-	--GR_Invites.tooltip.text:SetText("Unknown")
---	GR_Invites.tooltip.text:SetPoint("CENTER")
-
-	--local close = CreateFrame("Button",nil,GR_Invites,"UIPanelCloseButton",anchor,SSBtn3_OnClick)
-	--close:SetPoint("TOPLEFT",GR_Invites,"TOPLEFT",-4,-4)
-	--GR_Invites.play = CreateButton("GR_SUPERSCAN_PLAYPAUSE","",anchor,SSBtn3_OnClick)
-	--GR_Invites.play:SetNormalTexture("Interface\\TimeManager\\PauseButton")
-	--GR_Invites.play:SetPoint("TOPLEFT",GR_Invites,"TOPLEFT",-4,-4)
-	--local play = CreateFrame("Button",nil,GR_Invites,"PauseButton")
-	--play:SetPoint("TOPRIGHT",GR_Invites,"TOPRIGHT",-4,-4)
-	--->
 	GR_Invites.items = {}
 	local update = 0
 	local toolUpdate = 0
@@ -395,464 +385,6 @@ local function SSBtn3_OnClick(self)
 	end
 end
 
---function GR:CreateSmallSuperScanFrame()
---	CreateFrame("Frame", "SuperScanFrame");
---	SuperScanFrame:SetWidth(130);
---	SuperScanFrame:SetHeight(30);
---	local backdrop =
---	{
---		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
---		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
---		tile = true,
---		tileSize = 16,
---		edgeSize = 4,
---		insets = { left = 4, right = 4, top = 4, bottom = 4 }
---	}
---	SetFramePosition(SuperScanFrame)
---	SuperScanFrame:SetMovable(true)
---	SuperScanFrame:SetScript("OnMouseDown",function(self)
---		self:StartMoving()
---	end)
---	SuperScanFrame:SetScript("OnMouseUp",function(self)
---		self:StopMovingOrSizing()
---		SaveFramePosition(self)
---	end)
---	SuperScanFrame:SetBackdrop(backdrop)
---
---	local close = CreateFrame("Button",nil,SuperScanFrame,"UIPanelCloseButton")
---	close:SetPoint("LEFT",SuperScanFrame,"RIGHT",-5,0)
---
---	SuperScanFrame.time = SuperScanFrame:CreateFontString(nil,"OVERLAY","GameFontNormal")
---	SuperScanFrame.time:SetPoint("CENTER")
---	--SuperScanFrame.time:SetText(format("|cff00ff00%d%%|r|cffffff00 %s|r    ",0,GR:GetSuperScanETR()))
---
---
---	SuperScanFrame.progressTexture = SuperScanFrame:CreateTexture();
---	SuperScanFrame.progressTexture:SetPoint("LEFT", 5, 0);
---	SuperScanFrame.progressTexture:SetHeight(18);
---	SuperScanFrame.progressTexture:SetWidth(140);
---	SuperScanFrame.progressTexture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark");
---	SuperScanFrame.progressTexture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark");
---	local anchor = {
---		point = "TOPLEFT",
---		relativePoint = "BOTTOMLEFT",
---		xOfs = 0,
---		yOfs = 0,
---	}
---
---	SuperScanFrame.button1 = CreateButton("GR_INVITE_BUTTON2", SuperScanFrame, 70, 30, format("",GR:GetNumQueued()), anchor, GR.SendGuildInvite)
---		anchor.xOfs = 85;
---	SuperScanFrame.button2 = CreateButton("GR_PURGE_QUEUE", SuperScanFrame, 55, 30, "Clear", anchor, GR.PurgeQueue);
---		anchor.xOfs = 57;
---	SuperScanFrame.button2 = CreateButton("GR_SUPERSCAN_PLAYPAUSE", SuperScanFrame, 40,30,"",anchor,SSBtn3_OnClick);
---	GR_SUPERSCAN_PLAYPAUSE:SetNormalTexture("Interface\\TimeManager\\PauseButton");
---
---	SuperScanFrame.nextUpdate = 0;
---	SuperScanFrame:SetScript("OnUpdate", function()
---		if (SuperScanFrame.nextUpdate < GetTime()) then
---
---			SuperScanFrame.button1.label:SetText(format("Invite: %d",GR:GetNumQueued()));
---
---			if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
---				local remainingTime = SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR);
---				local totalScanTime = GR:GetTotalScanTime();
---				local percentageDone = (totalScanTime - remainingTime) / totalScanTime;
---				SuperScanFrame.time:SetText(format("|cff00ff00%d%%|r|cffffff00 %s|r",100*(percentageDone > 1 and 1 or percentageDone),GR:FormatTime(remainingTime)))
---				SuperScanFrame.progressTexture:SetWidth(120 * (percentageDone > 1 and 1 or percentageDone));
---			end
---
---			SuperScanFrame.nextUpdate = GetTime() + 0.2;
---		end
---	end)
-
-
---	SuperScanFrame:Hide();
---	-- Interface\Buttons\UI-SpellbookIcon-NextPage-Up
---	-- Interface\TimeManager\PauseButton
---end
---
---function GR:GetPercentageDone()
---	if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
---		local remainingTime = SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR);
---		local totalScanTime = GR:GetTotalScanTime();
---		local percentageDone = (totalScanTime - remainingTime) / totalScanTime;
---		return percentageDone * 100;
---	end
---	return 0;
---end
---
---function GR:GetSuperScanTimeLeft()
---	if (GR:IsScanning() and SuperScanFrame.ETR and SuperScanFrame.lastETR) then
---		return GR:FormatTime(SuperScanFrame.ETR - (GetTime() - SuperScanFrame.lastETR));
---	end
---	return 0;
---end
---
---
---function GR:ShowSuperScanFrame()
---	if (SuperScanFrame and not (GR_DATA.settings.checkBox["CHECKBOX_BACKGROUND_MODE"])) then
---		SuperScanFrame:Show();
---	else
---		if (GR_DATA.settings.checkBox["CHECKBOX_BACKGROUND_MODE"]) then
---			GR:CreateSmallSuperScanFrame();
---			SuperScanFrame:Hide();
---			return;
---		else
---			GR:CreateSmallSuperScanFrame();
---			SuperScanFrame:Show();
---		end
---
---	end
---end
---
---function GR:HideSuperScanFrame()
---	if (SuperScanFrame) then
---		SuperScanFrame:Hide();
---	end
---end
---
-
---Welcome Frame
---local function CreateWelcomeDefineFrame()
-
---end
-
-
-
-
---local KeyHarvestFrame = CreateFrame("Frame", "GR_KeyHarvestFrame");
---KeyHarvestFrame:SetPoint("CENTER",0,200);
---KeyHarvestFrame:SetWidth(10);
---KeyHarvestFrame:SetHeight(10);
---KeyHarvestFrame.text = KeyHarvestFrame:CreateFontString(nil, "OVERLAY", "MovieSubtitleFont");
---KeyHarvestFrame.text:SetPoint("CENTER");
---KeyHarvestFrame.text:SetText("|cff00ff00Press the KEY you wish to bind now!|r");
---KeyHarvestFrame:Hide();
-
---function KeyHarvestFrame:GetNewKeybindKey()
---	KeyHarvestFrame:Show();
---	self:SetScript("OnKeyDown", function(self, key)
---		if (SetBindingClick(key, "GR_INVITE_BUTTON2")) then
---			Alerter:SendAlert("|cff00ff00Successfully bound "..key.." to InviteButton!|r",1.5);
---			GR:print("Successfully bound "..key.." to InviteButton!");
---			GR_DATA.keyBind = key;
---			BUTTON_KEYBIND.label:SetText("Set Keybind ("..key..")");
---		else
---			Alerter:SendAlert("|cffff0000Error binding "..key.." to InviteButton!|r",1.5);
---			GR:print("Error binding "..key.." to InviteButton!");
---		end
---		self:EnableKeyboard(false);
---		KeyHarvestFrame:Hide();
---	end)
---	self:EnableKeyboard(true);
---
---end
---local function CreateWelcomePreviewFrame()
-	--Window Defaults
---[===[CreateFrame("Frame","GR_Whisper", UIParent, "BasicFrameTemplate");
-	GR_Whisper:SetSize(500,365);
-	GR_Whisper:SetPoint("CENTER", UIParent, "CENTER");
-	GR_Whisper:SetMovable(true)
-	GR_Whisper:SetScript("OnMouseDown",function(self)
-		self:StartMoving()
-	end)
-	GR_Whisper:SetScript("OnMouseUp",function(self)
-		self:StopMovingOrSizing()
-		SaveFramePosition(GR_Whisper)
-	end)
-	
-	--Config
-	local close = CreateFrame("Button",nil,GR_wPreview,"UIPanelCloseButton")
-	close:SetPoint("TOPRIGHT",GR_wPreview,"TOPRIGHT",-4,-4)
-
-	GR_wPreview.title = GR_wPreview:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
-	GR_wPreview.title:SetText(GR.L["GuildRecruiter Welcome Preview"])
-	GR_wPreview.title:SetPoint("TOP",GR_wPreview,"TOP",0,-20)
-
-	GR_wPreview.info = GR_wPreview:CreateFontString(nil,"OVERLAY","GameFontNormal")
-	GR_wPreview.info:SetPoint("TOPLEFT",GR_wPreview,"TOPLEFT",33,-55)
-	GR_wPreview.info:SetText("Welcome #"..i..": ",GR_DATA.settings.welcomes[i])
-	GR_wPreview.info:SetWidth(450)
-	GR_wPreview.info:SetJustifyH("LEFT")
-	
-end
-
-local function ShowPreviewFrame()
-	if GR_wPreview then
-		GR_wPreview:Show()
-	else
-		CreateWelcomePreviewFrame()
-		GR_wPreview:Show()
-	end
-end
-
-local function HidePreviewFrame()
-	if GR_wPreview then
-		GR_wPreview:Hide()
-	end
-end
-local function CreateWelcomeDefineFrame()
-	--Window Defaults
-	CreateFrame("Frame","GR_Welcome", UIParent, "BasicFrameTemplate");
-	GR_Welcome:SetSize(500,365);
-	GR_Welcome:SetPoint("CENTER", UIParent, "CENTER");
-	GR_Welcome:SetMovable(true)
-	GR_Welcome:SetScript("OnMouseDown",function(self)
-		self:StartMoving()
-	end)
-	GR_Welcome:SetScript("OnMouseUp",function(self)
-		self:StopMovingOrSizing()
-		SaveFramePosition(GR_Welcome)
-	end)
-	--Config
-	
-	GR_Welcome.title = GR_Welcome:CreateFontString(nil, "OVERLAY");
-	GR_Welcome.title:SetFontObject("GameFontHighlight");
-	GR_Welcome.title:SetPoint("CENTER", GR_Welcome.TitleBg, "CENTER", 5, 0);
-	GR_Welcome.title:SetText("Guild Recruiter Custom Welcome");
-
-	GR_Welcome.info = GR_Welcome:CreateFontString(nil,"OVERLAY","GameFontHighlight")
-	GR_Welcome.info:SetPoint("CENTER",GR_Welcome,"CENTER",0,115)
-	GR_Welcome.info:SetText("Create a custom welcome message to be sent in guild chat to new guild members on joining.")
-	GR_Welcome.info:SetWidth(450)
-	GR_Welcome.info:SetJustifyH("CENTER")
-function GR_SetupOptionsUI()
-	
-	
-	--Guild Check Button
-	GR_Welcome.guildCheckButton = CreateFrame("CheckButton","GR_GuildCheckButton",GR_Welcome,"UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
-	GR_Welcome.guildCheckButton:SetPoint("TOPLEFT",20,-20)
-	GR_Welcome.guildCheckButton.text:SetText("Guild Gratzing")
-	GR_Welcome.guildCheckButton:SetScript("OnShow", function(self,event,arg1) 
-		self:SetChecked(GR_Guild);
-	end)
-	GR_Welcome.guildCheckButton:SetScript("OnClick", function(self,event,arg1) 
-		GR_ToggleGuild();
-	end)
-
-	--Party Check Button
-	GR_Welcome.partyCheckButton = CreateFrame("CheckButton","GR_PartyCheckButton",GR_Welcome,"UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
-	GR_Welcome.partyCheckButton:SetPoint("TOPLEFT",20,-40)
-	GR_Welcome.partyCheckButton.text:SetText("Party Gratzing")
-	GR_Welcome.partyCheckButton:SetScript("OnShow", function(self,event,arg1) 
-		self:SetChecked(GR_Party);
-	end)
-	GR_Welcome.partyCheckButton:SetScript("OnClick", function(self,event,arg1) 
-		GR_ToggleParty();
-	end)
-
-	--Say Check Button
-	GR_Welcome.sayCheckButton = CreateFrame("CheckButton","GR_SayCheckButton",GR_Welcome,"UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
-	GR_Welcome.sayCheckButton:SetPoint("TOPLEFT",20,-60)
-	GR_Welcome.sayCheckButton.text:SetText("Say Gratzing")
-	GR_Welcome.sayCheckButton:SetScript("OnShow", function(self,event,arg1) 
-		self:SetChecked(GR_Say);
-	end)
-	GR_Welcome.sayCheckButton:SetScript("OnClick", function(self,event,arg1) 
-		GR_ToggleSay();
-	end)
-
-	--Guild Welcome Check Button
-	GR_Welcome.guildWelcomeCheckButton = CreateFrame("CheckButton",GR_Welcome,"Guild","UICheckButtonTemplate") --frameType, frameName, frameParent, frameTemplate    
-	GR_Welcome.guildWelcomeCheckButton:SetPoint("TOPLEFT",20,-100)
-	GR_Welcome.guildWelcomeCheckButton.text:SetText("New Guild Member Welcoming")
-	GR_Welcome.guildWelcomeCheckButton:SetScript("OnShow", function(self,event,arg1) 
-		self:SetChecked(GR_GuildJoinMessageToggle);
-	end)
-	GR_Welcome.guildWelcomeCheckButton:SetScript("OnClick", function(self,event,arg1) 
-		GR_ToggleGuildWelcome();
-	end)
-
-	--Delay Slider
-	GR_Welcome.delaySlider = CreateBasicSlider(GR_Welcome, "GR_DelaySlider", "Delay in milliseconds before sending the message", 0, 60000, 100);
-	GR_Welcome.delaySlider:HookScript("OnValueChanged", function(self,value)
-		GR_Delay = floor(value)
-	end)
-	GR_Welcome.delaySlider:HookScript("OnShow", function(self,value)
-		self:SetValue(GR_Delay);
-		self.editbox:SetNumber(GR_Delay);
-	end)
-	GR_Welcome.delaySlider.editbox:SetScript("OnShow", function(self,event,arg1)
-		self:SetNumber(GR_Delay);
-	end)
-	GR_Welcome.delaySlider:SetPoint("TOPRIGHT",-120,-20)
-
-	--Grouping Slider
-	GR_Welcome.groupingSlider = CreateBasicSlider(GR_Welcome, "GR_GroupingSlider", "Delay in milliseconds after a message is sent that it won't send another", 0, 60000, 100);
-	GR_Welcome.groupingSlider:HookScript("OnValueChanged", function(self,value)
-		GR_GroupingTime = floor(value)
-	end)
-	GR_Welcome.groupingSlider:HookScript("OnShow", function(self,value)
-		self:SetValue(GR_GroupingTime);
-		self.editbox:SetNumber(GR_GroupingTime);
-	end)
-	GR_Welcome.groupingSlider.editbox:SetScript("OnShow", function(self,event,arg1)
-		self:SetNumber(GR_GroupingTime);
-	end)
-	GR_Welcome.groupingSlider:SetPoint("TOPRIGHT",-120,-100)
-	--GR_Welcome.delayLabel = GR_Welcome:CreateFontString(nil,"OVERLAY","GameFontNormal", 200,200)
-	--GR_Welcome.delayLabel:SetText("delay")
-	--GR_Welcome.delayEditBox = CreateFrame("EditBox","GR_DelayEditBox",GR_Welcome,"InputBoxTemplate") --frameType, frameName, frameParent, frameTemplate    
-	--GR_Welcome.delayEditBox:SetSize(50,30)
- --   GR_Welcome.delayEditBox:ClearAllPoints()
-	--GR_Welcome.delayEditBox:SetPoint("TOPLEFT",120,-120)
- --   GR_Welcome.delayEditBox:SetText("test");
- --   GR_Welcome.delayEditBox:SetAutoFocus(false)
-	--GR_Welcome.delayEditBox.text:SetText("Delay(ms)")
-	--GR_Welcome.delayEditBox:SetScript("OnShow", function(self,event,arg1) 
-		--self:SetChecked(GR_Say);
-	--end)
-
-	--Grats Message
-	GR_Welcome.gratsMessageEditBox = CreateFrame("EditBox", "GR_GratsMessage", GR_Welcome, "InputBoxTemplate")
-	GR_Welcome.gratsMessageEditBox:SetSize(500,30)
-	GR_Welcome.gratsMessageEditBox:SetMultiLine(false)
-    GR_Welcome.gratsMessageEditBox:ClearAllPoints()
-	GR_Welcome.gratsMessageEditBox:SetPoint("TOPLEFT",20,-180)
-	GR_Welcome.gratsMessageEditBox:SetCursorPosition(0);
-	GR_Welcome.gratsMessageEditBox:ClearFocus();
-    GR_Welcome.gratsMessageEditBox:SetAutoFocus(false)
-	GR_Welcome.gratsMessageEditBox:SetScript("OnShow", function(self,event,arg1)
-		self:SetText(GR_GratsMessage)
-		self:SetCursorPosition(0);
-		self:ClearFocus();
-	end)
-	GR_Welcome.gratsMessageEditBox:SetScript("OnTextChanged", function(self,value)
-		GR_GratsMessage = self:GetText()
-	end)
-	GR_Welcome.gratsMessageLabel = CreateBasicFontString(GR_Welcome.gratsMessageEditBox,"GR_GratsMessageLabel","OVERLAY","GameFontNormal","Grats Message");
-	GR_Welcome.gratsMessageLabel:SetPoint("BOTTOMLEFT", GR_Welcome.gratsMessageEditBox, "TOPLEFT", 0, 0)
-
-	--Welcome to Guild Message
-	GR_Welcome.guildWelcomeMessageEditBox = CreateFrame("EditBox", "GR_GuildWelcomeMessage", GR_Welcome, "InputBoxTemplate")
-	GR_Welcome.guildWelcomeMessageEditBox:SetSize(500,30)
-	GR_Welcome.guildWelcomeMessageEditBox:SetMultiLine(false)
-    GR_Welcome.guildWelcomeMessageEditBox:ClearAllPoints()
-	GR_Welcome.guildWelcomeMessageEditBox:SetPoint("TOPLEFT",20,-240)
-	GR_Welcome.guildWelcomeMessageEditBox:SetCursorPosition(0);
-	GR_Welcome.guildWelcomeMessageEditBox:ClearFocus();
-    GR_Welcome.guildWelcomeMessageEditBox:SetAutoFocus(false)
-	GR_Welcome.guildWelcomeMessageEditBox:SetScript("OnShow", function(self,event,arg1)
-		self:SetText(GR_GuildWelcomeMessage)
-		self:SetCursorPosition(0);
-		self:ClearFocus();
-	end)
-	GR_Welcome.guildWelcomeMessageEditBox:SetScript("OnTextChanged", function(self,value)
-		GR_GuildWelcomeMessage = self:GetText()
-	end)
-	GR_Welcome.guildWelcomeMessageLabel = CreateBasicFontString(GR_Welcome.guildWelcomeMessageEditBox,"GR_GuildWelcomeMessageLabel","OVERLAY","GameFontNormal","Guild Welcome Message");
-	GR_Welcome.guildWelcomeMessageLabel:SetPoint("BOTTOMLEFT", GR_Welcome.guildWelcomeMessageEditBox, "TOPLEFT", 0, 0)
-
-
-end
-	
-
-	GR_Welcome:HookScript("OnHide", function() if (GR_Options.showAgain) then GR:ShowOptions() GR_Options.showAgain = false end end)
-end
-
-
-local function ShowWelcomeFrame()
-	if GR_Welcome then
-		GR_Welcome:Show()
-	else
-		CreateWelcomeDefineFrame()
-		GR_Welcome:Show()
-	end
-end
-
-local function HideWelcomeFrame()
-	if GR_Welcome then
-		GR_Welcome:Hide()
-	end
-end
---]===]
---Whisper Frame
-local function CreateWhisperDefineFrame()
-
-end
-
---local KeyHarvestFrame = CreateFrame("Frame", "GR_KeyHarvestFrame");
---KeyHarvestFrame:SetPoint("CENTER",0,200);
---KeyHarvestFrame:SetWidth(10);
---KeyHarvestFrame:SetHeight(10);
---KeyHarvestFrame.text = KeyHarvestFrame:CreateFontString(nil, "OVERLAY", "MovieSubtitleFont");
---KeyHarvestFrame.text:SetPoint("CENTER");
---KeyHarvestFrame.text:SetText("|cff00ff00Press the KEY you wish to bind now!|r");
---KeyHarvestFrame:Hide();
-
---function KeyHarvestFrame:GetNewKeybindKey()
---	KeyHarvestFrame:Show();
---	self:SetScript("OnKeyDown", function(self, key)
---		if (SetBindingClick(key, "GR_INVITE_BUTTON2")) then
---			Alerter:SendAlert("|cff00ff00Successfully bound "..key.." to InviteButton!|r",1.5);
---			GR:print("Successfully bound "..key.." to InviteButton!");
---			GR_DATA.keyBind = key;
---			BUTTON_KEYBIND.label:SetText("Set Keybind ("..key..")");
---		else
---			Alerter:SendAlert("|cffff0000Error binding "..key.." to InviteButton!|r",1.5);
---			GR:print("Error binding "..key.." to InviteButton!");
---		end
---		self:EnableKeyboard(false);
---		KeyHarvestFrame:Hide();
---	end)
---	self:EnableKeyboard(true);
---
---end
-
-
-local function CreateWhisperPreviewFrame()
-	CreateFrame("Frame","GR_Preview")
-	local backdrop =
-	{
-		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		tile = true,
-		tileSize = 16,
-		edgeSize = 4,
-		insets = { left = 4, right = 4, top = 4, bottom = 4 }
-	}
-	GR_Preview:SetWidth(500)
-	GR_Preview:SetHeight(175)
-	GR_Preview:SetBackdrop(backdrop)
-	SetFramePosition(GR_Preview)
-	GR_Preview:SetMovable(true)
-	GR_Preview:SetScript("OnMouseDown",function(self)
-		self:StartMoving()
-	end)
-	GR_Preview:SetScript("OnMouseUp",function(self)
-		self:StopMovingOrSizing()
-		SaveFramePosition(GR_Preview)
-	end)
-
-	local close = CreateFrame("Button",nil,GR_Preview,"UIPanelCloseButton")
-	close:SetPoint("TOPRIGHT",GR_Preview,"TOPRIGHT",-4,-4)
-
-	GR_Preview.title = GR_Preview:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
-	GR_Preview.title:SetText(GR.L["GuildRecruiter Whisper Preview"])
-	GR_Preview.title:SetPoint("TOP",GR_Preview,"TOP",0,-20)
-
-	GR_Preview.info = GR_Preview:CreateFontString(nil,"OVERLAY","GameFontNormal")
-	GR_Preview.info:SetPoint("TOPLEFT",GR_Preview,"TOPLEFT",33,-55)
-	GR_Preview.info:SetText("Whisper #"..i..": ",GR_DATA.settings.whispers[i])
-	GR_Preview.info:SetWidth(450)
-	GR_Preview.info:SetJustifyH("LEFT")
-	
-end
-
-local function ShowPreviewFrame()
-	if GR_Preview then
-		GR_Preview:Show()
-	else
-		CreateWhisperPreviewFrame()
-		GR_Preview:Show()
-	end
-end
-
-local function HidePreviewFrame()
-	if GR_Preview then
-		GR_Preview:Hide()
-	end
-end
 local function CreateWhisperDefineFrame()
 	--Window Defaults
 	CreateFrame("Frame","GR_Whisper", UIParent, "BasicFrameTemplate");
@@ -1009,58 +541,9 @@ local function HideWhisperFrame()
 		GR_Whisper:Hide()
 	end
 end
---BlackList Frame
-local function CreateBlackListFrame()
-	CreateFrame("Frame","GR_BlackList", UIParent, "BasicFrameTemplate")
-	GR_BlackList:SetWidth(550)
-	GR_BlackList:SetHeight(200)
-	SetFramePosition(GR_BlackList)
-	GR_BlackList:SetMovable(true)
-	GR_BlackList:SetScript("OnMouseDown",function(self)
-		self:StartMoving()
-	end)
-	GR_BlackList:SetScript("OnMouseUp",function(self)
-		self:StopMovingOrSizing()
-		SaveFramePosition(GR_BlackList)
-	end)
-
-	GR_BlackList.title = GR_BlackList:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
-	GR_BlackList.title:SetPoint("TOP", GR_BlackList, "TOP", 0, -5);
-	GR_BlackList.title:SetText("Guild Recruiter Black List");
-
-	GR_BlackList.underTitle = GR_BlackList:CreateFontString(nil, 	"OVERLAY", "GameFontHighlight");
-	GR_BlackList.underTitle:SetPoint("TOP", GR_BlackList, "TOP", 0, -38);
-	GR_BlackList.underTitle:SetText("Eventually, I'd like to have the blacklist show in this window. For now, I'll just tell you what's going on... I removed the filter. It doesn't work. I'll add it back when it works... I also want to incorporate some way of welcoming new members to your guild. It'll come in time... I also want to be able to sync blacklists across toons. My guild has multiple people recruiting and this would be helpful for us... For now, the addon works in its current form. Good luck recruiting.");
-	GR_BlackList.underTitle:SetWidth(400);
---[===[	
-	GR_BlackList.bottomText = GR_BlackList:CreateFontString(nil, "OVERLAY", "GameFOntNormal");
-	GR_BlackList.bottomText:SetPoint("BOTTOM", GR_BlackList, "BOTTOM", 0, 60);
-	GR_BlackList.bottomText:SetText("|cff00ff00In order to be filtered, a player has to match |r|cffFF3300ALL|r |cff00ff00criterias|r");
 
 
-	anchor = {
-		point = "BOTTOM",
-		relativePoint = "BOTTOM",
-		xOfs = -60,
-		yOfs = 20,
-	}
 
-
-	GR_BlackList.button1 = CreateButton("BUTTON_SAVE_FILTER", GR_BlackList, 120, 30, GR.L["Save"], anchor, GetFilterData);
-		anchor.xOfs = 60;
-	GR_BlackList.button2 = CreateButton("BUTTON_CANCEL_FILTER", GR_BlackList, 120, 30, GR.L["Back"], anchor, function() GR_BlackList:Hide() end);
---]===]
-	GR_BlackList:HookScript("OnHide", function() if (GR_Options.showAgain) then GR_Options:Show() GR_Options.showAgain = false end end);
-
-end
-
-local function ShowBlackListFrame()
-	if (not GR_BlackList) then
-		CreateBlackListFrame();
-	end
-	GR_BlackList:Show();
-end
---End BlackList Frame
 
 
 
@@ -1219,7 +702,7 @@ local function CreateOptions()
 	GR_Options.bottom = GR_Options:CreateFontString(nil,"OVERLAY");
 	GR_Options.bottom:SetFontObject("GameFontNormalTiny");
 	GR_Options.bottom:SetPoint("BOTTOM", GR_Options, "BOTTOM",0,10);
-	GR_Options.bottom:SetText("|cff88aaffUpdated and Maintained by The Shadow Collective https://discord.gg/x4tR4sX|r");
+	GR_Options.bottom:SetText("|cff88aaffWritten and Maintained by The Shadow Collective https://discord.gg/x4tR4sX|r");
 	
 	--Menu Text
 	GR_Options.top = GR_Options:CreateFontString(nil, "OVERLAY");
@@ -1259,6 +742,29 @@ local function CreateOptions()
 	GR_Options.guildlogo.texture:SetTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\grlogo.blp")
 	GR_Options.guildlogo.texture:Show()
 	
+	GR_Options.alisha = CreateFrame("Frame","alisha",GR_Options)
+	GR_Options.alisha:SetWidth(200)
+	GR_Options.alisha:SetHeight(64)
+	GR_Options.alisha:SetPoint("TOPLEFT",GR_Options,"TOPLEFT",9,-25)
+	GR_Options.alisha.text = GR_Options.alisha:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
+	GR_Options.alisha.text:SetText("Alisha, I can finally sleep.")
+	GR_Options.alisha.text:SetPoint("LEFT")
+	GR_Options.alisha.texture = GR_Options.alisha:CreateTexture()
+	GR_Options.alisha.texture:SetAllPoints()
+	GR_Options.alisha.texture:SetTexture()
+	GR_Options.alisha.texture:Show()
+	GR_Options.alisha2 = CreateFrame("Frame","alisha2",GR_Options)
+	GR_Options.alisha2:SetWidth(200)
+	GR_Options.alisha2:SetHeight(64)
+	GR_Options.alisha2:SetPoint("TOPLEFT",GR_Options,"TOPLEFT",9,-35)
+	GR_Options.alisha2.text = GR_Options.alisha2:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
+	GR_Options.alisha2.text:SetText("This addon is for you. -Goat")
+	GR_Options.alisha2.text:SetPoint("LEFT")
+	GR_Options.alisha2.texture = GR_Options.alisha2:CreateTexture()
+	GR_Options.alisha2.texture:SetAllPoints()
+	GR_Options.alisha2.texture:SetTexture()
+	GR_Options.alisha2.texture:Show()
+	
 	--Anchor Local Variable
 	local anchor = {}
 	
@@ -1270,25 +776,53 @@ local function CreateOptions()
 
 	--Checkboxes
 	local spacing = 45;
-	GR_Options.checkBox2 = CreateCheckbox("CHECKBOX_ADV_SCAN", GR_Options, "Show Advanced Scan Options", anchor);
-		anchor.yOfs = anchor.yOfs - spacing;
-	GR_Options.checkBox7 = CreateCheckbox("CHECKBOX_HIDE_WHISPER", GR_Options, "Hide Outgoing Whispers (WIP)", anchor);
-		anchor.yOfs = anchor.yOfs - spacing;
-	GR_Options.checkBox5 = CreateCheckbox("CHECKBOX_BACKGROUND_MODE", GR_Options, "Run Scan in Background", anchor);
-		anchor.yOfs = anchor.yOfs - spacing;
-	--GR_Options.checkBox6 = CreateCheckbox("CHECKBOX_ENABLE_FILTERS", GR_Options, "Enable Filtering", anchor);
-	--	anchor.yOfs = anchor.yOfs - spacing;
-	--GR_Options.checkbox1 = CreateCheckbox("CHECKBOX_MEMBER_WELCOME", GR_Options, "Welcome New Members (WIP)", anchor);
-	--	anchor.yOfs = anchor.yOfs - spacing;
-		
-	--GR_Options.checkBox3:HookScript("PostClick", function(self) ChatIntercept:StateSystem(self:GetChecked()) end);
-	--GR_Options.checkBox7:HookScript("PostClick", function(self) ChatIntercept:StateWhisper(self:GetChecked()) end);
+	
+	--------------------------------
+	-- Hide Whispers Check Button --
+	--------------------------------
+	
+	GR_Options.hideWhispersCheckButton = CreateFrame("CheckButton","GR_HideWhisperCheckButton",GR_Options,"UICheckButtonTemplate")
+	GR_Options.hideWhispersCheckButton:SetFrameLevel(300)
+	GR_Options.hideWhispersCheckButton:SetPoint("TOPLEFT",7,-160)
+	GR_Options.hideWhispersCheckButton.text:SetText("Hide Outgoing Whispers")
+	GR_Options.hideWhispersCheckButton:SetScript("OnShow", function(self,event,arg1) 
+		self:SetChecked(GR_HideWhisperToggle);
+	end)
+	GR_Options.hideWhispersCheckButton:SetScript("OnClick", function(self,event,arg1) 
+		GR_ToggleHideWhisper();
+	end)
+	
+	-------------------------
+	-- Hide Whisper Toggle --
+	-------------------------
+	
+	function GR_ToggleHideWhisper()
 
+	if(GR_HideWhisperToggle) then 
+		GR_HideWhisperToggle = false; 
+		GR_Print("Hide Whispers Off");
+	else
+		GR_HideWhisperToggle = true;    
+		GR_Print("Hide Whispers On");
+	end;
+	GR_Options.hideWhispersCheckButton:SetChecked(GR_HideWhisperToggle);
+	end
+	
+	---------------------------
+	-- Hide Whisper Function --
+	---------------------------
 
+	local function Filter ( self, Event, Message )
+		if (GR_HideWhisperToggle == true) then
+			return true;
+		end
+	end
+	ChatFrame_AddMessageEventFilter( "CHAT_MSG_WHISPER_INFORM", Filter );
+	
 	--Anchor Point for the bottom row of buttons
 		anchor.point = "BOTTOMLEFT"
 		anchor.relativePoint = "BOTTOMLEFT"
-		anchor.xOfs = 35
+		anchor.xOfs = 154.5
 		anchor.yOfs = 25
 
 	--onClickTester
@@ -1298,12 +832,12 @@ local function CreateOptions()
 	--	anchor.xOfs = anchor.xOfs + 100;
 	--GR_Options.button4 = CreateButton("BUTTON_FILTER", GR_Options, 92, 30, "Set Filters", anchor, function() GR:ShowFilterHandle() GR_Options:Hide() end);
 	--	anchor.xOfs = anchor.xOfs + 100;
-	GR_Options.button2 = CreateButton("BUTTON_SUPER_SCAN", GR_Options, 92, 30, "Scan", anchor, OptBtn2_OnClick);
-		anchor.xOfs = anchor.xOfs + 125;
+	--GR_Options.button2 = CreateButton("BUTTON_SUPER_SCAN", GR_Options, 92, 30, "Scan", anchor, OptBtn2_OnClick);
+		--anchor.xOfs = anchor.xOfs + 125;
 	GR_Options.button3 = CreateButton("BUTTON_INVITE", GR_Options, 92, 30, format("Whisper: %d",GR:GetNumQueued()), anchor, GR.SendGuildInvite);
 		anchor.xOfs = anchor.xOfs + 125;
-	GR_Options.button6 = CreateButton("BUTTON_BLACKLIST", GR_Options, 92, 30, "Black List", anchor, function(self) ShowBlackListFrame() GR_Options:Hide() GR_Options.showAgain = true end);
-		anchor.xOfs = anchor.xOfs + 125;
+	--GR_Options.button6 = CreateButton("BUTTON_BLACKLIST", GR_Options, 92, 30, "Black List", anchor, function(self) ShowBlackListFrame() GR_Options:Hide() GR_Options.showAgain = true end);
+		--anchor.xOfs = anchor.xOfs + 125;
 	
 	--Low Limit Selector
 	GR_Options.limitLow = CreateFrame("Frame","GR_LowLimit",GR_Options)
@@ -1387,8 +921,7 @@ local function CreateOptions()
 	GR_Options.raceLimitHigh = CreateFrame("Frame","GR_RaceLimitHigh",GR_Options)
 	GR_Options.raceLimitHigh:SetWidth(40)
 	GR_Options.raceLimitHigh:SetHeight(40)
-	GR_Options.raceLimitHigh:SetPoint("CENTER",GR_Options,"CENTER",180
-	,60)
+	GR_Options.raceLimitHigh:SetPoint("CENTER",GR_Options,"CENTER",180,60)
 	GR_Options.raceLimitHigh.text = GR_Options.raceLimitHigh:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
 	GR_Options.raceLimitHigh.text:SetPoint("CENTER")
 	GR_Options.raceLimitHigh.texture = GR_Options.raceLimitHigh:CreateTexture()
@@ -1531,13 +1064,13 @@ local function CreateOptions()
 	anchor = {
 		point = "TOPLEFT",
 		relativePoint = "TOPLEFT",
-		xOfs = 7,
-		yOfs = -27,
+		xOfs = 9,
+		yOfs = -115,
 	}
 	GR_Options.superScanText = GR_Options:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
-	GR_Options.superScanText:SetPoint("TOPLEFT", GR_Options, "TOPLEFT", 40, -35);
+	GR_Options.superScanText:SetPoint("TOPLEFT", GR_Options, "TOPLEFT", 40, -125);
 	GR_Options.superScanText:SetText("Player Scan");
-	GR_Options.buttonPlayPause = CreateButton("GR_SUPERSCAN_PLAYPAUSE2", GR_Options, 40,30,"",anchor,SSBtn3_OnClick);
+	GR_Options.buttonPlayPause = CreateButton("GR_SUPERSCAN_PLAYPAUSE2", GR_Options, 38,30,"",anchor,SSBtn3_OnClick);
 	GR_SUPERSCAN_PLAYPAUSE2:SetNormalTexture("Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up");
 	GR_SUPERSCAN_PLAYPAUSE2:Hide();
 	GR_Options.superScanText:Hide();
@@ -1560,10 +1093,10 @@ local function CreateOptions()
 			if (GR_DATA.settings.checkBox["CHECKBOX_BACKGROUND_MODE"]) then
 				GR_SUPERSCAN_PLAYPAUSE2:Show();
 				GR_Options.superScanText:Show();
-				if SuperScanFrame then SuperScanFrame:Hide() end;
+				if SuperScanFrame then SuperScanFrame:Show() end;
 			else
-				GR_SUPERSCAN_PLAYPAUSE2:Hide();
-				GR_Options.superScanText:Hide();
+				GR_SUPERSCAN_PLAYPAUSE2:Show();
+				GR_Options.superScanText:Show();
 				if (GR:IsScanning()) then
 					--GR:ShowSuperScanFrame();
 				end
@@ -1584,9 +1117,9 @@ local function CreateOptions()
 					GR_Options.raceLimitHigh:Show();
 				end
 			else
-				GR_Options.Interval:Hide();
-				GR_Options.classLimitHigh:Hide();
-				GR_Options.raceLimitHigh:Hide();
+				GR_Options.Interval:Show();
+				GR_Options.classLimitHigh:Show();
+				GR_Options.raceLimitHigh:Show();
 			end
 
 		--GR_Options.Interval:Show();
@@ -1630,7 +1163,6 @@ function GR:HideOptions()
 	end
 end
 
-
 local function CreateMinimapButton()
 	local f = CreateFrame("Button","GR_MiniMapButton",Minimap)
 	f:SetWidth(24)
@@ -1642,46 +1174,6 @@ local function CreateMinimapButton()
 	f:SetNormalTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\GR_MiniMapButton.tga")
 	f:SetPushedTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\GR_MiniMapButtonPushed.tga")
 	f:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
-
---	local tooltip = CreateFrame("Frame","GR_TooltTipMini",f,"GameTooltipTemplate")
---	tooltip:SetPoint("BOTTOMRIGHT",f,"TOPLEFT",0,-3)
---	local toolstring = tooltip:CreateFontString(nil,"OVERLAY","GameFontNormal")
---	toolstring:SetPoint("TOPLEFT",tooltip,"TOPLEFT",5,-7)
---	local toolstring2 = tooltip:CreateFontString(nil, "OVERLAY", "GameFontNormal");
---	local toolstring3 = tooltip:CreateFontString(nil, "OVERLAY", "GameFontNormal");
---	toolstring2:SetPoint("TOPLEFT",tooltip,"TOPLEFT",7,-33);
---	toolstring3:SetPoint("TOPLEFT", tooltip, "TOPLEFT", 7, -46);
---	toolstring2:SetText(format("ETR: %s",GR:GetSuperScanTimeLeft()));
---	toolstring3:SetText(format("%d%% done",floor(GR:GetPercentageDone())));
---
---	local tUpdate = 0;
---	local function UpdateTooltip()
---		if (tUpdate < GetTime()) then
---			toolstring:SetText(GR.LOGO..format("|cff88aaffGuildRecruiter|r\n|cff16ABB5Queue: %d|r",GR:GetNumQueued()))
---			toolstring2:SetText(format("ETR: %s",GR:GetSuperScanTimeLeft()));
---			toolstring3:SetText(format("%d%% done",floor(GR:GetPercentageDone())));
---			GR:debug(format("ETR: %s",GR:GetSuperScanETR()));
---			GR:debug(format("%d%% done",floor(GR:GetPercentageDone())));
---			tUpdate = GetTime() + 0.2;
---		end
---	end
---
---	toolstring:SetText(GR.LOGO..format("|cff88aaffGuildRecruiter|r\n|cff16ABB5Queue: |r|cffffff00%d|r",GR:GetNumQueued()))
---	toolstring:SetJustifyH("LEFT");
---	tooltip:SetWidth(max(toolstring:GetWidth(),toolstring2:GetWidth(),toolstring3:GetWidth())+ 20)
---	tooltip:SetHeight(toolstring:GetHeight() + toolstring2:GetHeight() + toolstring3:GetHeight() + 15)
---	--tooltip:Hide(2)
---	f:SetScript("OnEnter",function()
---		toolstring:SetText(GR.LOGO..format("|cff88aaffGuildRecruiter|r\n|cff16ABB5Queue: %d|r",GR:GetNumQueued()))
---		tooltip:Show()
---		tooltip:SetScript("OnUpdate",UpdateTooltip);
---	end)
---	f:SetScript("OnLeave",function()
---	--tooltip:Hide()
---	--tooltip:Hide()
---	tooltip:SetScript("OnUpdate", nil);
---	end)
-
 
 	local function moveButton(self)
 		local centerX, centerY = Minimap:GetCenter()
@@ -1726,113 +1218,10 @@ function GR:HideMinimapButton()
 	end
 end
 
-function GR_GetCmd(msg)
- 	if msg then
- 		local a=(msg); --contiguous string of non-space characters
- 		if a then
- 			return msg
- 		else	
- 			return "";
- 		end
- 	end
- end
-
-function GR_ShowHelp()
-	print("GR_Welcome usage:");
-	print("'/ag' or '/ag options' to show options ui");
-	print("'/ag {msg}' or '/autogratzer {msg}'");
-	print("'/ag delay {delay}' or '/autogratzer {delay}', with delay in milliseconds to set delay");
-	print("'/ag guild' or '/autogratzer guild' to enable/disable guild gratzing");
-	print("'/ag say' or '/autogratzer say' to enable/disable say gratzing");
-	print("'/ag party' or '/autogratzer party' to enable/disable say gratzing");
-end
-
-function GR_ToggleGuild()
-	if(GR_Guild) then 
-		GR_Guild = false; 
-		GR_Print("Guild gratzing now off");
-	else
-		GR_Guild = true;    
-		GR_Print("Guild gratzing now on");
-	end;
-	GR_Welcome.guildCheckButton:SetChecked(GR_Guild);
-end
-
-function GR_ToggleSay()
-	if(GR_Say) then 
-		GR_Say = false; 
-		GR_Print("Say gratzing now off");
-	else
-		GR_Say = true;
-		GR_Print("Say gratzing now on");
-	end;
-	GR_Welcome.sayCheckButton:SetChecked(GR_Say);
-end
-
-function GR_ToggleParty()
-	if(GR_Party) then 
-		GR_Party = false; 
-		GR_Print("Party gratzing now off");
-	else
-		GR_Party = true; 
-		GR_Print("Party gratzing now on");
-	end;
-	GR_Welcome.partyCheckButton:SetChecked(GR_Party);
-end
-
-function GR_ToggleGuildWelcome()
-	if(GR_GuildJoinMessageToggle) then 
-		GR_GuildJoinMessageToggle = false; 
-		GR_Print("New guild member welcoming now off");
-	else
-		GR_GuildJoinMessageToggle = true;    
-		GR_Print("New guild member welcoming now on");
-	end;
-	GR_Welcome.guildWelcomeCheckButton:SetChecked(GR_GuildJoinMessageToggle);
-end
-
-function GR_SetDelay(delay)
-	if(delay ~= nill)then
-		GR_Delay = tonumber(delay); 
-		GR_Print("Grats message delay set to: " ..delay.."ms");	
-	else
-		GR_Print("Provide a number in milliseconds, eg '/ag delay 5000' for 5 seconds");
-	end
-end
-
-function GR_Command(msg)
-    local Cmd, SubCmd = GR_GetCmd(msg);
-    if (Cmd == "")then
-        --If the interface options aren't already loaded this doesn't work fully(just opens to non addons tab)
-		--but apparently if you call it twice it works fine!
-		InterfaceOptionsFrame_OpenToCategory(GR_Welcome);
-		InterfaceOptionsFrame_OpenToCategory(GR_Welcome);
-    elseif (Cmd == "help")then
-        GR_ShowHelp();
-    elseif (Cmd == "options")then
-        InterfaceOptionsFrame_OpenToCategory(GR_Welcome);
-		InterfaceOptionsFrame_OpenToCategory(GR_Welcome);
-    elseif (Cmd == "guild")then
-        GR_ToggleGuild();
-    elseif (Cmd == "say")then
-        GR_ToggleSay();
-    elseif (Cmd == "party")then
-        GR_ToggleParty();
-	elseif (Cmd == "guildwelcome")then
-        GR_ToggleGuildWelcome();
-	elseif (string.find(Cmd,"delay") == 1)then
-        GR_SetDelay(string.match(Cmd,"%d+"));
-    else
-        GR_GratsMessage = Cmd;
-		GR_Print("Grats message set to: " .. Cmd);
-    end
-end
-
-
 function GR_OnEvent(self,event,arg1,arg2)
 	if(event == "GUILD_ROSTER_UPDATE")then GR_CheckOverride(); return end
-	if(GR_GratsMessage == nil)then
-		GR_GratsMessage="Gratzzz";
+	if(GR_GratsMessage1 == nil)then
+		GR_GratsMessage1="Grats!";
     end
     if(not GR_IsMe(arg2))then
 	    if(event == "CHAT_MSG_GUILD_ACHIEVEMENT" and not GR_GuildDisabledOverride)then GR_DoGrats("GUILD");
@@ -1845,35 +1234,6 @@ function GR_OnEvent(self,event,arg1,arg2)
 			end
 	    end
 	end
-end
-
-function GR_DoGrats(source)
-	if((source == "SAY" and GR_Say == true) or (source == "GUILD" and GR_Guild == true) or (source == "PARTY" and GR_Party == true)) then
-		CurTime=GetTime();
-		if (GR_LastMessage == nil) then
-			GR_LastMessage = 1;
-		end
-		if((CurTime - GR_LastMessage) > (GR_GroupingTime/1000))then
-			GR_LastMessage = GetTime();
-			if(GR_Delay > 0)then
-				C_Timer.After((GR_Delay/1000), function() SendChatMessage(GR_GratsMessage, source); end)
-			else
-				SendChatMessage(GR_GratsMessage, source);
-			end
-		end
-	end
-end
-
-function GR_GuildWelcome()
-	--Testing, enable if you know what your doing...
-	if(GR_GuildJoinMessageToggle and (GetTime() - GR_LastMessage > (GR_GroupingTime/1000)))then
-		GR_LastMessage = GetTime();
-		if(GR_Delay > 0)then
-			C_Timer.After((GR_Delay/1000), function() SendChatMessage("Welcome :)", "GUILD"); end)
-		else
-			SendChatMessage(GR_GuildWelcomeMessage, "GUILD");
-		end
-    end
 end
 
 function GR_IsMe(nameString)
@@ -1889,6 +1249,25 @@ function GR_IsMe(nameString)
 	else
 		return false;
 	end
+end
+
+function split(str, pat)
+   local t = {}  -- NOTE: use {n = 0} in Lua-5.0
+   local fpat = "(.-)" .. pat
+   local last_end = 1
+   local s, e, cap = str:find(fpat, 1)
+   while s do
+      if s ~= 1 or cap ~= "" then
+	 table.insert(t,cap)
+      end
+      last_end = e+1
+      s, e, cap = str:find(fpat, last_end)
+   end
+   if last_end <= #str then
+      cap = str:sub(last_end)
+      table.insert(t, cap)
+   end
+   return unpack(t)
 end
 
 function GR_CheckOverride()
@@ -1912,37 +1291,27 @@ function GR_CheckOverride()
 end
 
 function GR_Print(msg)
-	print("\124cffffFF00[AG]\124r",msg);
+	print("\124cffffFF00[GR]\124r",msg);
 end
 
-function split(str, pat)
-   local t = {}  -- NOTE: use {n = 0} in Lua-5.0
-   local fpat = "(.-)" .. pat
-   local last_end = 1
-   local s, e, cap = str:find(fpat, 1)
-   while s do
-      if s ~= 1 or cap ~= "" then
-	 table.insert(t,cap)
-      end
-      last_end = e+1
-      s, e, cap = str:find(fpat, last_end)
-   end
-   if last_end <= #str then
-      cap = str:sub(last_end)
-      table.insert(t, cap)
-   end
-   return unpack(t)
-end
+ function GR_GetCmd(msg)
+ 	if msg then
+ 		local a=(msg);
+ 		if a then
+ 			return msg
+ 		else	
+ 			return "";
+ 		end
+ 	end
+ end
 
-
+	function CreateBasicFontString(parent, name, layer, template, text)
+		local fs = parent:CreateFontString(name,layer,template)
+			fs:SetText(text)
+		return fs
+	end
   
-  function CreateBasicFontString(parent, name, layer, template, text)
-    local fs = parent:CreateFontString(name,layer,template)
-    fs:SetText(text)
-    return fs
-  end
-  
-  function CreateBasicSlider(parent, name, title, minVal, maxVal, valStep)
+	function CreateBasicSlider(parent, name, title, minVal, maxVal, valStep)
     local slider = CreateFrame("Slider", name, parent, "OptionsSliderTemplate")
     local editbox = CreateFrame("EditBox", "$parentEditBox", slider, "InputBoxTemplate")
     slider:SetMinMaxValues(minVal, maxVal)
@@ -1994,11 +1363,5 @@ end
     slider.editbox = editbox
     return slider
   end
-
-
-
-
-
-
 
 GR:debug(">> GUI.lua");

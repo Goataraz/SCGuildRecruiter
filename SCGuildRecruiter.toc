@@ -5,8 +5,7 @@
 ## Notes: Guild Recruitment Addon by The Shadow Collective Korialstrasz.
 ## Version: 3.0.0
 ##-------------------------------------------------------------
-## SavedVariables: GR_DATA,GR_GratsMessage,GR_GratsTimeMin,GR_GratsTimeMax,GR_GratsTimeWait,GR_GuildJoinMessageToggle,GR_Guild,GR_Say,GR_Party,GR_Delay,GR_GuildDisabledOverride,GR_GroupingTime,GR_GuildJoinMessageToggle,GR_GuildWelcomeMessage
-## SavedVariablesPerCharacter: GR_BACKUP
+## SavedVariables: GR_DATA,GR_GratsMessage,GR_GratsTimeMin,GR_GratsTimeMax,GR_GratsTimeWait,GR_GuildJoinMessageToggle,GR_Guild,GR_Say,GR_Party,GR_Delay,GR_GuildDisabledOverride,GR_GroupingTime,GR_GuildJoinMessageToggle,GR_GuildWelcomeMessage,GR_HideWhisperToggle
 ##-------------------------------------------------------------
 ## X-Website: https://www.curseforge.com/wow/addons/scguildrecruiter
 ## X-Curse-Project-ID: 319583
@@ -34,5 +33,5 @@ core\GR_System_Message.lua
 core\GR_Events.lua
 
 core\GR_GUI.lua
-
+core\GR_GUI.xml
 
