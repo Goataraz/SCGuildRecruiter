@@ -1220,16 +1220,14 @@ end
 
 function GR_OnEvent(self,event,arg1,arg2)
 	if(event == "GUILD_ROSTER_UPDATE")then GR_CheckOverride(); return end
-	if(GR_GratsMessage1 == nil)then
-		GR_GratsMessage1="Grats!";
-    end
+	
     if(not GR_IsMe(arg2))then
-	    if(event == "CHAT_MSG_GUILD_ACHIEVEMENT" and not GR_GuildDisabledOverride)then GR_DoGrats("GUILD");
-	    elseif(event == "CHAT_MSG_ACHIEVEMENT")then GR_DoGrats("SAY");
-	    elseif(event == "CHAT_MSG_ACHIEVEMENT")then GR_DoGrats("PARTY");
-	    elseif(event == "CHAT_MSG_SYSTEM" and not GR_GuildDisabledOverride) then
+	    if(string.find(arg1,"has overrun the guild."))then GR_DoGrats("GUILD");
+	    elseif(string.find(arg1,"has overrun the guild."))then GR_DoGrats("SAY");
+	    elseif(string.find(arg1,"has overrun the guild."))then GR_DoGrats("PARTY");
+	    elseif(string.find(arg1,"has overrun the guild.")) and not GR_GuildDisabledOverride) then
 	    	if(arg1 ~= nil) then
-				if(string.find(arg1,"has joined the guild.")) then GR_GuildWelcome();
+				if(string.find(arg1,"has overrun the guild.")) then SendChatMessage(GetRandomArgument("Goat is amazing!","I'm in love with a farm animal!","I love Goat!"), "GUILD");
 				end
 			end
 	    end
