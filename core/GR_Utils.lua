@@ -1,5 +1,5 @@
 
-function SGI:FormatTime(T)
+function GR:FormatTime(T)
 	local R,S,M,H = ""
 	T = floor(T)
 	H = floor(T/3600)
@@ -23,7 +23,7 @@ function SGI:FormatTime(T)
 	return R
 end
 
-function SGI:CountTable(T)
+function GR:CountTable(T)
 	local i = 0
 	if type(T) ~= "table" then
 		return i
@@ -34,26 +34,3 @@ function SGI:CountTable(T)
 	return i
 end
 
---[[
-function SGI.
-
-function SGI.
-
-function SGI.
-
-function SGI.
-
-function SGI.
-function SGI.
-
-function SGI.
-
-function SGI.
-function SGI.
-function SGI.
-function SGI.
-function SGI.
-function SGI.
-function SGI.
-function SGI.
-]]
