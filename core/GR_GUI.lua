@@ -527,11 +527,11 @@ local function CreateWhisperDefineFrame()
 	-- editbox preview buttons --
 	-----------------------------
 	
-	GR_Whisper.button1 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) GR_Print(GR_DATA.settings.whispers[1])end);
+	GR_Whisper.button1 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) SendChatMessage(GR_DATA.settings.whispers[1],"WHISPER",nil,UnitName("player"))end);
 		anchor.yOfs = anchor.yOfs - 50;
-	GR_Whisper.button2 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) GR_Print(GR_DATA.settings.whispers[2])end);
+	GR_Whisper.button2 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) SendChatMessage(GR_DATA.settings.whispers[2],"WHISPER",nil,UnitName("player"))end);
 		anchor.yOfs = anchor.yOfs - 50;
-	GR_Whisper.button3 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) GR_Print(GR_DATA.settings.whispers[3])end);
+	GR_Whisper.button3 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) SendChatMessage(GR_DATA.settings.whispers[3],"WHISPER",nil,UnitName("player"))end);
 		anchor.yOfs = anchor.yOfs - 50;
 
 	-------------------------------------------------------
