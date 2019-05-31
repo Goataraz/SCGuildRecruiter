@@ -2,6 +2,8 @@ GR = {};
 
 -- General
 GR.LOGO = "|cffffff00<|r|cff16ABB5GR|r|cffffff00>|r ";
+SLASH_RELOADUI1 = "/rl";
+SlashCmdList.RELOADUI = ReloadUI;
 SLASH_GUILDRECRUITER1 = "/gr";
 SLASH_GUILDRECRUITER2 = "/guildrecruiter";
 GR_DATA_INDEX = UnitName("player").." - "..GetRealmName() or "?";

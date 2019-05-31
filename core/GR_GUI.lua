@@ -92,7 +92,7 @@ local function CreateCheckbox(name, parent, label, anchor)
 	end
 	return f;
 end
-
+--[==[
 local function CreateDropDown(name, parent, label, items, anchor)
 	local f = CreateFrame("Button", name, parent, "UIDropDownMenuTemplate");
 	f:ClearAllPoints();
@@ -127,7 +127,7 @@ local function CreateDropDown(name, parent, label, items, anchor)
 	UIDropDownMenu_JustifyText(f, "LEFT")
 	return f
 end
-
+--]==]
 local function SetFramePosition(frame)
 	if (type(GR_DATA.settings.frames[frame:GetName()]) ~= "table") then
 		if (frame:GetName() == "GR_MiniMapButton") then
@@ -385,10 +385,18 @@ local function SSBtn3_OnClick(self)
 	end
 end
 
+	-------------------------
+	-- Edit Whisper Window --
+	-------------------------
+
 local function CreateWhisperDefineFrame()
-	--Window Defaults
+	
+	---------------------
+	-- Window Defaults --
+	---------------------
+	
 	CreateFrame("Frame","GR_Whisper", UIParent, "BasicFrameTemplate");
-	GR_Whisper:SetSize(500,340);
+	GR_Whisper:SetSize(700,340);
 	GR_Whisper:SetPoint("CENTER", UIParent, "CENTER");
 	GR_Whisper:SetMovable(true)
 	GR_Whisper:SetScript("OnMouseDown",function(self)
@@ -398,22 +406,33 @@ local function CreateWhisperDefineFrame()
 		self:StopMovingOrSizing()
 		SaveFramePosition(GR_Whisper)
 	end)
-	--Config
+	
+	------------
+	-- Config --
+	------------
 	
 	GR_Whisper.title = GR_Whisper:CreateFontString(nil, "OVERLAY");
 	GR_Whisper.title:SetFontObject("GameFontHighlight");
 	GR_Whisper.title:SetPoint("CENTER", GR_Whisper.TitleBg, "CENTER", 5,0);
 	GR_Whisper.title:SetText("Guild Recruiter Custom Whispers");
 
+	------------------
+	-- Editbox Text --
+	------------------
+
 	GR_Whisper.info = GR_Whisper:CreateFontString(nil,"OVERLAY","GameFontHighlight")
 	GR_Whisper.info:SetPoint("CENTER",GR_Whisper,"CENTER",0,115)
 	GR_Whisper.info:SetText("Create up to 3 custom recruitment messages to whisper to people you would like to join your guild. Make it flashy and give as much information as you can, but don't go over the 256 character limit! Good Luck!")
-	GR_Whisper.info:SetWidth(450)
+	GR_Whisper.info:SetWidth(650)
 	GR_Whisper.info:SetJustifyH("CENTER")
+	
+	---------------
+	-- Editbox 1 --
+	---------------
 	
 	GR_Whisper.edit = CreateFrame("EditBox", "GR_WhisperMessage1", GR_Whisper, "InputBoxTemplate")
 	GR_Whisper.edit:SetFrameLevel(300)
-	GR_Whisper.edit:SetSize(450,30)
+	GR_Whisper.edit:SetSize(650,30)
 	GR_Whisper.edit:SetMultiLine(false)
     GR_Whisper.edit:ClearAllPoints()
 	GR_Whisper.edit:SetPoint("CENTER",GR_Whisper,"CENTER",0,50)
@@ -425,6 +444,7 @@ local function CreateWhisperDefineFrame()
 		self:SetCursorPosition(0);
 		self:ClearFocus();
 	end)
+	GR_Whisper.edit:SetMaxLetters(256)
 	GR_Whisper.edit:SetScript("OnTextChanged", function(self,value)
 		GR_DATA.settings.whispers[1] = self:GetText()
 	end)
@@ -435,9 +455,13 @@ local function CreateWhisperDefineFrame()
 	GR_Whisper.editLabel = CreateBasicFontString(GR_Whisper.edit,"GR_Whisper.editLabel","OVERLAY","GameFontNormal","Whisper #1");
 	GR_Whisper.editLabel:SetPoint("BOTTOMLEFT", GR_Whisper.edit, "TOPLEFT", 0, 0)
 	
+	---------------
+	-- Editbox 2 --
+	---------------	
+	
 	GR_Whisper.edit = CreateFrame("EditBox", "GR_WhisperMessage2", GR_Whisper, "InputBoxTemplate")
 	GR_Whisper.edit:SetFrameLevel(300)
-	GR_Whisper.edit:SetSize(450,30)
+	GR_Whisper.edit:SetSize(650,30)
 	GR_Whisper.edit:SetMultiLine(false)
     GR_Whisper.edit:ClearAllPoints()
 	GR_Whisper.edit:SetPoint("CENTER",GR_Whisper,"CENTER",0,0)
@@ -449,6 +473,7 @@ local function CreateWhisperDefineFrame()
 		self:SetCursorPosition(0);
 		self:ClearFocus();
 	end)
+	GR_Whisper.edit:SetMaxLetters(256)
 	GR_Whisper.edit:SetScript("OnTextChanged", function(self,value)
 		GR_DATA.settings.whispers[2] = self:GetText()
 	end)
@@ -459,9 +484,13 @@ local function CreateWhisperDefineFrame()
 	GR_Whisper.editLabel = CreateBasicFontString(GR_Whisper.edit,"GR_Whisper.editLabel","OVERLAY","GameFontNormal","Whisper #2");
 	GR_Whisper.editLabel:SetPoint("BOTTOMLEFT", GR_Whisper.edit, "TOPLEFT", 0, 0)
 	
+	---------------
+	-- Editbox 3 --
+	---------------
+	
 	GR_Whisper.edit = CreateFrame("EditBox", "GR_WhisperMessage3", GR_Whisper, "InputBoxTemplate")
 	GR_Whisper.edit:SetFrameLevel(300)
-	GR_Whisper.edit:SetSize(450,30)
+	GR_Whisper.edit:SetSize(650,30)
 	GR_Whisper.edit:SetMultiLine(false)
     GR_Whisper.edit:ClearAllPoints()
 	GR_Whisper.edit:SetPoint("CENTER",GR_Whisper,"CENTER",0,-50)
@@ -473,6 +502,7 @@ local function CreateWhisperDefineFrame()
 		self:SetCursorPosition(0);
 		self:ClearFocus();
 	end)
+	GR_Whisper.edit:SetMaxLetters(256)
 	GR_Whisper.edit:SetScript("OnTextChanged", function(self,value)
 		GR_DATA.settings.whispers[3] = self:GetText()
 	end)
@@ -482,69 +512,52 @@ local function CreateWhisperDefineFrame()
 	end)
 	GR_Whisper.editLabel = CreateBasicFontString(GR_Whisper.edit,"GR_Whisper.editLabel","OVERLAY","GameFontNormal","Whisper #3");
 	GR_Whisper.editLabel:SetPoint("BOTTOMLEFT", GR_Whisper.edit, "TOPLEFT", 0, 0)	
---[==[
-	GR_Whisper.edit = CreateFrame("EditBox", "GR_Edit", GR_Whisper, "InsetFrameTemplate3")
-	GR_Whisper.edit:SetWidth(450)
-	GR_Whisper.edit:SetHeight(65)
-	GR_Whisper.edit:SetMultiLine(true)
-	GR_Whisper.edit:SetPoint("CENTER",GR_Whisper,"CENTER",0,30)
-	GR_Whisper.edit:SetFontObject("GameFontNormal")
-	GR_Whisper.edit:SetCursorPosition(0);
-	GR_Whisper.edit:ClearFocus();
-	GR_Whisper.edit:SetAutoFocus(false)
-	GR_Whisper.edit:SetScript("OnShow", function(self,event,arg1)
-		self:SetText(GR_DATA.settings.whispers)
-		self:SetCursorPosition(0);
-		self:ClearFocus();
-	end)
-	GR_Whisper.edit:SetTextInsets(10,10,10,10)
-	GR_Whisper.edit:SetMaxLetters(256)
-		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
-	GR_Whisper.edit:SetScript("OnHide",function()
-		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
-	end)
-	GR_Whisper.edit.text = GR_Whisper.edit:CreateFontString(nil,"OVERLAY","GameFontNormal")
-	GR_Whisper.edit.text:SetPoint("CENTER",GR_Whisper.edit,"TOP",0,15)
-	GR_Whisper.edit.text:SetText("Enter your recruitment message.")
+	
+	--------------------------------------------------
+	-- Anchor Point for the editbox preview buttons --
+	--------------------------------------------------
+	
+	local anchor = {};	
+		anchor.point = "TOPRIGHT"
+		anchor.relativePoint = "TOPRIGHT"
+		anchor.xOfs = -104
+		anchor.yOfs = -130
 
-	local yOfs = -20
-	GR_Whisper.status = {}
-	for i = 1,3 do
-		GR_Whisper.status[i] = {}
-		GR_Whisper.status[i].box = CreateFrame("Frame",nil,GR_Whisper)
-		GR_Whisper.status[i].box:SetWidth(170)
-		GR_Whisper.status[i].box:SetHeight(18)
-		GR_Whisper.status[i].box:SetFrameStrata("HIGH")
-		GR_Whisper.status[i].box.index = i
-		GR_Whisper.status[i].box:SetPoint("LEFT",GR_Whisper,"CENTER",60,0)
-		GR_Whisper.status[i].box:SetScript("OnEnter",function(self)
-			if GR_DATA.settings.whispers[self.index] then
-				--GameTooltip:SetOwner(self,"ANCHOR_CURSOR")
-				--GameTooltip:SetText(GR:FormatWhisper(GR_DATA.settings.whispers[self.index],UnitName("Player")))
-			end
-		end)
-		GR_Whisper.status[i].box:SetScript("OnLeave",function(self)
-			--GameTooltip:Hide()
-		end)
-		GR_Whisper.status[i].text = GR_Whisper:CreateFontString(nil,nil,"GameFontNormal")
-		GR_Whisper.status[i].text:SetText("Whisper #"..i.." status: ")
-		GR_Whisper.status[i].text:SetWidth(200)
-		GR_Whisper.status[i].text:SetJustifyH("LEFT")
-		GR_Whisper.status[i].text:SetPoint("LEFT",GR_Whisper,"CENTER",50,yOfs)
-		yOfs = yOfs - 18
-	end
-	local whispers = {
-		"Whisper #1",
-		"Whisper #2",
-		"Whisper #3",
-	}
+	-----------------------------
+	-- editbox preview buttons --
+	-----------------------------
+	
+	GR_Whisper.button1 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) GR_Print(GR_DATA.settings.whispers[1])end);
+		anchor.yOfs = anchor.yOfs - 50;
+	GR_Whisper.button2 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) GR_Print(GR_DATA.settings.whispers[2])end);
+		anchor.yOfs = anchor.yOfs - 50;
+	GR_Whisper.button3 = CreateButton("BUTTON_PREVIEW_WHISPER", GR_Whisper, 80, 20, "Preview", anchor, function(self) GR_Print(GR_DATA.settings.whispers[3])end);
+		anchor.yOfs = anchor.yOfs - 50;
 
-	anchor = {}
-		anchor.point = "BOTTOMLEFT"
-		anchor.relativePoint = "BOTTOMLEFT"
-		anchor.xOfs = 60
-		anchor.yOfs = 100
---]==]
+	-------------------------------------------------------
+	-- Anchor Point for the editbox (dummy) save buttons --
+	-------------------------------------------------------
+	
+		anchor.point = "TOPRIGHT"
+		anchor.relativePoint = "TOPRIGHT"
+		anchor.xOfs = -24
+		anchor.yOfs = -130
+		
+	---------------------------------------------------------------------------------------------------------	
+	-- save buttons (these don't actually do anything aside from provide the user with necessary feedback) --
+	---------------------------------------------------------------------------------------------------------
+	
+	GR_Whisper.button4 = CreateButton("BUTTON_SAVE_WHISPER", GR_Whisper, 80, 20, "Save", anchor, function(self) GR_Print("Whisper #1 Saved.")end);
+		anchor.yOfs = anchor.yOfs - 50;
+	GR_Whisper.button5 = CreateButton("BUTTON_SAVE_WHISPER", GR_Whisper, 80, 20, "Save", anchor, function(self) GR_Print("Whisper #2 Saved.")end);
+		anchor.yOfs = anchor.yOfs - 50;
+	GR_Whisper.button6 = CreateButton("BUTTON_SAVE_WHISPER", GR_Whisper, 80, 20, "Save", anchor, function(self) GR_Print("Whisper #3 Saved.")end);
+		anchor.yOfs = anchor.yOfs - 50;
+	
+	----------------
+	-- Guild Logo --
+	----------------
+	
 	GR_Whisper.guildlogo = CreateFrame("Frame","guildlogo",GR_Whisper)
 	GR_Whisper.guildlogo:SetWidth(64)
 	GR_Whisper.guildlogo:SetHeight(64)
@@ -555,47 +568,7 @@ local function CreateWhisperDefineFrame()
 	GR_Whisper.guildlogo.texture:SetAllPoints()
 	GR_Whisper.guildlogo.texture:SetTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\grlogo.blp")
 	GR_Whisper.guildlogo.texture:Show()
---[==[
-	--CreateDropDown(name, parent, label, items, anchor)
-	GR_Whisper.drop = CreateDropDown("GR_WHISPER_DROP",GR_Whisper,"Select Message",whispers,anchor)
 
-		anchor.xOfs = 100
-		anchor.yOfs = 5
-	--CreateButton(name, parent, width, height, label, anchor, onClick)
-	CreateButton("GR_SAVEWHISPER",GR_Whisper,120,30,GR.L["Save"],anchor,function()
-		local text = GR_Whisper.edit:GetText()
-		local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-		GR_DATA.settings.whispers[ID] = text
-		GR_Whisper.edit:SetText("")
-	end)
-	anchor.xOfs = 280
-	CreateButton("GR_CANCELWHISPER",GR_Whisper,120,30,GR.L["Cancel"],anchor,function()
-		GR_Whisper:Hide()
-	end)
-
-	GR_Whisper.update = 0
-	GR_Whisper.changed = false
-	GR_Whisper:SetScript("OnUpdate",function()
-		if GetTime() > GR_Whisper.update then
-			for i = 1,3 do
-				if type(GR_DATA.settings.whispers[i]) == "string" then
-					GR_Whisper.status[i].text:SetText("Whisper status: |cff00ff00Good|r")
-				else
-					GR_Whisper.status[i].text:SetText("Whisper status: |cffff0000Undefined|r")
-				end
-			end
-			local ID = GR_DATA.settings.dropDown["GR_WHISPER_DROP"]
-			GR_Whisper.status[ID].text:SetText("Whisper status: |cffff8800Editing...|r")
-
-			if ID ~= GR_Whisper.changed then
-				GR_Whisper.changed = ID
-				GR_Whisper.edit:SetText(GR_DATA.settings.whispers[GR_DATA.settings.dropDown["GR_WHISPER_DROP"] or 1] or "")
-			end
-
-			GR_Whisper.update = GetTime() + 0.5
-		end
-	end)
---]==]
 	GR_Whisper:HookScript("OnHide", function() if (GR_Options.showAgain) then GR:ShowOptions() GR_Options.showAgain = false end end)
 end
 
@@ -1342,7 +1315,7 @@ function GR_CheckOverride()
 end
 --]]
 function GR_Print(msg)
-	print("\124cffffFF00[GR]\124r",msg);
+	print("\124cffff6060[GR]\124r",msg);
 end
 
  function GR_GetCmd(msg)
