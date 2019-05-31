@@ -410,7 +410,79 @@ local function CreateWhisperDefineFrame()
 	GR_Whisper.info:SetText("Create up to 3 custom recruitment messages to whisper to people you would like to join your guild. Make it flashy and give as much information as you can, but don't go over the 256 character limit! Good Luck!")
 	GR_Whisper.info:SetWidth(450)
 	GR_Whisper.info:SetJustifyH("CENTER")
-
+	
+	GR_Whisper.edit = CreateFrame("EditBox", "GR_WhisperMessage1", GR_Whisper, "InputBoxTemplate")
+	GR_Whisper.edit:SetFrameLevel(300)
+	GR_Whisper.edit:SetSize(450,30)
+	GR_Whisper.edit:SetMultiLine(false)
+    GR_Whisper.edit:ClearAllPoints()
+	GR_Whisper.edit:SetPoint("CENTER",GR_Whisper,"CENTER",0,50)
+	GR_Whisper.edit:SetCursorPosition(0);
+	GR_Whisper.edit:ClearFocus();
+    GR_Whisper.edit:SetAutoFocus(false)
+	GR_Whisper.edit:SetScript("OnShow", function(self,event,arg1)
+		self:SetText(GR_DATA.settings.whispers[1])
+		self:SetCursorPosition(0);
+		self:ClearFocus();
+	end)
+	GR_Whisper.edit:SetScript("OnTextChanged", function(self,value)
+		GR_DATA.settings.whispers[1] = self:GetText()
+	end)
+	GR_Whisper.edit:SetText(GR_DATA.settings.whispers[1])
+	GR_Whisper.edit:SetScript("OnHide",function()
+		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[1])
+	end)
+	GR_Whisper.editLabel = CreateBasicFontString(GR_Whisper.edit,"GR_Whisper.editLabel","OVERLAY","GameFontNormal","Whisper #1");
+	GR_Whisper.editLabel:SetPoint("BOTTOMLEFT", GR_Whisper.edit, "TOPLEFT", 0, 0)
+	
+	GR_Whisper.edit = CreateFrame("EditBox", "GR_WhisperMessage2", GR_Whisper, "InputBoxTemplate")
+	GR_Whisper.edit:SetFrameLevel(300)
+	GR_Whisper.edit:SetSize(450,30)
+	GR_Whisper.edit:SetMultiLine(false)
+    GR_Whisper.edit:ClearAllPoints()
+	GR_Whisper.edit:SetPoint("CENTER",GR_Whisper,"CENTER",0,0)
+	GR_Whisper.edit:SetCursorPosition(0);
+	GR_Whisper.edit:ClearFocus();
+    GR_Whisper.edit:SetAutoFocus(false)
+	GR_Whisper.edit:SetScript("OnShow", function(self,event,arg1)
+		self:SetText(GR_DATA.settings.whispers[2])
+		self:SetCursorPosition(0);
+		self:ClearFocus();
+	end)
+	GR_Whisper.edit:SetScript("OnTextChanged", function(self,value)
+		GR_DATA.settings.whispers[2] = self:GetText()
+	end)
+	GR_Whisper.edit:SetText(GR_DATA.settings.whispers[2])
+	GR_Whisper.edit:SetScript("OnHide",function()
+		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[2])
+	end)
+	GR_Whisper.editLabel = CreateBasicFontString(GR_Whisper.edit,"GR_Whisper.editLabel","OVERLAY","GameFontNormal","Whisper #2");
+	GR_Whisper.editLabel:SetPoint("BOTTOMLEFT", GR_Whisper.edit, "TOPLEFT", 0, 0)
+	
+	GR_Whisper.edit = CreateFrame("EditBox", "GR_WhisperMessage3", GR_Whisper, "InputBoxTemplate")
+	GR_Whisper.edit:SetFrameLevel(300)
+	GR_Whisper.edit:SetSize(450,30)
+	GR_Whisper.edit:SetMultiLine(false)
+    GR_Whisper.edit:ClearAllPoints()
+	GR_Whisper.edit:SetPoint("CENTER",GR_Whisper,"CENTER",0,-50)
+	GR_Whisper.edit:SetCursorPosition(0);
+	GR_Whisper.edit:ClearFocus();
+    GR_Whisper.edit:SetAutoFocus(false)
+	GR_Whisper.edit:SetScript("OnShow", function(self,event,arg1)
+		self:SetText(GR_DATA.settings.whispers[3])
+		self:SetCursorPosition(0);
+		self:ClearFocus();
+	end)
+	GR_Whisper.edit:SetScript("OnTextChanged", function(self,value)
+		GR_DATA.settings.whispers[3] = self:GetText()
+	end)
+	GR_Whisper.edit:SetText(GR_DATA.settings.whispers[3])
+	GR_Whisper.edit:SetScript("OnHide",function()
+		GR_Whisper.edit:SetText(GR_DATA.settings.whispers[3])
+	end)
+	GR_Whisper.editLabel = CreateBasicFontString(GR_Whisper.edit,"GR_Whisper.editLabel","OVERLAY","GameFontNormal","Whisper #3");
+	GR_Whisper.editLabel:SetPoint("BOTTOMLEFT", GR_Whisper.edit, "TOPLEFT", 0, 0)	
+--[==[
 	GR_Whisper.edit = CreateFrame("EditBox", "GR_Edit", GR_Whisper, "InsetFrameTemplate3")
 	GR_Whisper.edit:SetWidth(450)
 	GR_Whisper.edit:SetHeight(65)
@@ -472,18 +544,18 @@ local function CreateWhisperDefineFrame()
 		anchor.relativePoint = "BOTTOMLEFT"
 		anchor.xOfs = 60
 		anchor.yOfs = 100
-
+--]==]
 	GR_Whisper.guildlogo = CreateFrame("Frame","guildlogo",GR_Whisper)
 	GR_Whisper.guildlogo:SetWidth(64)
 	GR_Whisper.guildlogo:SetHeight(64)
-	GR_Whisper.guildlogo:SetPoint("CENTER",GR_Whisper,"CENTER",-5,-50)
+	GR_Whisper.guildlogo:SetPoint("CENTER",GR_Whisper,"CENTER",-5,-110)
 	GR_Whisper.guildlogo.text = GR_Options.guildlogo:CreateFontString(nil,"OVERLAY","GameFontNormalLarge")
 	GR_Whisper.guildlogo.text:SetPoint("CENTER")
 	GR_Whisper.guildlogo.texture = GR_Whisper.guildlogo:CreateTexture()
 	GR_Whisper.guildlogo.texture:SetAllPoints()
 	GR_Whisper.guildlogo.texture:SetTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\grlogo.blp")
 	GR_Whisper.guildlogo.texture:Show()
-
+--[==[
 	--CreateDropDown(name, parent, label, items, anchor)
 	GR_Whisper.drop = CreateDropDown("GR_WHISPER_DROP",GR_Whisper,"Select Message",whispers,anchor)
 
@@ -523,7 +595,7 @@ local function CreateWhisperDefineFrame()
 			GR_Whisper.update = GetTime() + 0.5
 		end
 	end)
-
+--]==]
 	GR_Whisper:HookScript("OnHide", function() if (GR_Options.showAgain) then GR:ShowOptions() GR_Options.showAgain = false end end)
 end
 
@@ -1217,7 +1289,58 @@ function GR:HideMinimapButton()
 		GR_MiniMapButton:Hide();
 	end
 end
+--[[
+function GR_OnEvent(self,event,arg1,arg2)
+	if(event == "GUILD_ROSTER_UPDATE")then GR_CheckOverride(); return end
+	
+    if(not GR_IsMe(arg2))then
+	    if(event == "CHAT_MSG_GUILD_ACHIEVEMENT" and not GR_GuildDisabledOverride)then GR_DoGrats("GUILD");
+	    elseif(event == "CHAT_MSG_ACHIEVEMENT")then GR_DoGrats("SAY");
+	    elseif(event == "CHAT_MSG_ACHIEVEMENT")then GR_DoGrats("PARTY");
+	    elseif(event == "CHAT_MSG_SYSTEM" and not GR_GuildDisabledOverride) then
+	    	if(arg1 ~= nil) then
+				if(string.find(arg1,"has joined the guild.")) then SendChatMessage(GetRandomArgument("Goat is amazing!","I'm in love with a farm animal!","I love Goat!"), "GUILD");
+				end
+			end
+	    end
+	end
+end
 
+function GR_IsMe(nameString)
+	local name,server = split(nameString,"-")
+	local myName, myServer = UnitName("player")
+	if(myServer == nil)then
+		myServer = GetRealmName();
+	end
+	if(server == nil and name == myName)then
+		return true;
+	elseif(server ~= nil and name == myName and server == myServer)then
+		return true;
+	else
+		return false;
+	end
+end
+
+function GR_CheckOverride()
+	local myName = UnitName("player")
+	for index=1, GetNumGuildMembers() do 
+		
+		 local name,_,_,_,_,_,note = GetGuildRosterInfo(index)
+		 if GR_IsMe(name) then
+			 note = note:lower()
+			 if note:match("noag") then
+				GR_GuildDisabledOverride = true;
+				return true;
+			 else
+				GR_GuildDisabledOverride = false;
+				return false;
+			 end
+			 break
+		 end
+	end
+	return false;
+end
+--]]
 function GR_Print(msg)
 	print("\124cffffFF00[GR]\124r",msg);
 end
