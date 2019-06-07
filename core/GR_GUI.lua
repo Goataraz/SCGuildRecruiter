@@ -747,7 +747,7 @@ local function CreateOptions()
 	GR_Options.bottom = GR_Options:CreateFontString(nil,"OVERLAY");
 	GR_Options.bottom:SetFontObject("GameFontNormalTiny");
 	GR_Options.bottom:SetPoint("BOTTOM", GR_Options, "BOTTOM",0,10);
-	GR_Options.bottom:SetText("|cff88aaffWritten and Maintained by The Shadow Collective https://discord.gg/x4tR4sX|r");
+	GR_Options.bottom:SetText("|cff88aaffWritten and Maintained by The Shadow Collective https://discord.gg/czpQSKw|r");
 	
 	--Menu Text
 	GR_Options.top = GR_Options:CreateFontString(nil, "OVERLAY");
