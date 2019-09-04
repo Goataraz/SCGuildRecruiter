@@ -747,7 +747,7 @@ local function CreateOptions()
 	GR_Options.bottom = GR_Options:CreateFontString(nil,"OVERLAY");
 	GR_Options.bottom:SetFontObject("GameFontNormalTiny");
 	GR_Options.bottom:SetPoint("BOTTOM", GR_Options, "BOTTOM",0,10);
-	GR_Options.bottom:SetText("|cff88aaffWritten and Maintained by The Shadow Collective https://discord.gg/czpQSKw|r");
+	GR_Options.bottom:SetText("|cff88aaffWritten and Maintained by The Shadow Collective|r");
 	
 	--Menu Text
 	GR_Options.top = GR_Options:CreateFontString(nil, "OVERLAY");
@@ -759,22 +759,7 @@ local function CreateOptions()
 	GR_Options.optionHelpText = GR_Options:CreateFontString(nil, "OVERLAY","GameFontNormalTiny");
 	GR_Options.optionHelpText:SetText("|cff00D2FFScroll to change levels|r");
 	GR_Options.optionHelpText:SetPoint("TOP",GR_Options,"TOP",-5,-200);
-	--Easter Egg-- I love you, Alisha. <3
-	local egg = CreateFrame("Button","GR_EasterEgg",GR_Options)
-	egg:SetWidth(24)
-	egg:SetHeight(24)
-	egg:SetPoint("BOTTOMLEFT",GR_Options,"BOTTOMLEFT",70,70)
-	egg:SetNormalTexture(nil)
-	egg:SetPushedTexture(nil)
-	egg:SetHighlightTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\GR_MiniMapButton.tga")
-	egg:SetScript("OnClick",function(self,button)
-		if GR_EasterEgg then
-			SendChatMessage(GetRandomArgument("Goataraz loves Algaroat! <3","Algaroat loves Goataraz! <3","Flaris loves Penis!","Oh my god... I just pee'd a little.","Excelsior!"),"YELL");
-		else
-			SendChatMessage(GetRandomArgument("Goataraz loves Algaroat! <3","Algaroat loves Goataraz! <3","Flaris loves Penis!","Oh my god... I just pee'd a little.","Excelsior!"),"YELL");
-		end
-	end)
-	
+
 	--Logo
 	GR_Options.guildlogo = CreateFrame("Frame","guildlogo",GR_Options)
 	GR_Options.guildlogo:SetWidth(64)
@@ -787,29 +772,7 @@ local function CreateOptions()
 	GR_Options.guildlogo.texture:SetTexture("Interface\\AddOns\\SCGuildRecruiter\\media\\grlogo.blp")
 	GR_Options.guildlogo.texture:Show()
 	
-	GR_Options.alisha = CreateFrame("Frame","alisha",GR_Options)
-	GR_Options.alisha:SetWidth(200)
-	GR_Options.alisha:SetHeight(64)
-	GR_Options.alisha:SetPoint("TOPLEFT",GR_Options,"TOPLEFT",9,-25)
-	GR_Options.alisha.text = GR_Options.alisha:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
-	GR_Options.alisha.text:SetText("Alisha, I can finally sleep.")
-	GR_Options.alisha.text:SetPoint("LEFT")
-	GR_Options.alisha.texture = GR_Options.alisha:CreateTexture()
-	GR_Options.alisha.texture:SetAllPoints()
-	GR_Options.alisha.texture:SetTexture()
-	GR_Options.alisha.texture:Show()
-	GR_Options.alisha2 = CreateFrame("Frame","alisha2",GR_Options)
-	GR_Options.alisha2:SetWidth(200)
-	GR_Options.alisha2:SetHeight(64)
-	GR_Options.alisha2:SetPoint("TOPLEFT",GR_Options,"TOPLEFT",9,-35)
-	GR_Options.alisha2.text = GR_Options.alisha2:CreateFontString(nil,"OVERLAY","GameFontNormalTiny")
-	GR_Options.alisha2.text:SetText("This addon is for you. -Goat")
-	GR_Options.alisha2.text:SetPoint("LEFT")
-	GR_Options.alisha2.texture = GR_Options.alisha2:CreateTexture()
-	GR_Options.alisha2.texture:SetAllPoints()
-	GR_Options.alisha2.texture:SetTexture()
-	GR_Options.alisha2.texture:Show()
-	
+
 	--Anchor Local Variable
 	local anchor = {}
 	
